@@ -25,6 +25,7 @@ pages:
     - job: Install
       artifacts: true
   script:
+    - npm install
     - npm run generate
   artifacts:
     paths:

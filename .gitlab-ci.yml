@@ -20,6 +20,7 @@ Install:
 
 pages:
   stage: deploy
+  image: node:alpine
   needs:
     - job: Install
       artifacts: true

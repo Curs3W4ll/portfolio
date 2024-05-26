@@ -1,0 +1,39 @@
+---
+
+stages:
+  - deploy
+
+
+Install:
+  stage: .pre
+  image: node:alpine
+  needs: []
+  dependencies: []
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - nodes_modules/
+      - .nuxt/
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+pages:
+  stage: deploy
+  needs:
+    - job: Install
+      artifacts: true
+  script:
+    - npm run generate
+  artifacts:
+    paths:
+      - .output/public
+  publish: .output/public
+  environment:
+    name: production
+    url: https://hervaud.fr
+    deployment_tier: production
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+...

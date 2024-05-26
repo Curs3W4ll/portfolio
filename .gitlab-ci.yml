@@ -1,9 +1,7 @@
 ---
-
 stages:
   - test
   - deploy
-
 
 Install:
   stage: .pre
@@ -50,5 +48,3 @@ pages:
     deployment_tier: production
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-
-...

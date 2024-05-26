@@ -53,6 +53,8 @@ Lint:
   needs:
     - job: Install
       artifacts: true
+    - job: Format code
+      optional: true
   interruptible: true
   script:
     - npm install

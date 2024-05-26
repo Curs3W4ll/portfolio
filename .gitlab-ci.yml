@@ -61,6 +61,7 @@ Lint:
     - npm run lint
     - npm run build
   rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 # This job is used to let GitLab merge requests that have no job to be merged

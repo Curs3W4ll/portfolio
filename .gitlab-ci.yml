@@ -30,6 +30,8 @@ Format code:
   variables:
     COMMIT_MESSAGE: ":art: Format code"
     PUSH_BRANCH: $CI_COMMIT_BRANCH
+  before_script:
+    - apk add git
   script:
     - npm install
     - npm run format

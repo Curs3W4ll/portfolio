@@ -34,6 +34,7 @@ Format code:
     - apk add git
   script:
     - npm install
+    - npm run lint:fix || true
     - npm run format
     - git config user.name "GitLab CI"
     - git config user.email "ci.epitech@gmail.com"
@@ -45,6 +46,23 @@ Format code:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       variables:
         PUSH_BRANCH: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+
+Lint:
+  stage: test
+  image: node:alpine
+  needs:
+    - job: Install
+      artifacts: true
+    - job: Format code
+      optional: true
+  interruptible: true
+  script:
+    - npm install
+    - npm run lint
+    - npm run build
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 # This job is used to let GitLab merge requests that have no job to be merged
 # Fixing a weird behavior of GitLab, not letting you merge when your pipeline contains no job
@@ -64,6 +82,8 @@ pages:
     - job: Install
       artifacts: true
     - job: Format code
+      optional: true
+    - job: Lint
       optional: true
   script:
     - npm install

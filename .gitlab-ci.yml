@@ -1,6 +1,7 @@
 ---
 
 stages:
+  - test
   - deploy
 
 
@@ -18,6 +19,17 @@ Install:
       - .nuxt/
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+# This job is used to let GitLab merge requests that have no job to be merged
+# Fixing a weird behavior of GitLab, not letting you merge when your pipeline contains no job
+No job MR validation:
+  stage: test
+  needs: []
+  dependencies: []
+  script:
+    - echo "Skipping pipeline..."
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 pages:
   stage: deploy

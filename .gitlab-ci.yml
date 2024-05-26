@@ -31,6 +31,7 @@ Format code:
     COMMIT_MESSAGE: ":art: Format code"
     PUSH_BRANCH: $CI_COMMIT_BRANCH
   script:
+    - npm install
     - npm run format
     - git config user.name "GitLab CI"
     - git remote add gitlab_origin https://oauth2:$PUSH_GITLAB_ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git

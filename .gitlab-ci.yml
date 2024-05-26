@@ -9,6 +9,7 @@ Install:
   image: node:alpine
   needs: []
   dependencies: []
+  interruptible: true
   script:
     - npm install
   artifacts:

@@ -14,6 +14,37 @@ This repository comes from [this GitLab repository](https://gitlab.com/curs3_w4l
 
 ## Project details
 
+### Technical stack
+
+The project is using [NuxtJS](https://nuxt.com/) with [Typescript](https://www.typescriptlang.org/) as a main framework.  
+The project is then generate as a JamStack static website and hosted on [GitLab pages](https://docs.gitlab.com/ee/user/project/pages/).
+
+The project is using [ESLint](https://eslint.org/) for linting and code good practices tracking.  
+The project is using [Prettier](https://prettier.io/) for code formatting.
+
+#### Available commands
+
+`npm run build`  
+Build the project (Typescript transpilation).
+
+`npm run preview`  
+Launch a preview server for the builded version
+
+`npm run generate`  
+Generate a static website from the project (in `.output/public`)
+
+`npm run dev`  
+Launch a dev server of the project with hot reload (HMR) enabled to see live updates
+
+`npm run lint`  
+Execute linter (eslint) on the project files
+
+`npm run lint:fix`  
+Execute linter (eslint) with `--fix` on the project files to automatically fix some lint errors
+
+`npm run format`  
+Execute formatter (prettier) on the project files and write formatted code in them
+
 ### Conventions
 
 This repository is following a bunch of conventions to have a uniform code base.

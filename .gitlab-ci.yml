@@ -87,6 +87,27 @@ No job MR validation:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
+Unit tests:
+  stage: test
+  needs:
+    - job: Install
+      artifacts: true
+    - job: Format code
+      optional: true
+  script:
+    - npm install
+    - npm run test:unit:coverage
+  artifacts:
+    paths:
+      - coverage/
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
 pages:
   stage: deploy
   image: node:alpine
@@ -96,6 +117,8 @@ pages:
     - job: Format code
       optional: true
     - job: Lint
+      optional: true
+    - job: Unit tests
       optional: true
   script:
     - npm install

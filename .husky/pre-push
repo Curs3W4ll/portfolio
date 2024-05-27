@@ -1,0 +1,38 @@
+# Colors definition
+none="\033[0m"
+bold="\033[1m"
+info="\033[0;36m"
+success="\033[0;32m${bold}"
+warning="\033[0;93m${bold}"
+error="\033[0;31m${bold}"
+
+GITLAB_PROJECT_WEBLINK="https://gitlab.com/curs3_w4ll/portfolio"
+BRANCH_NAMING_CONVENTION_DOC_WEBLINK="${GITLAB_PROJECT_WEBLINK}#branch-naming-convention"
+
+# Regex to apply to check if the branch name is valid
+REGEX_NO_ISSUE_KEY="^[0-9]+"
+REGEX_NO_SUMMARY="${REGEX_NO_ISSUE_KEY}-.+\$"
+REGEX_GLOBAL="${REGEX_NO_ISSUE_KEY}-[a-zA-Z0-9-]{2,}\$"
+
+BRANCH_NAME="$(git symbolic-ref --short HEAD)"
+
+echo "${info}Detected branch name is: '$BRANCH_NAME'${none}"
+
+if ! [[ "$BRANCH_NAME" =~ $REGEX_GLOBAL ]]; then
+    echo "${error}${bold}Your branch name does not match the convention, please update it using 'git branch -m <new_name>'${none}"
+    echo "${bold}You can find the branch naming convention here: ${BRANCH_NAMING_CONVENTION_DOC_WEBLINK}${none}"
+    echo "${error}Invalid branch name, nothing pushed${none}"
+
+    if ! [[ "$BRANCH_NAME" =~ $REGEX_NO_ISSUE_KEY ]]; then
+        echo "${error}Your branch name does not contains a valid GitLab issue key${none}"
+    elif ! [[ "$BRANCH_NAME" =~ $REGEX_NO_SUMMARY ]]; then
+        echo "${error}Your branch name contains no summary${none}"
+    else
+        echo "${error}Your branch name summary is too short, it should be at least 2 characters long${none}"
+    fi
+
+    echo "A valid branch name looks like the following: '5-Add-delete-user-button'"
+    exit 1
+else
+    echo "${success}Branch name is valid${none}"
+fi

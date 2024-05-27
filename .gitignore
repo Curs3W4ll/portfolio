@@ -23,4 +23,6 @@ logs
 .env.*
 !.env.example
 
+# Tests
 coverage/
+junit-report.xml

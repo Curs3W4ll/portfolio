@@ -45,6 +45,29 @@ Execute linter (eslint) with `--fix` on the project files to automatically fix s
 `npm run format`  
 Execute formatter (prettier) on the project files and write formatted code in them
 
+#### Git hooks
+
+##### Issue id auto-filler
+
+This custom Git hook allow to write your commit without the issue id, as it will automatically insert it at the start of a commit (if not already present, avoiding duplications), so you don't have to.  
+Both commmiting using `git commit -m` and `git commit` editor are supported.
+
+##### Commit checker
+
+This custom Git hook will check every commit you do, and ensure that it is following [our convention](#commit-convention). If a commit does not match the convention, it will be aborted.
+
+##### Branch name checker
+
+This custom Git hook will check every branch you're trying to push to, and ensure that it is following [our convention](#branch-naming-convention). If the branch name does not match the convention, the push will be aborted.
+
+##### Merge request link generator
+
+This custom Git hook will display a link to quickly create a well-configured merge request each time your are pushing to a branch.
+
+##### Lint staged
+
+This Git hook is using [lint-staged](https://github.com/lint-staged/lint-staged) to automatically run the formatter and linter on the modified files (staged files) before commiting, so files are automatically formatted.
+
 ### Conventions
 
 This repository is following a bunch of conventions to have a uniform code base.

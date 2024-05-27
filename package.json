@@ -10,6 +10,9 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test:unit": "vitest run",
+    "test:unit:dev": "vitest --ui",
+    "test:unit:coverage": "vitest run --coverage",
     "postinstall": "nuxt prepare",
     "prepare": "husky"
   },
@@ -20,11 +23,17 @@
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
+    "@nuxt/test-utils": "^3.13.1",
+    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^14.11.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.5",
     "prettier": "^3.2.5",
     "prettier-plugin-organize-imports": "^3.2.4",
-    "vite-plugin-eslint2": "^4.4.0"
+    "vite-plugin-eslint2": "^4.4.0",
+    "vitest": "^1.6.0"
   },
   "lint-staged": {
     "*": [

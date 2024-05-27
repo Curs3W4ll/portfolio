@@ -7,6 +7,15 @@ stages:
   - test
   - deploy
 
+include:
+  - component: gitlab.com/dependabot-gitlab/dependabot-standalone/template@3.15.0
+    inputs:
+      gitlab_access_token: $DEPENDABOT_GITLAB_ACCESS_TOKEN
+      github_access_token: $DEPENDABOT_GITHUB_ACCESS_TOKEN
+      stage: test
+    rules:
+      - if: $RUN_DEPENDABOT
+
 Install:
   stage: .pre
   image: node:alpine
@@ -20,7 +29,7 @@ Install:
       - nodes_modules/
       - .nuxt/
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 Format code:
@@ -64,7 +73,7 @@ Lint:
     - npm run lint
     - npm run build
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 # This job is used to let GitLab merge requests that have no job to be merged
@@ -100,4 +109,4 @@ pages:
     url: https://hervaud.fr
     deployment_tier: production
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"

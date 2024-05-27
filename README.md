@@ -85,7 +85,7 @@ Commits should follow the following format:
 ```
 
 - `<issue-id>`: The GitLab issue id this branch is linked to. The issue id is a number
-- `<gitmoji>`: The Gitmoji to label your commit, see [Gitmojies](#gitmojies) 
+- `<gitmoji>`: The Gitmoji to label your commit, see [Gitmojies](#gitmojies)
 - `<scope>`: **[Optional, Encouraged]** The scope this commit's changes acts on (Login page, Button component, Database service…). This should not be more than two words.
 - `<description>`: A short description of the work contained in the commit. This description should be at least 10 characters long. Here is a little tip to know what to put as a description: Complete this phrase: If merged, this commit will... and here it is, you have a description! (don’t put the start of the phrase into your commit).
 - `<body>`: **[Optional]** Additional information, this could be links, text, requests…
@@ -139,29 +139,30 @@ We use Gitmojis in our commits to let people who are reviewing this commit (or m
 
 **Gitmojis to use**
 
-|Gitmoji and name|Meaning|
-|----------------|-------|
-|:sparkles: `:sparkles:`|Introduce a new feature|
-|:bug: `:bug:`|Fix a bug|
-|:art: `:art:`|Format code or structure without alteration of how it works|
-|:recycle: `:recycle:`|Refactor code or deletion of deprecated code|
-|:traffic_light: `:traffic_light:`|Add or update tests|
-|:pencil: `:pencil:`|Add or update documentation (this includes code comments)|
-|:lipstick: `:lipstick:`|Add or update UI styles files|
-|:wrench: `:wrench:`|Add or update configuration and build files (.gitignore too)|
-|:truck: `:truck:`|Move or delete a resource|
-|:arrow_up: `:arrow_up:` :arrow_down: `:arrow_down:`|Upgrade or downgrade a dependency|
-|:label: `:label:`|Publish a new release / Update version tag|
-|:zap: `:zap:`|Improve performance, optimization|
-|:rewind: `:rewind:`|Undo operation|
-|:tada: `:tada:`|Initial commit / Repository creation|
-|:beers:  `:beers:`|Apply suggestions given by coworkers during code review|
-|:twisted_rightwards_arrows: `:twisted_rightwards_arrows:`|Merge related|
-|:construction: `:construction:`|Work In Progress (commit to be deleted)|
+| Gitmoji and name                                          | Meaning                                                      |
+| --------------------------------------------------------- | ------------------------------------------------------------ |
+| :sparkles: `:sparkles:`                                   | Introduce a new feature                                      |
+| :bug: `:bug:`                                             | Fix a bug                                                    |
+| :art: `:art:`                                             | Format code or structure without alteration of how it works  |
+| :recycle: `:recycle:`                                     | Refactor code or deletion of deprecated code                 |
+| :traffic_light: `:traffic_light:`                         | Add or update tests                                          |
+| :pencil: `:pencil:`                                       | Add or update documentation (this includes code comments)    |
+| :lipstick: `:lipstick:`                                   | Add or update UI styles files                                |
+| :wrench: `:wrench:`                                       | Add or update configuration and build files (.gitignore too) |
+| :truck: `:truck:`                                         | Move or delete a resource                                    |
+| :arrow_up: `:arrow_up:` :arrow_down: `:arrow_down:`       | Upgrade or downgrade a dependency                            |
+| :label: `:label:`                                         | Publish a new release / Update version tag                   |
+| :zap: `:zap:`                                             | Improve performance, optimization                            |
+| :rewind: `:rewind:`                                       | Undo operation                                               |
+| :tada: `:tada:`                                           | Initial commit / Repository creation                         |
+| :beers: `:beers:`                                         | Apply suggestions given by coworkers during code review      |
+| :twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | Merge related                                                |
+| :construction: `:construction:`                           | Work In Progress (commit to be deleted)                      |
 
 #### Branch naming convention
 
 To keep branches readable, you must name the branch you create according to the following format:
+
 ```
 <issue-id>-<issue-summary>
 ```

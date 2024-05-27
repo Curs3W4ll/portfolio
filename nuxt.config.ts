@@ -5,4 +5,7 @@ export default defineNuxtConfig({
   eslint: {
     checker: true,
   },
+  devServer: {
+    port: 4173,
+  },
 });

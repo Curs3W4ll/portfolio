@@ -1,112 +1,112 @@
----
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/pipeline/#customization
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 variables:
   HUSKY: 0
-
 stages:
-  - format
-  - test
-  - deploy
-
+- format
+- test
+- deploy
 include:
-  - component: gitlab.com/dependabot-gitlab/dependabot-standalone/template@3.15.0
-    inputs:
-      gitlab_access_token: $DEPENDABOT_GITLAB_ACCESS_TOKEN
-      github_access_token: $DEPENDABOT_GITHUB_ACCESS_TOKEN
-      stage_name: test
-    rules:
-      - if: $RUN_DEPENDABOT
-
+- component: gitlab.com/dependabot-gitlab/dependabot-standalone/template@3.15.0
+  inputs:
+    gitlab_access_token: "$DEPENDABOT_GITLAB_ACCESS_TOKEN"
+    github_access_token: "$DEPENDABOT_GITHUB_ACCESS_TOKEN"
+    stage_name: test
+  rules:
+  - if: "$RUN_DEPENDABOT"
+- template: Security/SAST.gitlab-ci.yml
 Install:
-  stage: .pre
+  stage: ".pre"
   image: node:alpine
   needs: []
   dependencies: []
   interruptible: true
   script:
-    - npm install
+  - npm install
   artifacts:
     paths:
-      - nodes_modules/
-      - .nuxt/
+    - nodes_modules/
+    - ".nuxt/"
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-
+  - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 Format code:
   stage: format
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
+  - job: Install
+    artifacts: true
   interruptible: true
   variables:
     COMMIT_MESSAGE: ":art: Format code"
-    PUSH_BRANCH: $CI_COMMIT_BRANCH
+    PUSH_BRANCH: "$CI_COMMIT_BRANCH"
   before_script:
-    - apk add git
+  - apk add git
   script:
-    - npm install
-    - npm run lint:fix || true
-    - npm run format
-    - git config user.name "GitLab CI"
-    - git config user.email "ci.epitech@gmail.com"
-    - git remote add gitlab_origin https://oauth2:$PUSH_GITLAB_ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
-    - git add .
-    - git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
-    - git push gitlab_origin HEAD:$PUSH_BRANCH
+  - npm install
+  - npm run lint:fix || true
+  - npm run format
+  - git config user.name "GitLab CI"
+  - git config user.email "ci.epitech@gmail.com"
+  - git remote add gitlab_origin https://oauth2:$PUSH_GITLAB_ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
+  - git add .
+  - git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
+  - git push gitlab_origin HEAD:$PUSH_BRANCH
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      variables:
-        PUSH_BRANCH: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
-
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    variables:
+      PUSH_BRANCH: "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
 Lint:
   stage: test
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
-    - job: Format code
-      optional: true
+  - job: Install
+    artifacts: true
+  - job: Format code
+    optional: true
   interruptible: true
   script:
-    - npm install
-    - npm run lint
-    - npm run build
+  - npm install
+  - npm run lint
+  - npm run build
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-
-# This job is used to let GitLab merge requests that have no job to be merged
-# Fixing a weird behavior of GitLab, not letting you merge when your pipeline contains no job
+  - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 No job MR validation:
   stage: test
   needs: []
   dependencies: []
   script:
-    - echo "Skipping pipeline..."
+  - echo "Skipping pipeline..."
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 pages:
   stage: deploy
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
-    - job: Format code
-      optional: true
-    - job: Lint
-      optional: true
+  - job: Install
+    artifacts: true
+  - job: Format code
+    optional: true
+  - job: Lint
+    optional: true
   script:
-    - npm install
-    - npm run generate
+  - npm install
+  - npm run generate
   artifacts:
     paths:
-      - .output/public
-  publish: .output/public
+    - ".output/public"
+  publish: ".output/public"
   environment:
     name: production
     url: https://hervaud.fr
     deployment_tier: production
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+  - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+sast:
+  stage: test

@@ -12,7 +12,7 @@ include:
     inputs:
       gitlab_access_token: $DEPENDABOT_GITLAB_ACCESS_TOKEN
       github_access_token: $DEPENDABOT_GITHUB_ACCESS_TOKEN
-      stage: test
+      stage_name: test
     rules:
       - if: $RUN_DEPENDABOT
 

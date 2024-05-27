@@ -2,6 +2,7 @@
 none="\033[0m"
 bold="\033[1m"
 info="\033[0;36m"
+success="\033[0;32m${bold}"
 warning="\033[0;93m${bold}"
 error="\033[0;31m${bold}"
 
@@ -26,12 +27,12 @@ if ! [[ "$BRANCH_NAME" =~ $REGEX ]]; then
     echo "${warning}Your branch name does not match the convention, could not prefix the commit${none}"
 else
     commit_prefix="#${BASH_REMATCH[1]} "
-    echo "${green}Prefixing commit with: ${commit_prefix}${none}"
+    echo "${info}Prefixing commit with: ${commit_prefix}${none}"
     grepOutput=$(head -n1 $COMMIT_MSG_FILE | grep "^$(escapeForRegex $commit_prefix)" || true)
     if [ -z "$grepOutput" ]; then
         sed -i -e "1s/^/$commit_prefix/" $COMMIT_MSG_FILE
-        echo "${green}Commit prefixed${none}"
+        echo "${success}Commit prefixed${none}"
     else
-        echo "${cyan}Prefix already present, not adding anything${none}"
+        echo "${info}Prefix already present, not adding anything${none}"
     fi
 fi

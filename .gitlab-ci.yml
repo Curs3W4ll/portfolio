@@ -89,6 +89,7 @@ No job MR validation:
 
 Unit tests:
   stage: test
+  image: node:alpine
   needs:
     - job: Install
       artifacts: true

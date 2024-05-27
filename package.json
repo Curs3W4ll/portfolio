@@ -27,8 +27,10 @@
     "vite-plugin-eslint2": "^4.4.0"
   },
   "lint-staged": {
+    "*": [
+      "npm run format"
+    ],
     "**/*.{js,cjs,mjs,ts,cts,mts,vue}": [
-      "npm run format",
       "npm run lint:fix"
     ]
   }

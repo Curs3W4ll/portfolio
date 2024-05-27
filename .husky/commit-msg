@@ -1,0 +1,44 @@
+# Colors definition
+none="\033[0m"
+bold="\033[1m"
+info="\033[0;36m"
+success="\033[0;32m${bold}"
+warning="\033[0;93m${bold}"
+error="\033[0;31m${bold}"
+
+# Arguments given to the script by git hooks
+COMMIT_MSG_FILE=$1
+COMMIT=`cat $COMMIT_MSG_FILE`
+
+GITLAB_PROJECT_WEBLINK="https://gitlab.com/curs3_w4ll/portfolio"
+COMMIT_CONVENTION_DOC_WEBLINK="${GITLAB_PROJECT_WEBLINK}#commit-convention"
+GITMOJIES_DOC_WEBLINK="${GITLAB_PROJECT_WEBLINK}#gitmojies"
+
+# Regex to apply to check if the commit is valid
+REGEX_NO_ISSUE_KEY="^#[0-9]+"
+REGEX_NO_GITMOJI="${REGEX_NO_ISSUE_KEY} (:sparkles:|:bug:|:art:|:recycle:|:traffic_light:|:pencil:|:lipstick:|:wrench:|:truck:|:arrow_up:|:arrow_down:|:label:|:zap:|:rewind:|:tada:|:beers:|:twisted_rightwards_arrows:|:construction:)"
+REGEX_NO_DESCRIPTION="${REGEX_NO_GITMOJI} ."
+REGEX_GLOBAL="${REGEX_NO_GITMOJI} .{10,}\$"
+
+echo "${info}Detected commit: '$COMMIT'${none}"
+
+if ! [[ "$COMMIT" =~ $REGEX_GLOBAL ]]; then
+    echo "${error}${bold}Your commit does not match the convention, please commit again with a valid message${none}"
+    echo "${bold}You can find the commit convention here: ${COMMIT_CONVENTION_DOC_WEBLINK}${none}"
+    echo "${error}Invalid commit, nothing committed${none}"
+
+    if ! [[ "$COMMIT" =~ $REGEX_NO_ISSUE_KEY ]]; then
+        echo "${error}Your commit does not contains a valid GitLab issue key${none}"
+    elif ! [[ "$COMMIT" =~ $REGEX_NO_GITMOJI ]]; then
+        echo "${error}Your commit does not contains a valid Gitmoji, you can find the Gitmojies list here: ${GITMOJIES_DOC_WEBLINK}${none}"
+    elif ! [[ "$COMMIT" =~ $REGEX_NO_DESCRIPTION ]]; then
+        echo "${error}Your commit contains no description${none}"
+    else
+        echo "${error}Your commit description is too short, it should be at least 10 characters long${none}"
+    fi
+
+    echo "A valid commit looks like the following: '#5 :sparkles: Add a button to delete a user'"
+    exit 1
+else
+    echo "${success}Commit is valid${none}"
+fi

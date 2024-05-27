@@ -1,4 +1,7 @@
 ---
+variables:
+  HUSKY: 0
+
 stages:
   - format
   - test

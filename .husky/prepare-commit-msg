@@ -1,0 +1,38 @@
+# Colors definition
+none="\033[0m"
+bold="\033[1m"
+info="\033[0;36m"
+success="\033[0;32m${bold}"
+warning="\033[0;93m${bold}"
+error="\033[0;31m${bold}"
+
+# Arguments given to the script by git hooks
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+# Regex to apply to check if we can deduce issue id from branch name
+REGEX="^([0-9]+)-"
+BRANCH_NAME="$(git symbolic-ref --short HEAD)"
+COMMIT=`cat $COMMIT_MSG_FILE`
+
+# Escape a string so it is usable in regex
+escapeForRegex() {
+    sed -e 's/[^^]/[&]/g; s/\^/\\^/g; $!a\'$'\n''\\n' <<<"$COMMIT_MSG_FILE" | tr -d '\n'
+}
+
+echo "${info}Detected branch name is: '$BRANCH_NAME'${none}"
+
+if ! [[ "$BRANCH_NAME" =~ $REGEX ]]; then
+    echo "${warning}Your branch name does not match the convention, could not prefix the commit${none}"
+else
+    commit_prefix="#${BASH_REMATCH[1]} "
+    echo "${info}Prefixing commit with: ${commit_prefix}${none}"
+    grepOutput=$(head -n1 $COMMIT_MSG_FILE | grep "^$(escapeForRegex $commit_prefix)" || true)
+    if [ -z "$grepOutput" ]; then
+        sed -i -e "1s/^/$commit_prefix/" $COMMIT_MSG_FILE
+        echo "${success}Commit prefixed${none}"
+    else
+        echo "${info}Prefix already present, not adding anything${none}"
+    fi
+fi

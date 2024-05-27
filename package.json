@@ -10,7 +10,8 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.3.13",
@@ -19,8 +20,16 @@
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.5",
     "prettier": "^3.2.5",
     "prettier-plugin-organize-imports": "^3.2.4",
     "vite-plugin-eslint2": "^4.4.0"
+  },
+  "lint-staged": {
+    "**/*.{js,cjs,mjs,ts,cts,mts,vue}": [
+      "npm run format",
+      "npm run lint:fix"
+    ]
   }
 }

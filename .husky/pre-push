@@ -1,0 +1,82 @@
+# Colors definition
+none="\033[0m"
+bold="\033[1m"
+info="\033[0;36m"
+success="\033[0;32m${bold}"
+warning="\033[0;93m${bold}"
+error="\033[0;31m${bold}"
+
+GITLAB_PROJECT_WEBLINK="https://gitlab.com/curs3_w4ll/portfolio"
+BRANCH_NAMING_CONVENTION_DOC_WEBLINK="${GITLAB_PROJECT_WEBLINK}#branch-naming-convention"
+
+# Regex to apply to check if the branch name is valid
+REGEX_NO_ISSUE_KEY="^[0-9]+"
+REGEX_NO_SUMMARY="${REGEX_NO_ISSUE_KEY}-.+\$"
+REGEX_GLOBAL="${REGEX_NO_ISSUE_KEY}-[a-zA-Z0-9-]{2,}\$"
+
+BRANCH_NAME="$(git symbolic-ref --short HEAD)"
+
+echo "${info}Detected branch name is: '$BRANCH_NAME'${none}"
+
+if ! [[ "$BRANCH_NAME" =~ $REGEX_GLOBAL ]]; then
+    echo "${error}${bold}Your branch name does not match the convention, please update it using 'git branch -m <new_name>'${none}"
+    echo "${bold}You can find the branch naming convention here: ${BRANCH_NAMING_CONVENTION_DOC_WEBLINK}${none}"
+    echo "${error}Invalid branch name, nothing pushed${none}"
+
+    if ! [[ "$BRANCH_NAME" =~ $REGEX_NO_ISSUE_KEY ]]; then
+        echo "${error}Your branch name does not contains a valid GitLab issue key${none}"
+    elif ! [[ "$BRANCH_NAME" =~ $REGEX_NO_SUMMARY ]]; then
+        echo "${error}Your branch name contains no summary${none}"
+    else
+        echo "${error}Your branch name summary is too short, it should be at least 2 characters long${none}"
+    fi
+
+    echo "A valid branch name looks like the following: '5-Add-delete-user-button'"
+    exit 1
+else
+    echo "${success}Branch name is valid${none}"
+fi
+
+
+BRANCH_NAME="$(git symbolic-ref --short HEAD)"
+PUSH_URL="$(git remote get-url origin)"
+DEFAULT_TARGET_BRANCH="main"
+ISSUE_KEY=""
+TARGET_BRANCH=""
+REGEX="^([0-9]+)-"
+
+
+# Parse URL
+PUSH_URL=`echo $PUSH_URL | sed 's/^[^@]*@//g'`
+PUSH_URL=`echo $PUSH_URL | sed 's/:/\//'`
+PUSH_URL=`echo $PUSH_URL | sed 's/\.[^\.]*$//g'`
+echo "${info}Project URL: ${PUSH_URL}${none}"
+
+echo "${step}Checking if the target branch (${DEFAULT_TARGET_BRANCH}) exists${none}"
+git ls-remote --exit-code origin "${DEFAULT_TARGET_BRANCH}" 2>&1 >/dev/null
+if [ $? -ne 0 ]; then
+    echo "${warning}The target branch ${DEFAULT_TARGET_BRANCH} does not exists, using GitLab's default"
+else
+    TARGET_BRANCH=$DEFAULT_TARGET_BRANCH
+fi
+
+# Branch name check if contains issue id
+if [[ "$BRANCH_NAME" =~ $REGEX ]]; then
+    ISSUE_KEY="${BASH_REMATCH[1]}"
+    echo "${info}Your branch name contains the following issue key: '${ISSUE_KEY}'${none}"
+else
+    echo "${info}The branch name does not contains an issue key${none}"
+fi
+
+# URL link creation
+URL="https://${PUSH_URL}/-/merge_requests/new?merge_request%5Bsource_branch%5D=${BRANCH_NAME}"
+if [ -n "$TARGET_BRANCH" ]; then
+    URL="${URL}&merge_request%5Btarget_branch%5D=${TARGET_BRANCH}"
+fi
+URL="${URL}&merge_request%5Btitle%5D="
+if [ -n "${ISSUE_KEY}" ]; then
+    URL="${URL}%23${ISSUE_KEY}%20"
+fi
+URL="${URL}%3CSummary%20of%20your%20MR%3E"
+
+echo "${info}${bold}You can create a merge request here: ${URL}${none}"

@@ -120,7 +120,7 @@ Unit tests:
 
 E2E tests:
   stage: test
-  image: node:alpine
+  image: cypress/base:latest
   needs:
     - job: Format code
       optional: true

@@ -16,28 +16,20 @@ include:
     rules:
       - if: $RUN_DEPENDABOT
 
-Install:
-  stage: .pre
-  image: node:alpine
-  needs: []
-  dependencies: []
-  interruptible: true
-  script:
-    - npm install
-  artifacts:
-    paths:
-      - nodes_modules/
-      - .nuxt/
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - node_modules/
+    - .nuxt/
+    - .npm/
 
 Format code:
   stage: format
   image: node:alpine
-  needs:
-    - job: Install
-      artifacts: true
+  needs: []
+  dependencies: []
   interruptible: true
   variables:
     COMMIT_MESSAGE: ":art: Format code"
@@ -45,7 +37,7 @@ Format code:
   before_script:
     - apk add git
   script:
-    - npm install
+    - npm ci
     - npm run lint:fix || true
     - npm run format
     - git config user.name "GitLab CI"
@@ -63,13 +55,12 @@ Lint:
   stage: test
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
     - job: Format code
       optional: true
+  dependencies: []
   interruptible: true
   script:
-    - npm install
+    - npm ci
     - npm run lint
     - npm run build
   rules:
@@ -91,12 +82,11 @@ Unit tests:
   stage: test
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
     - job: Format code
       optional: true
+  dependencies: []
   script:
-    - npm install
+    - npm ci
     - npm run test:unit:coverage
   artifacts:
     paths:
@@ -111,20 +101,40 @@ Unit tests:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
+E2E tests:
+  stage: test
+  image: node:alpine
+  needs:
+    - job: Format code
+      optional: true
+  dependencies: []
+  script:
+    - npm ci
+    - npm run test:e2e:record
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - cypress/videos/
+      - cypress/screenshots/
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
 pages:
   stage: deploy
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
     - job: Format code
       optional: true
     - job: Lint
       optional: true
     - job: Unit tests
       optional: true
+    - job: E2E tests
+      optional: true
+  dependencies: []
   script:
-    - npm install
+    - npm ci
     - npm run generate
   artifacts:
     paths:

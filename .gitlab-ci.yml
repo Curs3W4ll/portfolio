@@ -62,7 +62,24 @@ Lint:
   script:
     - npm ci
     - npm run lint
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+Build:
+  stage: test
+  image: node:alpine
+  needs:
+    - job: Format code
+      optional: true
+  dependencies: []
+  interruptible: true
+  script:
+    - npm ci
     - npm run build
+  artifacts:
+    paths:
+      - .output/public
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -107,7 +124,8 @@ E2E tests:
   needs:
     - job: Format code
       optional: true
-  dependencies: []
+    - job: Build
+      artifacts: true
   script:
     - npm ci
     - npm run test:e2e:record

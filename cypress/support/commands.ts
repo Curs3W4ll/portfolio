@@ -42,7 +42,7 @@ Cypress.Commands.add("getByData", (selector) => {
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
-  module Cypress {
+  namespace Cypress {
     interface Chainable {
       getByData(selector: string): Chainable<JQuery<Element>>;
     }

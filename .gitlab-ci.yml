@@ -19,9 +19,10 @@ include:
 cache:
   key:
     files:
-      - package-lock.json
+      # - package-lock.json # BUG: Cannot use package-lock.json file as key because of this npm bug: https://github.com/npm/cli/issues/4828
+      - package.json
   paths:
-    - node_modules/
+    # - node_modules/ # BUG: Cannot cache node modules because of this npm bug: https://github.com/npm/cli/issues/4828
     - .nuxt/
     - .npm/
 
@@ -37,7 +38,8 @@ Format code:
   before_script:
     - apk add git
   script:
-    - npm ci
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
+    - npm install
     - npm run lint:fix || true
     - npm run format
     - git config user.name "GitLab CI"
@@ -60,7 +62,8 @@ Lint:
   dependencies: []
   interruptible: true
   script:
-    - npm ci
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
+    - npm install
     - npm run lint
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
@@ -75,7 +78,8 @@ Build:
   dependencies: []
   interruptible: true
   script:
-    - npm ci
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
+    - npm install
     - npm run build
   artifacts:
     paths:
@@ -103,7 +107,8 @@ Unit tests:
       optional: true
   dependencies: []
   script:
-    - npm ci
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
+    - npm install
     - npm run test:unit
   artifacts:
     paths:
@@ -123,7 +128,8 @@ E2E tests:
     - job: Build
       artifacts: true
   script:
-    - npm ci
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
+    - npm install
     - npm run test:e2e:record
   artifacts:
     expire_in: 1 day
@@ -148,7 +154,8 @@ pages:
       optional: true
   dependencies: []
   script:
-    - npm ci
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
+    - npm install
     - npm run generate
   artifacts:
     paths:

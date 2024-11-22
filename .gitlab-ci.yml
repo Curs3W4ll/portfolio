@@ -104,16 +104,12 @@ Unit tests:
   dependencies: []
   script:
     - npm ci
-    - npm run test:unit:coverage
+    - npm run test:unit
   artifacts:
     paths:
-      - coverage/
       - junit-report.xml
     reports:
       junit: junit-report.xml
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage/cobertura-coverage.xml
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"

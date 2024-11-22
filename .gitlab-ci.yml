@@ -16,28 +16,21 @@ include:
     rules:
       - if: $RUN_DEPENDABOT
 
-Install:
-  stage: .pre
-  image: node:alpine
-  needs: []
-  dependencies: []
-  interruptible: true
-  script:
-    - npm install
-  artifacts:
-    paths:
-      - nodes_modules/
-      - .nuxt/
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+cache:
+  key:
+    files:
+      # - package-lock.json # BUG: Cannot use package-lock.json file as key because of this npm bug: https://github.com/npm/cli/issues/4828
+      - package.json
+  paths:
+    # - node_modules/ # BUG: Cannot cache node modules because of this npm bug: https://github.com/npm/cli/issues/4828
+    - .nuxt/
+    - .npm/
 
 Format code:
   stage: format
   image: node:alpine
-  needs:
-    - job: Install
-      artifacts: true
+  needs: []
+  dependencies: []
   interruptible: true
   variables:
     COMMIT_MESSAGE: ":art: Format code"
@@ -45,12 +38,13 @@ Format code:
   before_script:
     - apk add git
   script:
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install
     - npm run lint:fix || true
     - npm run format
     - git config user.name "GitLab CI"
     - git config user.email "ci.epitech@gmail.com"
-    - git remote add gitlab_origin https://oauth2:$PUSH_GITLAB_ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git
+    - git remote add gitlab_origin https://oauth2:$PUSH_GITLAB_ACCESS_TOKEN@gitlab.com/$CI_PROJECT_PATH.git || true
     - git add .
     - git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
     - git push gitlab_origin HEAD:$PUSH_BRANCH
@@ -63,15 +57,33 @@ Lint:
   stage: test
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
     - job: Format code
       optional: true
+  dependencies: []
   interruptible: true
   script:
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install
     - npm run lint
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+Build:
+  stage: test
+  image: node:alpine
+  needs:
+    - job: Format code
+      optional: true
+  dependencies: []
+  interruptible: true
+  script:
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
+    - npm install
     - npm run build
+  artifacts:
+    paths:
+      - .output/
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -91,22 +103,39 @@ Unit tests:
   stage: test
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
     - job: Format code
       optional: true
+  dependencies: []
   script:
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install
-    - npm run test:unit:coverage
+    - npm run test:unit
   artifacts:
     paths:
-      - coverage/
       - junit-report.xml
     reports:
       junit: junit-report.xml
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage/cobertura-coverage.xml
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+E2E tests:
+  stage: test
+  image: cypress/base:latest
+  needs:
+    - job: Format code
+      optional: true
+    - job: Build
+      artifacts: true
+  script:
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
+    - npm install
+    - npm run test:e2e:record
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - cypress/videos/
+      - cypress/screenshots/
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -115,15 +144,17 @@ pages:
   stage: deploy
   image: node:alpine
   needs:
-    - job: Install
-      artifacts: true
     - job: Format code
       optional: true
     - job: Lint
       optional: true
     - job: Unit tests
       optional: true
+    - job: E2E tests
+      optional: true
+  dependencies: []
   script:
+    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install
     - npm run generate
   artifacts:

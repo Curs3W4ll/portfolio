@@ -9,4 +9,5 @@ Sentry.init({
   replaysSessionSampleRate: 0.05,
   replaysOnErrorSampleRate: 1.0,
   environment: useRuntimeConfig().public.mode,
+  release: `portfolio@${useRuntimeConfig().public.version}`,
 });

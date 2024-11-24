@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     public: {
       sentryDSN: "",
       mode: "development",
+      version: process.env.NUXT_PUBLIC_VERSION || "development",
     },
   },
   css: ["@/assets/main.css"],
@@ -22,6 +23,13 @@ export default defineNuxtConfig({
   },
   typescript: {
     typeCheck: true,
+  },
+  sentry: {
+    sourceMapsUploadOptions: {
+      org: "hvconnect",
+      project: "portfolio",
+      authToken: process.env.NUXT_SENTRY_AUTH_TOKEN,
+    },
   },
   sourcemap: {
     client: true,

@@ -68,6 +68,7 @@ Lint:
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
 
 Build:
   stage: test
@@ -87,6 +88,7 @@ Build:
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
 
 # This job is used to let GitLab merge requests that have no job to be merged
 # Fixing a weird behavior of GitLab, not letting you merge when your pipeline contains no job
@@ -118,6 +120,7 @@ Unit tests:
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
 
 E2E tests:
   stage: test
@@ -139,6 +142,7 @@ E2E tests:
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
 
 pages:
   stage: deploy
@@ -153,18 +157,22 @@ pages:
     - job: E2E tests
       optional: true
   dependencies: []
+  variables:
+    NUXT_SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
   script:
     - cp ${PRODUCTION_ENV_FILE} .env
+    - echo "NUXT_PUBLIC_VERSION=${CI_COMMIT_TAG}" >> .env
     # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install
     - npm run generate
   artifacts:
     paths:
       - .output/public
+    expire_in: never
   publish: .output/public
   environment:
     name: production
     url: https://hervaud.fr
     deployment_tier: production
   rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/

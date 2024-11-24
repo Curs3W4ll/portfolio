@@ -6,8 +6,14 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+  runtimeConfig: {
+    public: {
+      sentryDSN: "",
+      mode: "development",
+    },
+  },
   css: ["@/assets/main.css"],
-  modules: ["@nuxt/eslint", "@nuxt/test-utils/module"],
+  modules: ["@nuxt/eslint", "@nuxt/test-utils/module", "@sentry/nuxt/module"],
   eslint: {
     checker: true,
   },
@@ -16,5 +22,8 @@ export default defineNuxtConfig({
   },
   typescript: {
     typeCheck: true,
+  },
+  sourcemap: {
+    client: true,
   },
 });

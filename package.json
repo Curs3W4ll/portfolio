@@ -4,9 +4,10 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
+    "build:preview": "nuxt preview",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "generate:preview": "serve .output/public",
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -19,6 +20,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@sentry/nuxt": "^8.40.0",
     "nuxt": "^3.12.4",
     "vue": "^3.5.13",
     "vue-router": "^4.3.2"
@@ -38,6 +40,7 @@
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
     "prettier-plugin-organize-imports": "^3.2.4",
+    "serve": "^14.2.4",
     "start-server-and-test": "^2.0.3",
     "typescript": "5.6.2",
     "vite-plugin-eslint2": "^4.4.0",

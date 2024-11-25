@@ -30,6 +30,11 @@ export default defineNuxtConfig({
       project: "portfolio",
       authToken: process.env.NUXT_SENTRY_AUTH_TOKEN,
     },
+    unstable_sentryBundlerPluginOptions: {
+      release: {
+        name: process.env.NUXT_SENTRY_RELEASE,
+      },
+    },
   },
   sourcemap: {
     client: true,

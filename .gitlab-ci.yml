@@ -162,7 +162,7 @@ pages:
     NUXT_SENTRY_RELEASE: $CI_COMMIT_TAG
   script:
     - cp ${PRODUCTION_ENV_FILE} .env
-    - echo "\nNUXT_PUBLIC_VERSION=${CI_COMMIT_TAG}\n" >> .env
+    - echo -e "\nNUXT_PUBLIC_VERSION=${CI_COMMIT_TAG}\n" >> .env
     - cat .env
     # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install

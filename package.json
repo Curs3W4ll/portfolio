@@ -43,8 +43,8 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "serve": "^14.2.4",
     "start-server-and-test": "^2.0.3",
+    "vite-plugin-eslint2": "^5.0.2",
     "typescript": "5.6.2",
-    "vite-plugin-eslint2": "^4.4.0",
     "vitest": "^2.1.5",
     "vue-tsc": "^2.1.10"
   },

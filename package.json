@@ -40,7 +40,7 @@
     "husky": "^9.1.6",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
-    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "serve": "^14.2.4",
     "start-server-and-test": "^2.0.3",
     "typescript": "5.6.2",

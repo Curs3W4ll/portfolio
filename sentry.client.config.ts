@@ -3,7 +3,7 @@ import * as Sentry from "@sentry/nuxt";
 Sentry.init({
   dsn: useRuntimeConfig().public.sentryDSN,
   trackComponents: true,
-  integrations: [Sentry.replayIntegration()],
+  integrations: [Sentry.replayIntegration(), Sentry.piniaIntegration(usePinia())],
   tracesSampleRate: 1.0,
   tracePropagationTargets: ["localhost"],
   replaysSessionSampleRate: 0.05,

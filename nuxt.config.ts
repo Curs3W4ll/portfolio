@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/main.css"],
-  modules: ["@nuxt/eslint", "@nuxt/test-utils/module", "@sentry/nuxt/module"],
+  modules: ["@nuxt/eslint", "@nuxt/test-utils/module", "@sentry/nuxt/module", "@pinia/nuxt"],
   eslint: {
     checker: true,
   },

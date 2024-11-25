@@ -22,6 +22,26 @@ The project is then generated as a JamStack static website and hosted on [GitLab
 The project is using [ESLint](https://eslint.org/) for linting and good practices tracking.  
 The project is using [Prettier](https://prettier.io/) for code formatting.
 
+#### Project deployment
+
+The project is currently deployed on GitLab pages using GitLab CI.  
+If you wish to deploy the project by another way, you could follow these steps:
+
+- Create a `.env` file following the `.env.example` file structure. Here is a detailed explanation of each env variable:
+
+| Variable                 | Type                  | Description                                                                      |
+| ------------------------ | --------------------- | -------------------------------------------------------------------------------- |
+| `NUXT_PUBLIC_SENTRY_DSN` | `String`, `undefined` | The DSN to use to connect to a Sentry project                                    |
+| `NUXT_PUBLIC_MODE`       | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
+| `NUXT_PUBLIC_VERSION`    | `String`              | The version of the website deployed                                              |
+
+- Option 1: Run the website as a **static website** (used for GitLab pages deployment)
+  - Generate a static version of the website with `npm run generate`
+  - Deploy the static website using the tool you want or with `npx serve .output/public` for example
+- Option 2: Run the website as a **SPA**
+  - Build the website with `npm run build`
+  - Serve the website using the tool you want
+
 #### Available commands
 
 See a list of available npm commands with `npm run`.

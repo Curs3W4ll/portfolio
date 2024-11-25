@@ -34,6 +34,7 @@ If you wish to deploy the project by another way, you could follow these steps:
 | `NUXT_PUBLIC_SENTRY_DSN` | `String`, `undefined` | The DSN to use to connect to a Sentry project                                    |
 | `NUXT_PUBLIC_MODE`       | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
 | `NUXT_PUBLIC_VERSION`    | `String`              | The version of the website deployed                                              |
+| `NUXT_PUBLIC_GTAG_ID`    | `String`, `undefined` | The Id to use to connect to Google Analytics                                     |
 
 - Option 1: Run the website as a **static website** (used for GitLab pages deployment)
   - Generate a static version of the website with `npm run generate`

@@ -35,7 +35,7 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.6.0",
     "cypress": "^13.10.0",
-    "eslint-plugin-cypress": "^3.2.0",
+    "eslint-plugin-cypress": "^4.1.0",
     "happy-dom": "^15.11.6",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.7",

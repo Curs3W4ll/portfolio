@@ -13,8 +13,8 @@
     "lint:fix": "eslint . --fix",
     "test:unit": "vitest run",
     "test:unit:dev": "vitest --ui",
-    "test:e2e": "start-server-and-test 'NITRO_PORT=4173 nuxt preview' http://localhost:4173 'cypress run --e2e'",
-    "test:e2e:record": "start-server-and-test 'NITRO_PORT=4173 nuxt preview' http://localhost:4173 'cypress run --e2e --record'",
+    "test:e2e": "start-server-and-test 'PORT=4173 nuxt preview' http://localhost:4173 'cypress run --e2e'",
+    "test:e2e:record": "start-server-and-test 'PORT=4173 nuxt preview' http://localhost:4173 'cypress run --e2e --record'",
     "test:e2e:dev": "start-server-and-test dev http://localhost:4173 'cypress open --e2e' --browser chrome",
     "postinstall": "nuxt prepare",
     "prepare": "husky"

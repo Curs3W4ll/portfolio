@@ -15,7 +15,13 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/main.css"],
-  modules: ["@nuxt/eslint", "@nuxt/test-utils/module", "@sentry/nuxt/module", "@pinia/nuxt"],
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/test-utils/module",
+    "@sentry/nuxt/module",
+    "@pinia/nuxt",
+    "@primevue/nuxt-module",
+  ],
   eslint: {
     checker: true,
   },
@@ -35,6 +41,14 @@ export default defineNuxtConfig({
       release: {
         name: process.env.NUXT_SENTRY_RELEASE,
       },
+    },
+  },
+  primevue: {
+    importTheme: {
+      from: "@/themes/custom.ts",
+    },
+    options: {
+      ripple: true,
     },
   },
   sourcemap: {

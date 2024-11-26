@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     "@sentry/nuxt/module",
     "@pinia/nuxt",
     "@primevue/nuxt-module",
+    "nuxt-gtag",
   ],
   eslint: {
     checker: true,

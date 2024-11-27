@@ -22,6 +22,24 @@ The project is then generated as a JamStack static website and hosted on [GitLab
 The project is using [ESLint](https://eslint.org/) for linting and good practices tracking.  
 The project is using [Prettier](https://prettier.io/) for code formatting.
 
+#### Installation
+
+To install dependencies, use `npm install`.
+
+See a list of available commands with `npm run`.
+
+If you wish to start the project either in `dev` mode or in `generate:preview` mode, you will need to create a local ssl certificate.  
+In order to do this, follow these steps:
+
+- Install the `mkcert` CLI
+- Run the following command in the project folder:
+
+```sh
+mkcert localhost
+```
+
+- You're ready to locally launch the project in https!
+
 #### Project deployment
 
 The project is currently deployed on GitLab pages using GitLab CI.  
@@ -42,10 +60,6 @@ If you wish to deploy the project by another way, you could follow these steps:
 - Option 2: Run the website as a **SPA**
   - Build the website with `npm run build`
   - Serve the website using the tool you want
-
-#### Available commands
-
-See a list of available npm commands with `npm run`.
 
 #### Git hooks
 

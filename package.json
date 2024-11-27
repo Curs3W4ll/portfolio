@@ -5,9 +5,10 @@
   "scripts": {
     "build": "nuxt build",
     "build:preview": "nuxt preview",
-    "dev": "nuxt dev",
+    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
     "generate": "nuxt generate",
-    "generate:preview": "serve .output/public",
+    "generate:preview": "NODE_TLS_REJECT_UNAUTHORIZED=0 serve .output/public --ssl-cert localhost.pem --ssl-key localhost-key.pem",
+    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useHead({
   link: [
-    { rel: "canonical", href: "https://hervaud.fr" },
+    { rel: "canonical", href: config.seo.url },
     { rel: "icon", type: "image/png", sizes: "512x512", href: "/favicon/favicon-512x512.png" },
     { rel: "icon", type: "image/png", sizes: "192x192", href: "/favicon/favicon-192x192.png" },
     { rel: "icon", type: "image/png", sizes: "96x96", href: "/favicon/favicon-96x96.png" },

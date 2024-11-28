@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     "nuxt-gtag",
     "@storyblok/nuxt",
     "@nuxt/devtools",
+    "@nuxtjs/sitemap",
   ],
   eslint: {
     checker: true,
@@ -63,6 +64,10 @@ export default defineNuxtConfig({
     accessToken: process.env.NUXT_STORYBLOK_ACCESS_TOKEN,
     bridge: true,
     devtools: true,
+  },
+  site: {
+    url: "https://hervaud.fr",
+    name: "Corentin Hervaud",
   },
   sourcemap: {
     client: true,

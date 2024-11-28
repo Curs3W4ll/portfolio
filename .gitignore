@@ -32,3 +32,10 @@ junit-report.xml
 # Cypress
 /cypress/videos/
 /cypress/screenshots/
+
+# Local ssh certificate
+localhost-key.pem
+localhost.pem
+
+# StoryBlok files
+components.314995.json

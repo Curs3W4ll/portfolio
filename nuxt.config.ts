@@ -2,7 +2,6 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: {
     enabled: true,
-
     timeline: {
       enabled: true,
     },
@@ -22,6 +21,8 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@primevue/nuxt-module",
     "nuxt-gtag",
+    "@storyblok/nuxt",
+    "@nuxt/devtools",
   ],
   eslint: {
     checker: true,
@@ -51,6 +52,11 @@ export default defineNuxtConfig({
     options: {
       ripple: true,
     },
+  },
+  storyblok: {
+    accessToken: process.env.NUXT_STORYBLOK_ACCESS_TOKEN,
+    bridge: true,
+    devtools: true,
   },
   sourcemap: {
     client: true,

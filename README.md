@@ -22,6 +22,24 @@ The project is then generated as a JamStack static website and hosted on [GitLab
 The project is using [ESLint](https://eslint.org/) for linting and good practices tracking.  
 The project is using [Prettier](https://prettier.io/) for code formatting.
 
+#### Installation
+
+To install dependencies, use `npm install`.
+
+See a list of available commands with `npm run`.
+
+If you wish to start the project either in `dev` mode or in `generate:preview` mode, you will need to create a local ssl certificate.  
+In order to do this, follow these steps:
+
+- Install the `mkcert` CLI
+- Run the following command in the project folder:
+
+```sh
+mkcert localhost
+```
+
+- You're ready to locally launch the project in https!
+
 #### Project deployment
 
 The project is currently deployed on GitLab pages using GitLab CI.  
@@ -29,12 +47,13 @@ If you wish to deploy the project by another way, you could follow these steps:
 
 - Create a `.env` file following the `.env.example` file structure. Here is a detailed explanation of each env variable:
 
-| Variable                 | Type                  | Description                                                                      |
-| ------------------------ | --------------------- | -------------------------------------------------------------------------------- |
-| `NUXT_PUBLIC_SENTRY_DSN` | `String`, `undefined` | The DSN to use to connect to a Sentry project                                    |
-| `NUXT_PUBLIC_MODE`       | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
-| `NUXT_PUBLIC_VERSION`    | `String`              | The version of the website deployed                                              |
-| `NUXT_PUBLIC_GTAG_ID`    | `String`, `undefined` | The Id to use to connect to Google Analytics                                     |
+| Variable                      | Type                  | Description                                                                      |
+| ----------------------------- | --------------------- | -------------------------------------------------------------------------------- |
+| `NUXT_PUBLIC_SENTRY_DSN`      | `String`, `undefined` | The DSN to use to connect to a Sentry project                                    |
+| `NUXT_PUBLIC_MODE`            | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
+| `NUXT_PUBLIC_VERSION`         | `String`              | The version of the website deployed                                              |
+| `NUXT_PUBLIC_GTAG_ID`         | `String`, `undefined` | The Id to use to connect to Google Analytics                                     |
+| `NUXT_STORYBLOK_ACCESS_TOKEN` | `String`, `undefined` | The access token used to connect to the StoryBlok space                          |
 
 - Option 1: Run the website as a **static website** (used for GitLab pages deployment)
   - Generate a static version of the website with `npm run generate`
@@ -43,9 +62,17 @@ If you wish to deploy the project by another way, you could follow these steps:
   - Build the website with `npm run build`
   - Serve the website using the tool you want
 
-#### Available commands
+#### Update StoryBlok types
 
-See a list of available npm commands with `npm run`.
+This project is using [StoryBlok](https://www.storyblok.com) to retrieve its content from a headless CSM.
+
+StoryBlok is used acrosse the project to retrieve data, and as the project is using Typescript, we need a way to type the data returned by the CSM.  
+In order to do this, we're using the StoryBlok CLI to generate schemas used for typing.
+
+To update the types according to the architecture used in the StoryBlok space, follow these steps:
+
+- Ensure you're logged in using `npm run storyblok:login`
+- Update generated types using `npm run storyblok:updatetypes`
 
 #### Git hooks
 

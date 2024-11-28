@@ -53,6 +53,7 @@ If you wish to deploy the project by another way, you could follow these steps:
 | `NUXT_PUBLIC_MODE`       | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
 | `NUXT_PUBLIC_VERSION`    | `String`              | The version of the website deployed                                              |
 | `NUXT_PUBLIC_GTAG_ID`    | `String`, `undefined` | The Id to use to connect to Google Analytics                                     |
+| `NUXT_STORYBLOK_ACCESS_TOKEN`    | `String`, `undefined` | The access token used to connect to the StoryBlok space                                     |
 
 - Option 1: Run the website as a **static website** (used for GitLab pages deployment)
   - Generate a static version of the website with `npm run generate`

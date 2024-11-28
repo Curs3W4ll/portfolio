@@ -13,7 +13,13 @@ export default defineNuxtConfig({
       version: process.env.NUXT_PUBLIC_VERSION || "development",
     },
   },
-  css: ["@/assets/main.css"],
+  css: ["@/assets/css/main.css"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   modules: [
     "@nuxt/eslint",
     "@nuxt/test-utils/module",
@@ -23,6 +29,8 @@ export default defineNuxtConfig({
     "nuxt-gtag",
     "@storyblok/nuxt",
     "@nuxt/devtools",
+    "@nuxtjs/sitemap",
+    "@nuxtjs/robots",
   ],
   eslint: {
     checker: true,
@@ -57,6 +65,10 @@ export default defineNuxtConfig({
     accessToken: process.env.NUXT_STORYBLOK_ACCESS_TOKEN,
     bridge: true,
     devtools: true,
+  },
+  site: {
+    url: "https://hervaud.fr",
+    name: "Corentin Hervaud",
   },
   sourcemap: {
     client: true,

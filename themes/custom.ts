@@ -4,8 +4,8 @@ import Aura from "@primevue/themes/aura";
 const MyPreset = definePreset(Aura, {
   darkModeSelector: false,
   semantic: {
-    primary: palette("#5FDFC8"),
-    accent: palette("#C980E6"),
+    primary: palette("#C980E6"),
+    accent: palette("#5FDFC8"),
     colorScheme: {
       light: {
         accent: {

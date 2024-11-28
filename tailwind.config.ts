@@ -1,4 +1,7 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from "tailwindcss";
+// @ts-expect-error No declared type for now
+import primeui from "tailwindcss-primeui";
+
 export default {
   content: [
     "./components/**/*.{js,ts,vue}",
@@ -11,5 +14,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("tailwindcss-primeui")],
-};
+  plugins: [primeui],
+} satisfies Config;

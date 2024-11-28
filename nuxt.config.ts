@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     "@storyblok/nuxt",
     "@nuxt/devtools",
     "@nuxtjs/sitemap",
+    "@nuxtjs/robots",
   ],
   eslint: {
     checker: true,

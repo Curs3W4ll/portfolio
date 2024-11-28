@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@nuxt/devtools": "^1.6.1",
+    "@nuxtjs/sitemap": "^7.0.0",
     "@pinia/nuxt": "^0.7.0",
     "@primevue/nuxt-module": "^4.2.3",
     "@primevue/themes": "^4.2.3",

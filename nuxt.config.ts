@@ -13,7 +13,13 @@ export default defineNuxtConfig({
       version: process.env.NUXT_PUBLIC_VERSION || "development",
     },
   },
-  css: ["@/assets/main.css"],
+  css: ["@/assets/css/main.css"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   modules: [
     "@nuxt/eslint",
     "@nuxt/test-utils/module",

@@ -47,13 +47,13 @@ If you wish to deploy the project by another way, you could follow these steps:
 
 - Create a `.env` file following the `.env.example` file structure. Here is a detailed explanation of each env variable:
 
-| Variable                 | Type                  | Description                                                                      |
-| ------------------------ | --------------------- | -------------------------------------------------------------------------------- |
-| `NUXT_PUBLIC_SENTRY_DSN` | `String`, `undefined` | The DSN to use to connect to a Sentry project                                    |
-| `NUXT_PUBLIC_MODE`       | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
-| `NUXT_PUBLIC_VERSION`    | `String`              | The version of the website deployed                                              |
-| `NUXT_PUBLIC_GTAG_ID`    | `String`, `undefined` | The Id to use to connect to Google Analytics                                     |
-| `NUXT_STORYBLOK_ACCESS_TOKEN`    | `String`, `undefined` | The access token used to connect to the StoryBlok space                                     |
+| Variable                      | Type                  | Description                                                                      |
+| ----------------------------- | --------------------- | -------------------------------------------------------------------------------- |
+| `NUXT_PUBLIC_SENTRY_DSN`      | `String`, `undefined` | The DSN to use to connect to a Sentry project                                    |
+| `NUXT_PUBLIC_MODE`            | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
+| `NUXT_PUBLIC_VERSION`         | `String`              | The version of the website deployed                                              |
+| `NUXT_PUBLIC_GTAG_ID`         | `String`, `undefined` | The Id to use to connect to Google Analytics                                     |
+| `NUXT_STORYBLOK_ACCESS_TOKEN` | `String`, `undefined` | The access token used to connect to the StoryBlok space                          |
 
 - Option 1: Run the website as a **static website** (used for GitLab pages deployment)
   - Generate a static version of the website with `npm run generate`
@@ -61,6 +61,18 @@ If you wish to deploy the project by another way, you could follow these steps:
 - Option 2: Run the website as a **SPA**
   - Build the website with `npm run build`
   - Serve the website using the tool you want
+
+#### Update StoryBlok types
+
+This project is using [StoryBlok](https://www.storyblok.com) to retrieve its content from a headless CSM.
+
+StoryBlok is used acrosse the project to retrieve data, and as the project is using Typescript, we need a way to type the data returned by the CSM.  
+In order to do this, we're using the StoryBlok CLI to generate schemas used for typing.
+
+To update the types according to the architecture used in the StoryBlok space, follow these steps:
+
+- Ensure you're logged in using `npm run storyblok:login`
+- Update generated types using `npm run storyblok:updatetypes`
 
 #### Git hooks
 

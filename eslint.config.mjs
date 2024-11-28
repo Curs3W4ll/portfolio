@@ -8,6 +8,7 @@ export default withNuxt().append([
   ...compat.config({
     plugins: ["cypress"],
     extends: ["plugin:cypress/recommended"],
+    ignorePatterns: ["components-types-sb.d.ts"],
     overrides: [
       {
         files: ["storyblok/**/*.vue"],

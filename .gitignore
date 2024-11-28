@@ -36,3 +36,6 @@ junit-report.xml
 # Local ssh certificate
 localhost-key.pem
 localhost.pem
+
+# StoryBlok files
+components.314995.json

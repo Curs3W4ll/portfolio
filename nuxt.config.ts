@@ -70,6 +70,13 @@ export default defineNuxtConfig({
     url: "https://hervaud.fr",
     name: "Corentin Hervaud",
   },
+  sitemap: {
+    urls: [
+      {
+        loc: "/resume.pdf",
+      },
+    ],
+  },
   sourcemap: {
     client: true,
   },

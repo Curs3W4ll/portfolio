@@ -13,7 +13,7 @@ export default defineNuxtConfig({
       version: process.env.NUXT_PUBLIC_VERSION || "development",
     },
   },
-  css: ["@/assets/css/main.css"],
+  css: ["~/assets/css/main.css", "~/assets/scss/main.scss"],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -55,7 +55,7 @@ export default defineNuxtConfig({
   },
   primevue: {
     importTheme: {
-      from: "@/themes/custom.ts",
+      from: "~/themes/custom.ts",
     },
     options: {
       ripple: true,

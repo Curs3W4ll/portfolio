@@ -6,7 +6,10 @@ defineProps<{
 </script>
 
 <template>
-  <div v-editable="blok">
-    <h1>{{ blok.headline }}</h1>
+  <div
+    v-editable="blok"
+    class="flex justify-center"
+  >
+    <h1 class="text-7xl">{{ blok.headline }}</h1>
   </div>
 </template>

@@ -5,7 +5,7 @@ const story = await useAsyncStoryblok("home", {
 </script>
 
 <template>
-  <div class="align-center flex flex-col">
+  <div class="align-center mt-10 flex flex-col">
     <StoryblokComponent
       v-if="story"
       :blok="story.content"
@@ -15,6 +15,10 @@ const story = await useAsyncStoryblok("home", {
       size="large"
       icon="pi pi-file-pdf"
       class="mx-auto mt-8"
+      as="a"
+      href="/resume.pdf"
+      target="_blank"
+      no-rel
     />
   </div>
 </template>

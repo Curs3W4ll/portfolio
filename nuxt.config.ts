@@ -80,6 +80,7 @@ export default defineNuxtConfig({
     "@nuxt/devtools",
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
+    "@nuxt/fonts",
   ],
   eslint: {
     checker: true,

@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  background-color: #3a333d;
-}
-
-h1 {
-  color: #ececec;
-  font-size: 5rem;
-  text-align: center;
-  font-weight: bold;
+@layer base {
+  html {
+    @apply text-white;
+    @apply bg-black;
+  }
 }

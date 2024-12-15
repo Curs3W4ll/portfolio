@@ -11,5 +11,7 @@
     @apply from-primary-900;
     @apply to-black;
     @apply font-light;
+    @apply selection:bg-primary;
+    @apply selection:text-black;
   }
 }

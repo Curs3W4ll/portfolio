@@ -60,6 +60,7 @@ export default defineNuxtConfig({
       sentryDSN: "",
       mode: "development",
       version: process.env.NUXT_PUBLIC_VERSION || "development",
+      storyblokVersion: process.env.NUXT_STORYBLOK_VERSION || "published",
     },
   },
   css: ["~/assets/css/main.css", "~/assets/scss/main.scss"],

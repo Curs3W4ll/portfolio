@@ -8,18 +8,33 @@ defineProps<{
 }>();
 
 const resolvers = ref({
-  [MarkTypes.LINK]: (node: StoryblokRichTextNode<VNode>) =>
-    h(
+  [MarkTypes.LINK]: (node: StoryblokRichTextNode<VNode>) => {
+    console.log("link");
+    console.log(node);
+    return h(
       CustomLink,
       {
         href: node.attrs?.href,
         target: "_blank",
+        class: "text-white whitespace-nowrap",
       },
       () => node.text,
-    ),
+    );
+  },
+  [MarkTypes.BOLD]: (node: StoryblokRichTextNode<VNode>) => {
+    console.log("bold");
+    console.log(node);
+    return h(
+      "strong",
+      {
+        class: "text-white",
+      },
+      node.text,
+    );
+  },
 });
 </script>
 
 <template>
-  <StoryblokRichText class="space-y-5" :doc="richText" :resolvers="resolvers" />
+  <StoryblokRichText class="space-y-5 text-white-dark" :doc="richText" :resolvers="resolvers" />
 </template>

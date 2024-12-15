@@ -1,24 +1,17 @@
 <script setup lang="ts">
-const story = await useAsyncStoryblok("home", {
-  version: useRoute().query._storyblok ? "draft" : "published",
+const sbVersion = useStoryblokVersion();
+
+const profileStory = await useAsyncStoryblok("profile", {
+  version: sbVersion,
+});
+const aboutStory = await useAsyncStoryblok("about", {
+  version: sbVersion,
 });
 </script>
 
 <template>
-  <div class="align-center mt-10 flex flex-col">
-    <StoryblokComponent
-      v-if="story"
-      :blok="story.content"
-    />
-    <Button
-      label="See my resume"
-      size="large"
-      icon="pi pi-file-pdf"
-      class="mx-auto mt-8"
-      as="a"
-      href="/resume.pdf"
-      target="_blank"
-      no-rel
-    />
+  <div class="mx-36 my-28 flex justify-between gap-32">
+    <StoryblokComponent v-if="profileStory" class="shrink-0" :blok="profileStory.content" />
+    <StoryblokComponent v-if="aboutStory" :blok="aboutStory.content" />
   </div>
 </template>

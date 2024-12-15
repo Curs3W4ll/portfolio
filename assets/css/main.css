@@ -5,6 +5,11 @@
 @layer base {
   html {
     @apply text-white;
-    @apply bg-black;
+    @apply overscroll-none;
+    @apply bg-fixed;
+    @apply bg-gradient-to-tr;
+    @apply from-primary-900;
+    @apply to-black;
+    @apply font-light;
   }
 }

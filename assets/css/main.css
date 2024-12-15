@@ -8,7 +8,7 @@
     @apply overscroll-none;
     @apply bg-fixed;
     @apply bg-gradient-to-tr;
-    @apply from-primary-900;
+    @apply from-primary-800;
     @apply to-black;
     @apply font-light;
     @apply selection:bg-primary;

@@ -9,7 +9,7 @@
     @apply bg-fixed;
     @apply bg-gradient-to-tr;
     @apply from-primary-800;
-    @apply to-black;
+    @apply to-primary-950;
     @apply font-light;
     @apply selection:bg-primary;
     @apply selection:text-black;

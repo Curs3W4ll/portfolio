@@ -9,8 +9,8 @@ defineProps<{
 <template>
   <div v-editable="blok" class="space-y-3">
     <template v-if="blok">
-      <h1 class="text-5xl font-extrabold shrink-0 whitespace-nowrap">{{ blok.name }}</h1>
-      <h2 class="text-2xl font-bold">{{ blok.job }}</h2>
+      <h1 class="text-4xl sm:text-5xl font-extrabold shrink-0 whitespace-nowrap">{{ blok.name }}</h1>
+      <h2 class="text-xl sm:text-2xl font-bold">{{ blok.job }}</h2>
       <h3>{{ blok.description }}</h3>
     </template>
   </div>

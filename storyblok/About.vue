@@ -8,6 +8,6 @@ defineProps<{
 
 <template>
   <div v-editable="blok">
-    <CustomRichText v-if="blok" :rich-text="blok.description" />
+    <CustomRichText :rich-text="blok.description" />
   </div>
 </template>

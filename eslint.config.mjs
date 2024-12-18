@@ -17,5 +17,8 @@ export default withNuxt().append([
         },
       },
     ],
+    rules: {
+      "vue/no-v-html": "off",
+    },
   }),
 ]);

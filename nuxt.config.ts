@@ -128,6 +128,9 @@ export default defineNuxtConfig({
       },
     ],
   },
+  robots: {
+    disallow: ["_nuxt"],
+  },
   sourcemap: {
     client: true,
   },

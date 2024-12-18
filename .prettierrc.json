@@ -1,10 +1,32 @@
 {
   "$schema": "https://json.schemastore.org/prettierrc",
-  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss", "prettier-plugin-organize-attributes"],
   "semi": true,
   "tabWidth": 2,
   "singleQuote": false,
-  "printWidth": 100,
+  "printWidth": 120,
   "trailingComma": "all",
-  "singleAttributePerLine": true
+  "attributeGroups": [
+    "^[:]?is$",
+    "^v-for$",
+    "^v-if$",
+    "^v-else-if$",
+    "^v-else$",
+    "^v-show$",
+    "^v-cloak$",
+    "^v-pre$",
+    "^v-once$",
+    "^v-editable$",
+    "^[:]?id$",
+    "^[:]?(ref|key)$",
+    "^v-model",
+    "^[:]?class$",
+    "^:",
+    "$DEFAULT",
+    "^aria-",
+    "^(v-on|@)",
+    "^v-html$",
+    "^v-text$",
+    "^data-test$"
+  ]
 }

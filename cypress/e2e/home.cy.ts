@@ -3,9 +3,11 @@ describe("Displaying home page", () => {
     cy.visit("/");
   });
 
-  it("should render", () => {});
+  it("should display profile details", () => {
+    cy.getByData("profile").should("be.visible");
+  });
 
-  it("should contains a main title", () => {
-    cy.contains("Coming soon");
+  it("should display description", () => {
+    cy.getByData("about").should("be.visible");
   });
 });

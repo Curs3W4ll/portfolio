@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div v-editable="blok">
+  <div v-editable="blok" data-test="about">
     <CustomRichText :rich-text="blok.description" />
   </div>
 </template>

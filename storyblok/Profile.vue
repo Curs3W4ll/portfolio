@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div v-editable="blok" class="space-y-3">
+  <div v-editable="blok" class="space-y-3" data-test="profile">
     <NuxtLink to="/">
       <h1 class="text-4xl sm:text-5xl font-extrabold shrink-0 whitespace-nowrap">{{ blok.name }}</h1>
     </NuxtLink>

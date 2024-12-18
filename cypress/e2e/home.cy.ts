@@ -10,4 +10,8 @@ describe("Displaying home page", () => {
   it("should display description", () => {
     cy.getByData("about").should("be.visible");
   });
+
+  it("should display social links", () => {
+    cy.getByData("social-link").should("have.length.gt", 0);
+  });
 });

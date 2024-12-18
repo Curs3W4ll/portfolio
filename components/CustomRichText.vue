@@ -9,8 +9,6 @@ defineProps<{
 
 const resolvers = ref({
   [MarkTypes.LINK]: (node: StoryblokRichTextNode<VNode>) => {
-    console.log("link");
-    console.log(node);
     return h(
       CustomLink,
       {
@@ -22,8 +20,6 @@ const resolvers = ref({
     );
   },
   [MarkTypes.BOLD]: (node: StoryblokRichTextNode<VNode>) => {
-    console.log("bold");
-    console.log(node);
     return h(
       "strong",
       {

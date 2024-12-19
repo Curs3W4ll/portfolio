@@ -31,6 +31,7 @@
     "@primevue/themes": "^4.2.3",
     "@sentry/nuxt": "^8.40.0",
     "@storyblok/nuxt": "^6.2.0",
+    "@unleash/proxy-client-vue": "^0.1.2",
     "nuxt": "^3.14.4",
     "nuxt-gtag": "^3.0.2",
     "prettier-plugin-organize-attributes": "^1.0.0",

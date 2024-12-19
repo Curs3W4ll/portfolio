@@ -61,6 +61,8 @@ export default defineNuxtConfig({
       mode: "development",
       version: process.env.NUXT_PUBLIC_VERSION || "development",
       storyblokVersion: process.env.NUXT_STORYBLOK_VERSION || "published",
+      unleashProxyUrl: process.env.NUXT_UNLEASH_PROXY_URL,
+      unleashProxySecret: process.env.NUXT_UNLEASH_PROXY_CLIENT_KEY,
     },
   },
   css: ["~/assets/css/main.css", "~/assets/scss/main.scss"],
@@ -134,4 +136,5 @@ export default defineNuxtConfig({
   sourcemap: {
     client: true,
   },
+  compatibilityDate: "2024-12-19",
 });

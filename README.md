@@ -47,13 +47,16 @@ If you wish to deploy the project by another way, you could follow these steps:
 
 - Create a `.env` file following the `.env.example` file structure. Here is a detailed explanation of each env variable:
 
-| Variable                      | Type                  | Description                                                                      |
-| ----------------------------- | --------------------- | -------------------------------------------------------------------------------- |
-| `NUXT_PUBLIC_SENTRY_DSN`      | `String`, `undefined` | The DSN to use to connect to a Sentry project                                    |
-| `NUXT_PUBLIC_MODE`            | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
-| `NUXT_PUBLIC_VERSION`         | `String`              | The version of the website deployed                                              |
-| `NUXT_PUBLIC_GTAG_ID`         | `String`, `undefined` | The Id to use to connect to Google Analytics                                     |
-| `NUXT_STORYBLOK_ACCESS_TOKEN` | `String`, `undefined` | The access token used to connect to the StoryBlok space                          |
+| Variable                        | Type                  | Description                                                                      |
+| ------------------------------- | --------------------- | -------------------------------------------------------------------------------- |
+| `NUXT_PUBLIC_SENTRY_DSN`        | `String`, `undefined` | The DSN to use to connect to a Sentry project                                    |
+| `NUXT_PUBLIC_MODE`              | `String`              | The mode the website is deployed for (`development`, `staging`, `production`...) |
+| `NUXT_PUBLIC_VERSION`           | `String`              | The version of the website deployed                                              |
+| `NUXT_PUBLIC_GTAG_ID`           | `String`, `undefined` | The Id to use to connect to Google Analytics                                     |
+| `NUXT_STORYBLOK_ACCESS_TOKEN`   | `String`, `undefined` | The access token used to connect to the StoryBlok space                          |
+| `NUXT_STORYBLOK_VERSION`        | `String`, `undefined` | The version used when getting StoryBlok stories                                  |
+| `NUXT_UNLEASH_PROXY_URL`        | `String`, `undefined` | The URL of the Unleash proxy to use                                              |
+| `NUXT_UNLEASH_PROXY_CLIENT_KEY` | `String`, `undefined` | The client key to use when connecting to the Unleash proxy                       |
 
 - Option 1: Run the website as a **static website** (used for GitLab pages deployment)
   - Generate a static version of the website with `npm run generate`

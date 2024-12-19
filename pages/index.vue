@@ -14,10 +14,7 @@ const displayResumeButton = useFlag("display-resume");
 </script>
 
 <template>
-  <div
-    class="gap-24 px-10 *:pt-28 max-w-screen-xl lg:flex lg:justify-between lg:items-start min-h-screen xl:container"
-    data-test="root"
-  >
+  <div class="gap-24 px-10 *:pt-28 max-w-screen-xl lg:flex lg:justify-between lg:items-start min-h-screen xl:container">
     <StoryblokComponent
       v-if="profileStory"
       class="lg:sticky lg:top-0 lg:pb-28 lg:h-screen"

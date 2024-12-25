@@ -1,9 +1,6 @@
 import { plugin as unleashPlugin } from "@unleash/proxy-client-vue";
 
 export default defineNuxtPlugin((nuxtApp) => {
-  console.log(
-    "HELLO  -================================================================================================",
-  );
   if (nuxtApp.$config.public.unleashProxyUrl) {
     const config = {
       url: nuxtApp.$config.public.unleashProxyUrl,

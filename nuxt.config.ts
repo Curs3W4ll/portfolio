@@ -12,7 +12,7 @@ const config = {
 };
 
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: process.env.NUXT_CONFIG_SSR == "true" ? true : process.env.NUXT_CONFIG_SSR === "false" ? false : undefined,
   app: {
     head: {
       titleTemplate: `%s - ${config.seo.name}`,

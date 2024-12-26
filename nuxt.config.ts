@@ -15,7 +15,11 @@ export default defineNuxtConfig({
   ssr: process.env.NUXT_CONFIG_SSR == "true" ? true : process.env.NUXT_CONFIG_SSR === "false" ? false : undefined,
   app: {
     head: {
-      titleTemplate: `%s - ${config.seo.name}`,
+      titleTemplate: `%s %separator %siteName`,
+      templateParams: {
+        siteName: config.seo.name,
+        separator: "-",
+      },
       link: [
         { rel: "canonical", href: config.seo.url },
         { rel: "icon", type: "image/png", sizes: "512x512", href: "/favicon/favicon-512x512.png" },

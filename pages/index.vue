@@ -40,18 +40,10 @@ const displayResumeButton = useFlag("display-resume");
           @mouseover="focusedExperience = experience.uuid"
           @mouseleave="focusedExperience = undefined"
         />
+        <CustomLink v-if="displayResumeButton" class="pl-7 capitalize" href="/resume.pdf" target="_blank"
+          >See full résumé</CustomLink
+        >
       </div>
-      <Button
-        v-if="displayResumeButton"
-        class="mx-auto"
-        label="See my resume"
-        size="large"
-        icon="pi pi-file-pdf"
-        as="a"
-        href="/resume.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-      />
     </div>
   </div>
 </template>

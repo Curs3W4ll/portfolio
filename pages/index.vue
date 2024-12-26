@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useFlag } from "@unleash/proxy-client-vue";
 
+const focusedExperience = ref<string | undefined>(undefined);
+
 const sbVersion = useStoryblokVersion();
 
 const profileStory = await useAsyncStoryblok("profile", {
@@ -8,6 +10,12 @@ const profileStory = await useAsyncStoryblok("profile", {
 });
 const aboutStory = await useAsyncStoryblok("about", {
   version: sbVersion,
+});
+const experiences = await useStoryblokExperiences(sbVersion);
+const experienceStories = computed(() => {
+  return experiences.data.value?.filter((elem) => {
+    return typeof elem === "object";
+  });
 });
 
 const displayResumeButton = useFlag("display-resume");
@@ -23,6 +31,16 @@ const displayResumeButton = useFlag("display-resume");
     />
     <div class="pb-28 flex flex-col gap-32">
       <StoryblokComponent v-if="aboutStory" :blok="aboutStory.content" />
+      <div v-if="experienceStories" class="flex flex-col gap-10">
+        <StoryblokComponent
+          v-for="experience in experienceStories"
+          :key="experience.uuid"
+          :blok="experience.content"
+          :fade="focusedExperience && focusedExperience !== experience.uuid"
+          @mouseover="focusedExperience = experience.uuid"
+          @mouseleave="focusedExperience = undefined"
+        />
+      </div>
       <Button
         v-if="displayResumeButton"
         class="mx-auto"

@@ -16,16 +16,6 @@ export interface AboutStoryblok {
   [k: string]: any;
 }
 
-export interface ProfileStoryblok {
-  name: string;
-  job: string;
-  description: string;
-  links?: SocialLinkStoryblok[];
-  component: "profile";
-  _uid: string;
-  [k: string]: any;
-}
-
 export type MultilinkStoryblok =
   | {
       fieldtype: "multilink";
@@ -100,6 +90,28 @@ export type MultilinkStoryblok =
       [k: string]: any;
     };
 
+export interface ExperienceStoryblok {
+  startDate: string;
+  endDate?: string;
+  title: string;
+  company: string;
+  link?: Exclude<MultilinkStoryblok, { linktype?: "email" } | { linktype?: "asset" }>;
+  role: string;
+  component: "experience";
+  _uid: string;
+  [k: string]: any;
+}
+
+export interface ProfileStoryblok {
+  name: string;
+  job: string;
+  description: string;
+  links?: SocialLinkStoryblok[];
+  component: "profile";
+  _uid: string;
+  [k: string]: any;
+}
+
 export interface SocialLinkStoryblok {
   name: string;
   url: Exclude<MultilinkStoryblok, { linktype?: "email" } | { linktype?: "asset" }>;
@@ -109,9 +121,9 @@ export interface SocialLinkStoryblok {
   [k: string]: any;
 }
 
-export interface TeaserStoryblok {
-  headline?: string;
-  component: "teaser";
+export interface TagStoryblok {
+  title?: string;
+  component: "tag";
   _uid: string;
   [k: string]: any;
 }

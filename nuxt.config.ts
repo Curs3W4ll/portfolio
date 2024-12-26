@@ -88,6 +88,7 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
     "@nuxt/fonts",
+    "nuxt-time",
   ],
   eslint: {
     checker: true,

@@ -6,6 +6,7 @@
   html {
     @apply text-white;
     @apply overscroll-none;
+    @apply scroll-smooth;
     @apply bg-fixed;
     @apply bg-gradient-to-tr;
     @apply from-primary-800;

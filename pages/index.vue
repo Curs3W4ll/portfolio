@@ -30,8 +30,8 @@ const displayResumeButton = useFlag("display-resume");
       data-test="profile-section"
     />
     <div class="pb-28 flex flex-col gap-32">
-      <StoryblokComponent v-if="aboutStory" :blok="aboutStory.content" />
-      <div v-if="experienceStories" class="flex flex-col gap-10">
+      <StoryblokComponent v-if="aboutStory" id="about" :blok="aboutStory.content" />
+      <div v-if="experienceStories" id="experience" class="flex flex-col gap-5">
         <StoryblokComponent
           v-for="experience in experienceStories"
           :key="experience.uuid"
@@ -40,7 +40,7 @@ const displayResumeButton = useFlag("display-resume");
           @mouseover="focusedExperience = experience.uuid"
           @mouseleave="focusedExperience = undefined"
         />
-        <CustomLink v-if="displayResumeButton" class="pl-7 capitalize" href="/resume.pdf" target="_blank"
+        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" href="/resume.pdf" target="_blank"
           >See full résumé</CustomLink
         >
       </div>

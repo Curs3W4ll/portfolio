@@ -89,6 +89,7 @@ export default defineNuxtConfig({
     "@nuxtjs/robots",
     "@nuxt/fonts",
     "nuxt-time",
+    "nuxt-anchorscroll",
   ],
   eslint: {
     checker: true,

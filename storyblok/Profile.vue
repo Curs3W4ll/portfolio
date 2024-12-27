@@ -15,6 +15,7 @@ defineProps<{
       <h2 class="text-xl sm:text-2xl font-bold">{{ blok.job }}</h2>
       <h3>{{ blok.description }}</h3>
     </div>
+    <NavBar class="invisible lg:visible" />
     <div class="flex gap-5 pt-3">
       <NuxtLink v-for="link in blok.links" :key="link._uid" :to="link.url.url" target="_blank" data-test="social-link">
         <SvgIcon :icon="link.icon" :title="link.name" />

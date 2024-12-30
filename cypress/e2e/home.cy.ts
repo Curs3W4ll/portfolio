@@ -23,13 +23,13 @@ describe("Displaying home page", () => {
       cy.wait("@storyblok-profile");
       cy.wait("@storyblok-about");
 
-      cy.getByData("profile-section").then((el) => {
+      cy.getByData("profile").then((el) => {
         initialPosition = el.position();
       });
 
       cy.scrollTo("bottom", { duration: 50 });
 
-      cy.getByData("profile-section").should((el) => {
+      cy.getByData("profile").should((el) => {
         // Should not be equal because sticky elements have offsets equivalent to the scroll amount
         expect(el.position()).not.deep.equal(initialPosition);
       });

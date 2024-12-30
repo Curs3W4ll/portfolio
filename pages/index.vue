@@ -27,7 +27,6 @@ const displayResumeButton = useFlag("display-resume");
       v-if="profileStory"
       class="lg:sticky lg:top-0 lg:pb-28 lg:h-screen"
       :blok="profileStory.content"
-      data-test="profile-section"
     />
     <div class="pb-28 flex flex-col gap-32">
       <StoryblokComponent v-if="aboutStory" id="about" :blok="aboutStory.content" />

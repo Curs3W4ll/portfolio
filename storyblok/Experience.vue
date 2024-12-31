@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ExperienceStoryblok } from "~/components-types-sb";
+import { CustomLink } from "#components";
 
 withDefaults(
   defineProps<{
@@ -22,9 +23,9 @@ withDefaults(
       <DateExperience :start-date="blok.startDate" :end-date="blok.endDate" />
     </div>
     <div class="flex flex-col gap-1 text-white">
-      <CustomLink :href="blok.link?.url" target="_blank">
-        <strong>{{ blok.title }}</strong> · {{ blok.company }}
-      </CustomLink>
+      <component :is="blok.link?.url ? CustomLink : 'strong'" class="font-bold" :href="blok.link?.url" target="_blank">
+        {{ blok.title }} · {{ blok.company }}
+      </component>
       <div class="text-sm text-white-dark whitespace-pre-line">
         {{ blok.role }}
       </div>

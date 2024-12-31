@@ -12,6 +12,11 @@ const aboutStory = await useAsyncStoryblok("about", {
   version: sbVersion,
 });
 const experiences = await useStoryblokExperiences(sbVersion);
+if (import.meta.dev && experiences.data.value) {
+  for (const [i, elem] of experiences.data.value.entries()) {
+    useStoryblokBridge(elem.id, (evStory) => (experiences.data.value![i] = evStory));
+  }
+}
 const experienceStories = computed(() => {
   return experiences.data.value?.filter((elem) => {
     return typeof elem === "object";

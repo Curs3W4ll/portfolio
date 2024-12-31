@@ -11,7 +11,18 @@ const convertToDate = (e?: Date | string) => (typeof e === "string" ? (e === "" 
 const start = ref<Date | undefined>(convertToDate(props.startDate));
 const end = ref<Date | undefined>(convertToDate(props.endDate));
 
-const format = computed(() => {
+const startFormat = computed(() => {
+  const obj: ExtractPropTypes<typeof NuxtTime> = {};
+
+  if (start.value?.getUTCFullYear() === end.value?.getUTCFullYear()) {
+    obj.month = "short";
+  } else {
+    obj.year = "numeric";
+  }
+
+  return obj;
+});
+const endFormat = computed(() => {
   const obj: ExtractPropTypes<typeof NuxtTime> = {
     year: "numeric",
   };
@@ -27,9 +38,9 @@ const format = computed(() => {
 <template>
   <div>
     <strong>
-      <NuxtTime v-if="start" :datetime="start" v-bind="format" />
+      <NuxtTime v-if="start" :datetime="start" v-bind="startFormat" />
       -
-      <NuxtTime v-if="end" :datetime="end" v-bind="format" />
+      <NuxtTime v-if="end && end < new Date()" :datetime="end" v-bind="endFormat" />
       <span v-else>present</span>
     </strong>
   </div>

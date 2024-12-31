@@ -1,7 +1,7 @@
 export const useStoryblokExperiences = (version: "draft" | "published") => {
   const storyblokApi = useStoryblokApi();
 
-  return useAsyncData("storyblokExperiences", async () => {
+  return useAsyncData(async () => {
     const { data } = await storyblokApi.getStories({
       starts_with: "experiences/",
       version: version,

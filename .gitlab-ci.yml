@@ -82,7 +82,7 @@ Build:
     - cp ${DEV_ENV_FILE} .env
     # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install
-    - npm run build
+    - npm run build:noserver
   artifacts:
     paths:
       - .output/

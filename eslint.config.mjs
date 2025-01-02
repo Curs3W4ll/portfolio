@@ -6,7 +6,7 @@ const compat = new FlatCompat();
 
 export default withNuxt().append([
   ...compat.config({
-    plugins: ["cypress"],
+    plugins: ["cypress", "no-only-tests"],
     extends: ["plugin:cypress/recommended"],
     ignorePatterns: ["components-types-sb.d.ts"],
     overrides: [

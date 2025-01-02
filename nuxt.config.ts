@@ -140,7 +140,7 @@ export default defineNuxtConfig({
     ],
   },
   robots: {
-    disallow: ["_nuxt"],
+    disallow: ["/_nuxt/"],
   },
   sourcemap: {
     client: true,

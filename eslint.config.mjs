@@ -19,6 +19,7 @@ export default withNuxt().append([
     ],
     rules: {
       "vue/no-v-html": "off",
+      "vue/html-self-closing": "off",
     },
   }),
 ]);

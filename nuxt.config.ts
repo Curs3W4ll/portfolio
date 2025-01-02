@@ -15,6 +15,9 @@ export default defineNuxtConfig({
   ssr: process.env.NUXT_CONFIG_SSR == "true" ? true : process.env.NUXT_CONFIG_SSR === "false" ? false : undefined,
   app: {
     head: {
+      htmlAttrs: {
+        lang: "en",
+      },
       titleTemplate: `%s %separator %siteName`,
       templateParams: {
         siteName: config.seo.name,

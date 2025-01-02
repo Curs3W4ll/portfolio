@@ -3,6 +3,8 @@ import { useFlag } from "@unleash/proxy-client-vue";
 
 const focusedExperience = ref<string | undefined>(undefined);
 const focusedProject = ref<string | undefined>(undefined);
+const displayResumeButton = ref<boolean>(false);
+const displayProjectsArchiveButton = ref<boolean>(false);
 
 const sbVersion = useStoryblokVersion();
 
@@ -35,8 +37,13 @@ const projectsStories = computed(() => {
   });
 });
 
-const displayResumeButton = useFlag("display-resume");
-const displaySeeProjectArchiveButton = useFlag("display-projects-archive");
+onMounted(() => {
+  const displayResumeButtonFlag = useFlag("display-resume");
+  const displayProjectsArchiveButtonFlag = useFlag("display-projects-archive");
+
+  syncRef(displayResumeButton, displayResumeButtonFlag, { direction: "rtl" });
+  syncRef(displayProjectsArchiveButton, displayProjectsArchiveButtonFlag, { direction: "rtl" });
+});
 </script>
 
 <template>
@@ -70,7 +77,7 @@ const displaySeeProjectArchiveButton = useFlag("display-projects-archive");
           @mouseover="focusedProject = project.uuid"
           @mouseleave="focusedProject = undefined"
         />
-        <CustomLink v-if="displaySeeProjectArchiveButton" class="pl-5 capitalize" href="/projects"
+        <CustomLink v-if="displayProjectsArchiveButton" class="pl-5 capitalize" href="/projects"
           >Projects archive</CustomLink
         >
       </div>

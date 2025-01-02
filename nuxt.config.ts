@@ -15,6 +15,9 @@ export default defineNuxtConfig({
   ssr: process.env.NUXT_CONFIG_SSR == "true" ? true : process.env.NUXT_CONFIG_SSR === "false" ? false : undefined,
   app: {
     head: {
+      htmlAttrs: {
+        lang: "en",
+      },
       titleTemplate: `%s %separator %siteName`,
       templateParams: {
         siteName: config.seo.name,
@@ -90,6 +93,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "nuxt-time",
     "nuxt-anchorscroll",
+    "@vueuse/nuxt",
   ],
   eslint: {
     checker: true,
@@ -137,7 +141,7 @@ export default defineNuxtConfig({
     ],
   },
   robots: {
-    disallow: ["_nuxt"],
+    disallow: ["/_nuxt/"],
   },
   sourcemap: {
     client: true,

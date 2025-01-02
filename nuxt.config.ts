@@ -93,6 +93,7 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "nuxt-time",
     "nuxt-anchorscroll",
+    "@vueuse/nuxt",
   ],
   eslint: {
     checker: true,

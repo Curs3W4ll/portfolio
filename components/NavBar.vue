@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const anchors = ["about", "experience"];
+const anchors = ["about", "experience", "projects"];
 const activeAnchor = ref(anchors[0]);
 
 const handleScroll = () => {

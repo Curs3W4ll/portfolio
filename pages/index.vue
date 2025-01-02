@@ -2,6 +2,7 @@
 import { useFlag } from "@unleash/proxy-client-vue";
 
 const focusedExperience = ref<string | undefined>(undefined);
+const focusedProject = ref<string | undefined>(undefined);
 
 const sbVersion = useStoryblokVersion();
 
@@ -22,8 +23,20 @@ const experienceStories = computed(() => {
     return typeof elem === "object";
   });
 });
+const projects = await useStoryblokProjects(sbVersion, true);
+if (import.meta.dev && projects.data.value) {
+  for (const [i, elem] of projects.data.value.entries()) {
+    useStoryblokBridge(elem.id, (evStory) => (projects.data.value![i] = evStory));
+  }
+}
+const projectsStories = computed(() => {
+  return projects.data.value?.filter((elem) => {
+    return typeof elem === "object";
+  });
+});
 
 const displayResumeButton = useFlag("display-resume");
+const displaySeeProjectArchiveButton = useFlag("display-projects-archive");
 </script>
 
 <template>
@@ -46,6 +59,19 @@ const displayResumeButton = useFlag("display-resume");
         />
         <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" href="/resume.pdf" target="_blank"
           >See full résumé</CustomLink
+        >
+      </div>
+      <div v-if="projectsStories" id="projects" class="flex flex-col gap-5">
+        <StoryblokComponent
+          v-for="project in projectsStories"
+          :key="project.uuid"
+          :blok="project.content"
+          :fade="focusedProject && focusedProject !== project.uuid"
+          @mouseover="focusedProject = project.uuid"
+          @mouseleave="focusedProject = undefined"
+        />
+        <CustomLink v-if="displaySeeProjectArchiveButton" class="pl-5 capitalize" href="/projects"
+          >Projects archive</CustomLink
         >
       </div>
     </div>

@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import type { ProjectStoryblok } from "~/components-types-sb";
+import { CustomLink } from "#components";
+
+withDefaults(
+  defineProps<{
+    blok: ProjectStoryblok;
+    fade?: boolean;
+  }>(),
+  {
+    fade: false,
+  },
+);
+</script>
+
+<template>
+  <div
+    v-editable="blok"
+    class="flex items-start gap-3 p-5 rounded-lg text-white-dark hover:bg-white/5 peer peer-hover:opacity-50"
+    :class="{ 'opacity-50': fade }"
+  >
+    <div class="w-1/4 text-sm uppercase flex-shrink-0 p-2">
+      <img
+        class="border-white-dark border rounded"
+        :src="blok.previewImage.filename ?? undefined"
+        :alt="blok.previewImage.alt ?? undefined"
+      />
+    </div>
+    <div class="flex flex-col gap-1 text-white">
+      <component :is="blok.link?.url ? CustomLink : 'strong'" class="font-bold" :href="blok.link?.url" target="_blank">
+        {{ blok.title }}
+      </component>
+      <div class="text-sm text-white-dark whitespace-pre-line">
+        {{ blok.preview }}
+      </div>
+      <div v-if="blok.tags?.value" class="pt-2 flex flex-wrap gap-2">
+        <Tag v-for="tag in blok.tags.value" :key="tag" :value="tag" rounded />
+      </div>
+    </div>
+  </div>
+</template>

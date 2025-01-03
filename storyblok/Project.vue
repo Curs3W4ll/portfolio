@@ -20,10 +20,14 @@ withDefaults(
     :class="{ 'opacity-50': fade }"
   >
     <div class="w-1/4 text-sm uppercase flex-shrink-0 p-2">
-      <img
+      <NuxtImg
         class="border-white-dark border rounded"
         :src="blok.previewImage.filename ?? undefined"
-        :alt="blok.previewImage.alt ?? undefined"
+        :alt="blok.previewImage.alt ?? ''"
+        format="webp"
+        quality="1"
+        provider="storyblok"
+        placeholder
       />
     </div>
     <div class="flex flex-col gap-1 text-white">

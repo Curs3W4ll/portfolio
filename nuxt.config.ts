@@ -94,6 +94,7 @@ export default defineNuxtConfig({
     "nuxt-time",
     "nuxt-anchorscroll",
     "@vueuse/nuxt",
+    "@nuxt/image",
   ],
   eslint: {
     checker: true,
@@ -128,6 +129,11 @@ export default defineNuxtConfig({
     accessToken: process.env.NUXT_STORYBLOK_ACCESS_TOKEN,
     bridge: true,
     devtools: true,
+  },
+  image: {
+    storyblok: {
+      baseURL: "https://a.storyblok.com",
+    },
   },
   site: {
     url: "https://hervaud.fr",

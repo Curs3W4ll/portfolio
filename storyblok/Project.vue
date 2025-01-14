@@ -37,9 +37,7 @@ withDefaults(
       <div class="text-sm text-white-dark whitespace-pre-line">
         {{ blok.preview }}
       </div>
-      <div v-if="blok.tags?.value" class="pt-2 flex flex-wrap gap-2">
-        <Tag v-for="tag in blok.tags.value" :key="tag" :value="tag" rounded />
-      </div>
+      <TagsList :tags="blok.tags?.value" />
     </div>
   </div>
 </template>

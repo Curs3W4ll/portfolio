@@ -1,3 +1,5 @@
+import removeAttr from "remove-attr";
+
 const config = {
   seo: {
     name: "Corentin Hervaud",
@@ -104,6 +106,14 @@ export default defineNuxtConfig({
   },
   typescript: {
     typeCheck: true,
+  },
+  vite: {
+    plugins: [
+      removeAttr({
+        extensions: ["vue"],
+        attributes: [process.env.NUXT_KEEP_DATA_TEST_ATTRIBUTES === "true" ? "data-nothing" : "data-test"],
+      }),
+    ],
   },
   sentry: {
     sourceMapsUploadOptions: {

@@ -64,6 +64,7 @@
     "prettier": "^3.4.1",
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.9",
+    "remove-attr": "^0.0.15",
     "sass": "^1.81.0",
     "serve": "^14.2.4",
     "start-server-and-test": "^2.0.3",

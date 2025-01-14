@@ -32,8 +32,8 @@ const projectsStories = computed(() => {
       <h1 class="text-4xl font-bold">All projects</h1>
     </div>
     <table class="w-full table-auto text-left">
-      <thead>
-        <tr class="*:p-3 text-sm whitespace-nowrap">
+      <thead class="sticky top-0">
+        <tr class="*:p-3 text-sm whitespace-nowrap backdrop-blur">
           <th class="!pl-0">Year</th>
           <th>Project</th>
           <th>Made at</th>

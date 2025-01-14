@@ -22,7 +22,7 @@ const projectsStories = computed(() => {
 </script>
 
 <template>
-  <div class="container max-w-screen-xl py-20 space-y-10">
+  <div class="container max-w-screen-xl py-20 px-10 lg:px-0 space-y-10">
     <div class="space-y-3">
       <NuxtLink
         class="text-primary text-lg before:content-['←\00a0'] before:inline-block before:hover:motion-safe:-translate-x-2 before:motion-safe:transition-transform before:ease-in-out before:duration-300"
@@ -31,27 +31,27 @@ const projectsStories = computed(() => {
       >
       <h1 class="text-4xl font-bold">All projects</h1>
     </div>
-    <table class="w-full table-auto text-left">
-      <thead class="sticky top-0">
-        <tr class="*:p-3 text-sm whitespace-nowrap backdrop-blur">
-          <th class="!pl-0">Year</th>
-          <th>Project</th>
-          <th>Made at</th>
-          <th>Built using</th>
-          <th>Summary</th>
+    <table class="w-full table table-auto text-left">
+      <thead class="table-header-group sticky top-0">
+        <tr class="table-row *:p-3 text-sm whitespace-nowrap backdrop-blur">
+          <th class="table-cell !pl-0">Year</th>
+          <th class="table-cell">Project</th>
+          <th class="hidden md:table-cell">Made at</th>
+          <th class="hidden lg:table-cell">Built using</th>
+          <th class="hidden sm:table-cell">Summary</th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="project in projectsStories" :key="project.id" class="border-t border-white-dark *:p-3">
-          <td class="text-white-dark !pl-0">{{ project.year }}</td>
-          <td class="text-white whitespace-nowrap">
+      <tbody class="table-row-group">
+        <tr v-for="project in projectsStories" :key="project.id" class="table-row border-t border-white-dark *:p-3">
+          <td class="table-cell text-white-dark !pl-0">{{ project.year }}</td>
+          <td class="table-cell text-white whitespace-nowrap">
             <component :is="project.link?.url ? CustomLink : 'strong'" :href="project.link?.url" target="_blank">
               {{ project.title }}
             </component>
           </td>
-          <td class="text-white-dark">{{ project.company }}</td>
-          <td><TagsList :tags="project.tags?.value" /></td>
-          <td class="text-white-dark">{{ project.summary }}</td>
+          <td class="hidden md:table-cell text-white-dark">{{ project.company }}</td>
+          <td class="hidden lg:table-cell"><TagsList :tags="project.tags?.value" /></td>
+          <td class="hidden sm:table-cell text-white-dark">{{ project.summary }}</td>
         </tr>
       </tbody>
     </table>

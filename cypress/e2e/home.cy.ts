@@ -3,6 +3,7 @@ describe("Displaying home page", () => {
     cy.viewport(1920, 600);
     cy.intercept("https://api.storyblok.com/**/profile*").as("storyblok-profile");
     cy.intercept("https://api.storyblok.com/**/about*").as("storyblok-about");
+    cy.intercept("https://api.storyblok.com/**/*projects-preview*").as("storyblok-projects-preview");
     cy.intercept("https://api.storyblok.com/**/*experiences*").as("storyblok-experiences");
     cy.visit("/");
   });
@@ -22,6 +23,8 @@ describe("Displaying home page", () => {
 
       cy.wait("@storyblok-profile");
       cy.wait("@storyblok-about");
+      cy.wait("@storyblok-experiences");
+      cy.wait("@storyblok-projects-preview");
 
       cy.getByData("profile").then((el) => {
         initialPosition = el.position();
@@ -58,7 +61,24 @@ describe("Displaying home page", () => {
     });
   });
 
-  it("should display description", () => {
-    cy.getByData("about").should("be.visible");
+  context("About", () => {
+    it("should display description", () => {
+      cy.wait("@storyblok-about");
+      cy.getByData("about").should("be.visible");
+    });
+  });
+
+  context("Experiences", () => {
+    it("should display experiences", () => {
+      cy.wait("@storyblok-experiences");
+      cy.getByData("experience").should("have.length.gt", 0);
+    });
+  });
+
+  context("Projects preview", () => {
+    it("should display projects preview", () => {
+      cy.wait("@storyblok-projects-preview");
+      cy.getByData("project").should("have.length.gt", 0);
+    });
   });
 });

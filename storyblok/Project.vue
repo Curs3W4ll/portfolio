@@ -18,6 +18,7 @@ withDefaults(
     v-editable="blok"
     class="flex items-start gap-3 p-5 rounded-lg text-white-dark hover:bg-white/5 peer peer-hover:opacity-50"
     :class="{ 'opacity-50': fade }"
+    data-test="project"
   >
     <div class="w-1/4 text-sm uppercase flex-shrink-0 p-2">
       <NuxtImg
@@ -35,11 +36,9 @@ withDefaults(
         {{ blok.title }}
       </component>
       <div class="text-sm text-white-dark whitespace-pre-line">
-        {{ blok.preview }}
+        {{ blok.description }}
       </div>
-      <div v-if="blok.tags?.value" class="pt-2 flex flex-wrap gap-2">
-        <Tag v-for="tag in blok.tags.value" :key="tag" :value="tag" rounded />
-      </div>
+      <TagsList :tags="blok.tags?.value" />
     </div>
   </div>
 </template>

@@ -62,7 +62,11 @@ onMounted(() => {
       </div>
       <div v-if="projectsPreviewStory" id="projects" class="flex flex-col gap-5">
         <StoryblokComponent :blok="projectsPreviewStory.content" />
-        <CustomLink v-if="displayProjectsArchiveButton" class="pl-5 capitalize" href="/projects"
+        <CustomLink
+          v-if="displayProjectsArchiveButton"
+          class="pl-5 capitalize"
+          href="/projects"
+          data-test="projects-archive-button"
           >Projects archive</CustomLink
         >
       </div>

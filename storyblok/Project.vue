@@ -18,6 +18,7 @@ withDefaults(
     v-editable="blok"
     class="flex items-start gap-3 p-5 rounded-lg text-white-dark hover:bg-white/5 peer peer-hover:opacity-50"
     :class="{ 'opacity-50': fade }"
+    data-test="project"
   >
     <div class="w-1/4 text-sm uppercase flex-shrink-0 p-2">
       <NuxtImg

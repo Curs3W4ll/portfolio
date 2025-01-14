@@ -22,17 +22,18 @@ const projectsStories = computed(() => {
 </script>
 
 <template>
-  <div class="container max-w-screen-xl py-20 px-10 lg:px-0 space-y-10">
+  <div class="container max-w-screen-xl py-20 px-10 space-y-10">
     <div class="space-y-3">
       <NuxtLink
         class="text-primary text-lg before:content-['←\00a0'] before:inline-block before:hover:motion-safe:-translate-x-2 before:motion-safe:transition-transform before:ease-in-out before:duration-300"
         to="/"
+        data-test="back-button"
         >Corentin Hervaud</NuxtLink
       >
       <h1 class="text-4xl font-bold">All projects</h1>
     </div>
     <table class="w-full table table-auto text-left">
-      <thead class="table-header-group sticky top-0">
+      <thead class="table-header-group sticky top-0" data-test="header-row">
         <tr class="table-row *:p-3 text-sm whitespace-nowrap backdrop-blur">
           <th class="table-cell !pl-0">Year</th>
           <th class="table-cell">Project</th>

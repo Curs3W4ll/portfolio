@@ -142,6 +142,8 @@ export interface ProjectStoryblok {
   title: string;
   link?: Exclude<MultilinkStoryblok, { linktype?: "email" } | { linktype?: "asset" }>;
   previewImage: AssetStoryblok;
+  summary: string;
+  description: string;
   preview: string;
   company?: string;
   year: string;

@@ -35,7 +35,7 @@ withDefaults(
         {{ blok.title }}
       </component>
       <div class="text-sm text-white-dark whitespace-pre-line">
-        {{ blok.preview }}
+        {{ blok.description }}
       </div>
       <TagsList :tags="blok.tags?.value" />
     </div>

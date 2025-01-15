@@ -4,7 +4,7 @@ import { CustomLink } from "#components";
 
 const sbVersion = useStoryblokVersion();
 
-const projects = await useStoryblokProjects(sbVersion, true);
+const projects = await useStoryblokProjects(sbVersion);
 if (import.meta.dev && projects.data.value) {
   for (const [i, elem] of projects.data.value.entries()) {
     useStoryblokBridge(elem.id, (evStory) => (projects.data.value![i] = evStory));

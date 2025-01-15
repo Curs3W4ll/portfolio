@@ -7,6 +7,10 @@ stages:
   - test
   - deploy
 
+workflow:
+  auto_cancel:
+    on_new_commit: interruptible
+
 include:
   - component: gitlab.com/dependabot-gitlab/dependabot-standalone/template@3.15.0
     inputs:
@@ -31,7 +35,6 @@ Format code:
   image: node:alpine
   needs: []
   dependencies: []
-  interruptible: true
   variables:
     COMMIT_MESSAGE: ":art: Format code"
     PUSH_BRANCH: $CI_COMMIT_BRANCH
@@ -97,6 +100,7 @@ No job MR validation:
   stage: test
   needs: []
   dependencies: []
+  interruptible: true
   script:
     - echo "Skipping pipeline..."
   rules:
@@ -109,6 +113,7 @@ Unit tests:
     - job: Format code
       optional: true
   dependencies: []
+  interruptible: true
   script:
     # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install
@@ -131,6 +136,7 @@ E2E tests:
       optional: true
     - job: Build
       artifacts: true
+  interruptible: true
   script:
     # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
     - npm install

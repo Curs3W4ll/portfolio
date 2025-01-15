@@ -52,7 +52,12 @@ const projectsStories = computed(() => {
           </td>
           <td class="hidden md:table-cell text-white-dark">{{ project.company }}</td>
           <td class="hidden lg:table-cell"><TagsList :tags="project.tags?.value" /></td>
-          <td class="hidden sm:table-cell text-white-dark">{{ project.summary }}</td>
+          <td
+            v-tooltip.left="{ value: project.description, autoHide: false }"
+            class="hidden sm:table-cell text-white-dark"
+          >
+            {{ project.summary }}
+          </td>
         </tr>
       </tbody>
     </table>

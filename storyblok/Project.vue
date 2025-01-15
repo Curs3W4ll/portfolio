@@ -22,6 +22,7 @@ withDefaults(
   >
     <div class="w-1/4 text-sm uppercase flex-shrink-0 p-2">
       <NuxtImg
+        v-if="blok.previewImage"
         class="border-white-dark border rounded"
         :src="blok.previewImage.filename ?? undefined"
         :alt="blok.previewImage.alt ?? ''"

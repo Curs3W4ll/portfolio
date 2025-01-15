@@ -4,7 +4,7 @@ import { CustomLink } from "#components";
 
 const sbVersion = useStoryblokVersion();
 
-const projects = await useStoryblokProjects(sbVersion, true);
+const projects = await useStoryblokProjects(sbVersion);
 if (import.meta.dev && projects.data.value) {
   for (const [i, elem] of projects.data.value.entries()) {
     useStoryblokBridge(elem.id, (evStory) => (projects.data.value![i] = evStory));
@@ -52,7 +52,12 @@ const projectsStories = computed(() => {
           </td>
           <td class="hidden md:table-cell text-white-dark">{{ project.company }}</td>
           <td class="hidden lg:table-cell"><TagsList :tags="project.tags?.value" /></td>
-          <td class="hidden sm:table-cell text-white-dark">{{ project.summary }}</td>
+          <td
+            v-tooltip.left="{ value: project.description, autoHide: false }"
+            class="hidden sm:table-cell text-white-dark"
+          >
+            {{ project.summary }}
+          </td>
         </tr>
       </tbody>
     </table>

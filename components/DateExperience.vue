@@ -38,9 +38,9 @@ const endFormat = computed(() => {
 <template>
   <div>
     <strong>
-      <NuxtTime v-if="start" :datetime="start" v-bind="startFormat" />
+      <NuxtTime v-if="start" v-bind="startFormat" :datetime="start" />
       -
-      <NuxtTime v-if="end && end < new Date()" :datetime="end" v-bind="endFormat" />
+      <NuxtTime v-if="end && end < new Date()" v-bind="endFormat" :datetime="end" />
       <span v-else>present</span>
     </strong>
   </div>

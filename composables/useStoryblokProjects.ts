@@ -1,4 +1,4 @@
-export const useStoryblokProjects = (version: "draft" | "published", previewOnly: boolean = false) => {
+export const useStoryblokProjects = (version: "draft" | "published") => {
   const storyblokApi = useStoryblokApi();
 
   return useAsyncData(async () => {
@@ -6,7 +6,6 @@ export const useStoryblokProjects = (version: "draft" | "published", previewOnly
       starts_with: "projects/",
       version: version,
       sort_by: "content.year:desc",
-      ...(previewOnly ? { with_tag: "featured" } : {}),
     });
 
     return data.stories;

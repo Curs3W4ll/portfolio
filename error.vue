@@ -4,6 +4,10 @@ import type { NuxtError } from "#app";
 defineProps<{
   error: NuxtError;
 }>();
+
+const handleError = () => {
+  clearError({ redirect: "/" });
+};
 </script>
 
 <template>
@@ -11,7 +15,10 @@ defineProps<{
     <div class="flex gap-3 items-center">
       <h1 class="my-3 text-xl">{{ error.statusCode }}</h1>
       <Divider class="before:!border-white self-stretch" layout="vertical" />
-      <p>This page could not be loaded. <CustomLink to="/">Go back home</CustomLink></p>
+      <p>
+        This page could not be loaded.
+        <span class="hover:text-primary cursor-pointer" @click="handleError">Go back home</span>
+      </p>
     </div>
   </div>
 </template>

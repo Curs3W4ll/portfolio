@@ -17,7 +17,9 @@ const handleError = () => {
       <Divider class="before:!border-white self-stretch" layout="vertical" />
       <p>
         This page could not be loaded.
-        <span class="hover:text-primary cursor-pointer" @click="handleError">Go back home</span>
+        <span class="hover:text-primary cursor-pointer" data-test="go-back-home" @click="handleError"
+          >Go back home</span
+        >
       </p>
     </div>
   </div>

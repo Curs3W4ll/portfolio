@@ -7,5 +7,11 @@ export default {
     semantic: {
       primary: palette("#C980E6"),
     },
+    options: {
+      cssLayer: {
+        name: "primevue",
+        order: "tailwind-base, primevue, tailwind-utilities",
+      },
+    },
   }),
 };

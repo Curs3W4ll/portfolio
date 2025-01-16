@@ -19,6 +19,10 @@ const projectsStories = computed(() => {
       return elem.content as ProjectStoryblok;
     });
 });
+
+useHead({
+  title: "Projects archive",
+});
 </script>
 
 <template>

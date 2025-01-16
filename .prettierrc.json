@@ -20,12 +20,13 @@
     "^[:]?id$",
     "^[:]?(ref|key)$",
     "^v-model",
-    "^v-",
+    "^v-(?!html|text)",
     "^[:]?class$",
     "^:",
     "$DEFAULT",
     "^aria-",
-    "^@",
-    "^data-test$"
+    "^data-test$",
+    "^v-html",
+    "^@"
   ]
 }

@@ -2,6 +2,13 @@
 import type { ProjectStoryblok } from "~/components-types-sb";
 import { CustomLink } from "#components";
 
+defineI18nRoute({
+  paths: {
+    en: "/projects",
+    fr: "/projets",
+  },
+});
+
 const sbVersion = useStoryblokVersion();
 
 const projects = await useStoryblokProjects(sbVersion);
@@ -28,11 +35,11 @@ useHead({
 <template>
   <div class="container max-w-screen-xl py-20 px-10 space-y-10">
     <div class="space-y-3">
-      <NuxtLink
+      <NuxtLinkLocale
         class="text-primary text-lg before:content-['←\00a0'] before:inline-block before:hover:motion-safe:-translate-x-2 before:motion-safe:transition-transform before:ease-in-out before:duration-300"
-        to="/"
+        to="index"
         data-test="back-button"
-        >Corentin Hervaud</NuxtLink
+        >Corentin Hervaud</NuxtLinkLocale
       >
       <h1 class="text-4xl font-bold">All projects</h1>
     </div>

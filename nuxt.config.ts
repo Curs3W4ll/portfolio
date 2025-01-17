@@ -97,6 +97,7 @@ export default defineNuxtConfig({
     "nuxt-anchorscroll",
     "@vueuse/nuxt",
     "@nuxt/image",
+    "v-gsap-nuxt",
   ],
   eslint: {
     checker: true,

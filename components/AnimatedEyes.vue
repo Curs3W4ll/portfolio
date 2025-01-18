@@ -8,7 +8,7 @@ onMounted(() => {
     .matchMedia()
     .add("(prefers-reduced-motion: no-preference)", () => {
       useGSAP().to(".eye-ball", {
-        duration: 15,
+        duration: 10,
         y: 15,
         repeat: -1,
         yoyo: true,

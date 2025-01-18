@@ -56,7 +56,9 @@ useHead({
       </thead>
       <tbody class="table-row-group">
         <tr v-for="project in projectsStories" :key="project.id" class="table-row border-t border-white-dark *:p-3">
-          <td class="table-cell text-white-dark !pl-0"><NuxtTime :datetime="project.year" year="numeric" /></td>
+          <td class="table-cell text-white-dark !pl-0">
+            <NuxtTime :datetime="project.year" :locale="locale" year="numeric" />
+          </td>
           <td class="table-cell text-white whitespace-nowrap">
             <component :is="project.link?.url ? CustomLink : 'strong'" :href="project.link?.url" target="_blank">
               {{ project.title }}

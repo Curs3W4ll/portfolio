@@ -22,7 +22,7 @@ withDefaults(
         class="transition-all ease-out duration-200 group-hover:w-20 group-hover:h-0.5 group-hover:bg-white"
         :class="[active ? 'bg-white w-20 h-0.5' : 'bg-white-dark w-10 h-px']"
       />
-      {{ anchor }}</NuxtLink
+      {{ $t(`anchors.${anchor}`) }}</NuxtLink
     >
     <div class="grow" />
   </div>

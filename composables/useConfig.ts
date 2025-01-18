@@ -1,11 +1,11 @@
 export const useConfig = () => {
+  const { t } = useI18n();
+
   return {
     seo: {
       name: "Corentin Hervaud",
-      description:
-        "Corentin Hervaud is a software engineer specializing in creating innovative and modern websites and software using the latest technologies.",
+      description: t("seo.description"),
       image: "https://hervaud.fr/og.png",
-      locale: "en_US",
       type: "website",
       url: useRuntimeConfig().public.baseUrl,
       color: "#C980E6",

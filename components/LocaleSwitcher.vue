@@ -4,7 +4,9 @@ const { locale, locales } = useI18n();
 
 <template>
   <div>
-    <p class="font-bold"><i class="pi pi-language" /> Language</p>
+    <p class="font-bold">
+      <i class="pi pi-language" /> <span class="capitalize">{{ $t("language") }}</span>
+    </p>
     <div class="space-x-2 pl-3">
       <SwitchLocalePathLink
         v-for="l in locales"

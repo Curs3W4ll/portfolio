@@ -60,9 +60,9 @@ onMounted(() => {
           @mouseover="focusedExperience = experience.uuid"
           @mouseleave="focusedExperience = undefined"
         />
-        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" href="/resume.pdf" target="_blank"
-          >See full résumé</CustomLink
-        >
+        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" href="/resume.pdf" target="_blank">{{
+          $t("seeResume")
+        }}</CustomLink>
       </div>
       <div v-if="projectsPreviewStory" id="projects" class="flex flex-col gap-5">
         <StoryblokComponent :blok="projectsPreviewStory.content" />
@@ -71,7 +71,7 @@ onMounted(() => {
           class="pl-5 capitalize"
           href="/projects"
           data-test="projects-archive-button"
-          >Projects archive</CustomLink
+          >{{ $t("seeProjectsArchive") }}</CustomLink
         >
       </div>
     </div>

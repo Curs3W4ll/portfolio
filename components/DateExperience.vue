@@ -41,7 +41,7 @@ const endFormat = computed(() => {
       <NuxtTime v-if="start" v-bind="startFormat" :datetime="start" />
       -
       <NuxtTime v-if="end && end < new Date()" v-bind="endFormat" :datetime="end" />
-      <span v-else>present</span>
+      <span v-else>{{ $t("present") }}</span>
     </strong>
   </div>
 </template>

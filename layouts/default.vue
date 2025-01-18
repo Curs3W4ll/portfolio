@@ -1,10 +1,9 @@
 <script setup lang="ts">
 const route = useRoute();
-const { t } = useI18n();
 const head = useLocaleHead();
 const config = useConfig();
 
-const title = computed(() => t(route.meta.title ? `${route.meta.title} - ${config.seo.name}` : config.seo.name));
+const title = computed(() => (route.meta.title ? `${route.meta.title} - ${config.seo.name}` : config.seo.name));
 </script>
 
 <template>
@@ -33,7 +32,6 @@ const title = computed(() => t(route.meta.title ? `${route.meta.title} - ${confi
         <Meta :content="config.seo.image" property="og:image" />
         <Meta :content="config.seo.name" property="og:site_name" />
         <Meta :content="config.seo.type" property="og:type" />
-        <Meta :content="config.seo.locale" property="og:locale" />
         <Meta :content="config.seo.name" name="twitter:title" />
         <Meta :content="config.seo.description" name="twitter:description" />
         <Meta :content="config.seo.url" name="twitter:site" />

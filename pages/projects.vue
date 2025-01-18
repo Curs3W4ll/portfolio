@@ -10,7 +10,7 @@ defineI18nRoute({
 });
 
 const sbVersion = useStoryblokVersion();
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 const projects = await useStoryblokProjects(sbVersion, locale.value);
 if (import.meta.dev && projects.data.value) {
@@ -29,7 +29,7 @@ const projectsStories = computed(() => {
 });
 
 useHead({
-  title: "Projects archive",
+  title: t("titles.projectsArchive"),
 });
 </script>
 
@@ -42,16 +42,16 @@ useHead({
         data-test="back-button"
         >Corentin Hervaud</NuxtLinkLocale
       >
-      <h1 class="text-4xl font-bold">All projects</h1>
+      <h1 class="text-4xl font-bold first-letter:uppercase">{{ $t("allProjects") }}</h1>
     </div>
     <table class="w-full table table-auto text-left">
       <thead class="table-header-group sticky top-0" data-test="header-row">
         <tr class="table-row *:p-3 text-sm whitespace-nowrap backdrop-blur">
-          <th class="table-cell !pl-0">Year</th>
-          <th class="table-cell">Project</th>
-          <th class="hidden md:table-cell">Made at</th>
-          <th class="hidden lg:table-cell">Built using</th>
-          <th class="hidden sm:table-cell">Summary</th>
+          <th class="table-cell !pl-0 first-letter:uppercase">{{ $t("year") }}</th>
+          <th class="table-cell first-letter:uppercase">{{ $t("project") }}</th>
+          <th class="hidden md:table-cell first-letter:uppercase">{{ $t("madeAt") }}</th>
+          <th class="hidden lg:table-cell first-letter:uppercase">{{ $t("builtUsing") }}</th>
+          <th class="hidden sm:table-cell first-letter:uppercase">{{ $t("summary") }}</th>
         </tr>
       </thead>
       <tbody class="table-row-group">

@@ -124,6 +124,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       redirectOn: "root",
+      fallbackLocale: "en",
     },
     baseUrl: process.env.NUXT_BASE_URL,
     lazy: true,

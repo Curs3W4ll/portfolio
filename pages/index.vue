@@ -6,14 +6,17 @@ const displayResumeButton = ref<boolean>(false);
 const displayProjectsArchiveButton = ref<boolean>(false);
 
 const sbVersion = useStoryblokVersion();
+const { locale } = useI18n();
 
 const profileStory = await useAsyncStoryblok("profile", {
   version: sbVersion,
+  language: locale.value,
 });
 const aboutStory = await useAsyncStoryblok("about", {
   version: sbVersion,
+  language: locale.value,
 });
-const experiences = await useStoryblokExperiences(sbVersion);
+const experiences = await useStoryblokExperiences(sbVersion, locale.value);
 if (import.meta.dev && experiences.data.value) {
   for (const [i, elem] of experiences.data.value.entries()) {
     useStoryblokBridge(elem.id, (evStory) => (experiences.data.value![i] = evStory));
@@ -26,6 +29,7 @@ const experienceStories = computed(() => {
 });
 const projectsPreviewStory = await useAsyncStoryblok("projects-preview", {
   version: sbVersion,
+  language: locale.value,
   resolve_relations: ["projects-preview.projects"],
 });
 

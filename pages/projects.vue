@@ -10,8 +10,9 @@ defineI18nRoute({
 });
 
 const sbVersion = useStoryblokVersion();
+const { locale } = useI18n();
 
-const projects = await useStoryblokProjects(sbVersion);
+const projects = await useStoryblokProjects(sbVersion, locale.value);
 if (import.meta.dev && projects.data.value) {
   for (const [i, elem] of projects.data.value.entries()) {
     useStoryblokBridge(elem.id, (evStory) => (projects.data.value![i] = evStory));

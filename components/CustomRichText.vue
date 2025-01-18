@@ -32,5 +32,7 @@ const resolvers = ref({
 </script>
 
 <template>
-  <StoryblokRichText class="space-y-5 text-white-dark" :doc="richText" :resolvers="resolvers" />
+  <div class="space-y-5 text-white-dark">
+    <StoryblokRichText :doc="richText" :resolvers="resolvers" />
+  </div>
 </template>

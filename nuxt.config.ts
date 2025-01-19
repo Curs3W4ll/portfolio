@@ -110,12 +110,12 @@ export default defineNuxtConfig({
     locales: [
       {
         code: "en",
-        language: "en-US",
+        language: "en",
         file: "en-US.ts",
       },
       {
         code: "fr",
-        language: "fr-FR",
+        language: "fr",
         file: "fr-FR.ts",
       },
     ],

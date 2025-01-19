@@ -33,6 +33,16 @@ const projectsPreviewStory = await useAsyncStoryblok("projects-preview", {
   resolve_relations: ["projects-preview.projects"],
 });
 
+const resumeFile = computed(() => {
+  switch (locale.value) {
+    case "fr":
+      return "/fr/cv.pdf";
+    case "en":
+    default:
+      return "/resume.pdf";
+  }
+});
+
 onMounted(() => {
   const displayResumeButtonFlag = useFlag("display-resume");
   const displayProjectsArchiveButtonFlag = useFlag("display-projects-archive");
@@ -60,7 +70,7 @@ onMounted(() => {
           @mouseover="focusedExperience = experience.uuid"
           @mouseleave="focusedExperience = undefined"
         />
-        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" to="/resume.pdf" target="_blank">{{
+        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" :to="resumeFile" target="_blank">{{
           $t("seeResume")
         }}</CustomLink>
       </div>

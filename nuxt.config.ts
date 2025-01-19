@@ -100,6 +100,11 @@ export default defineNuxtConfig({
     urls: [
       {
         loc: "/resume.pdf",
+        _sitemap: "en",
+      },
+      {
+        loc: "/fr/cv.pdf",
+        _sitemap: "fr",
       },
     ],
   },

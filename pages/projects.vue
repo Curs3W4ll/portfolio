@@ -60,7 +60,7 @@ useHead({
             <NuxtTime :datetime="project.year" :locale="locale" year="numeric" />
           </td>
           <td class="table-cell text-white whitespace-nowrap">
-            <component :is="project.link?.url ? CustomLink : 'strong'" :href="project.link?.url" target="_blank">
+            <component :is="project.link?.url ? CustomLink : 'strong'" :to="project.link?.url" target="_blank">
               {{ project.title }}
             </component>
           </td>

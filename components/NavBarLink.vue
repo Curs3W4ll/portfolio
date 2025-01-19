@@ -15,7 +15,7 @@ withDefaults(
     <NuxtLink
       class="flex items-center gap-3 h-5 hover:text-white group"
       :class="[active ? 'text-white font-bold' : 'text-sm text-white-dark']"
-      :href="`#${anchor}`"
+      :to="`#${anchor}`"
       :data-test="`anchor-${anchor}`"
     >
       <div

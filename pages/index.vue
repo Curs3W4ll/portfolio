@@ -60,7 +60,7 @@ onMounted(() => {
           @mouseover="focusedExperience = experience.uuid"
           @mouseleave="focusedExperience = undefined"
         />
-        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" href="/resume.pdf" target="_blank">{{
+        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" to="/resume.pdf" target="_blank">{{
           $t("seeResume")
         }}</CustomLink>
       </div>
@@ -69,7 +69,7 @@ onMounted(() => {
         <CustomLink
           v-if="displayProjectsArchiveButton"
           class="pl-5 capitalize"
-          href="/projects"
+          to="/projects"
           data-test="projects-archive-button"
           >{{ $t("seeProjectsArchive") }}</CustomLink
         >

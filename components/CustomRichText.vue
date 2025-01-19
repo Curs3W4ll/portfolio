@@ -12,7 +12,7 @@ const resolvers = ref({
     return h(
       CustomLink,
       {
-        href: node.attrs?.href,
+        to: node.attrs?.href,
         target: "_blank",
         class: "text-white whitespace-nowrap",
       },

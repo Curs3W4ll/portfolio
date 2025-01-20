@@ -11,6 +11,8 @@ const convertToDate = (e?: Date | string) => (typeof e === "string" ? (e === "" 
 const start = ref<Date | undefined>(convertToDate(props.startDate));
 const end = ref<Date | undefined>(convertToDate(props.endDate));
 
+const { locale } = useI18n();
+
 const startFormat = computed(() => {
   const obj: ExtractPropTypes<typeof NuxtTime> = {};
 
@@ -38,10 +40,10 @@ const endFormat = computed(() => {
 <template>
   <div>
     <strong>
-      <NuxtTime v-if="start" v-bind="startFormat" :datetime="start" />
+      <NuxtTime v-if="start" v-bind="startFormat" :datetime="start" :locale="locale" />
       -
-      <NuxtTime v-if="end && end < new Date()" v-bind="endFormat" :datetime="end" />
-      <span v-else>present</span>
+      <NuxtTime v-if="end && end < new Date()" v-bind="endFormat" :datetime="end" :locale="locale" />
+      <span v-else>{{ $t("present") }}</span>
     </strong>
   </div>
 </template>

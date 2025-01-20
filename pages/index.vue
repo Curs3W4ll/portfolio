@@ -6,14 +6,17 @@ const displayResumeButton = ref<boolean>(false);
 const displayProjectsArchiveButton = ref<boolean>(false);
 
 const sbVersion = useStoryblokVersion();
+const { locale } = useI18n();
 
 const profileStory = await useAsyncStoryblok("profile", {
   version: sbVersion,
+  language: locale.value,
 });
 const aboutStory = await useAsyncStoryblok("about", {
   version: sbVersion,
+  language: locale.value,
 });
-const experiences = await useStoryblokExperiences(sbVersion);
+const experiences = await useStoryblokExperiences(sbVersion, locale.value);
 if (import.meta.dev && experiences.data.value) {
   for (const [i, elem] of experiences.data.value.entries()) {
     useStoryblokBridge(elem.id, (evStory) => (experiences.data.value![i] = evStory));
@@ -26,7 +29,18 @@ const experienceStories = computed(() => {
 });
 const projectsPreviewStory = await useAsyncStoryblok("projects-preview", {
   version: sbVersion,
+  language: locale.value,
   resolve_relations: ["projects-preview.projects"],
+});
+
+const resumeFile = computed(() => {
+  switch (locale.value) {
+    case "fr":
+      return "/fr/cv.pdf";
+    case "en":
+    default:
+      return "/resume.pdf";
+  }
 });
 
 onMounted(() => {
@@ -56,18 +70,18 @@ onMounted(() => {
           @mouseover="focusedExperience = experience.uuid"
           @mouseleave="focusedExperience = undefined"
         />
-        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" href="/resume.pdf" target="_blank"
-          >See full résumé</CustomLink
-        >
+        <CustomLink v-if="displayResumeButton" class="pl-5 capitalize" :to="resumeFile" target="_blank">{{
+          $t("seeResume")
+        }}</CustomLink>
       </div>
       <div v-if="projectsPreviewStory" id="projects" class="flex flex-col gap-5">
         <StoryblokComponent :blok="projectsPreviewStory.content" />
         <CustomLink
           v-if="displayProjectsArchiveButton"
           class="pl-5 capitalize"
-          href="/projects"
+          to="/projects"
           data-test="projects-archive-button"
-          >Projects archive</CustomLink
+          >{{ $t("seeProjectsArchive") }}</CustomLink
         >
       </div>
     </div>

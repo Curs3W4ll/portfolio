@@ -33,7 +33,7 @@ withDefaults(
       />
     </div>
     <div class="flex flex-col gap-1 text-white">
-      <component :is="blok.link?.url ? CustomLink : 'strong'" class="font-bold" :href="blok.link?.url" target="_blank">
+      <component :is="blok.link?.url ? CustomLink : 'strong'" class="font-bold" :to="blok.link?.url" target="_blank">
         {{ blok.title }}
       </component>
       <div class="text-sm text-white-dark whitespace-pre-line">

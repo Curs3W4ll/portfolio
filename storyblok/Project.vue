@@ -16,11 +16,11 @@ withDefaults(
 <template>
   <div
     v-editable="blok"
-    class="flex items-start gap-3 p-5 rounded-lg text-white-dark hover:bg-white/5 peer peer-hover:opacity-50"
+    class="flex flex-col-reverse md:flex-row items-start gap-3 p-5 rounded-lg text-white-dark hover:bg-white/5"
     :class="{ 'opacity-50': fade }"
     data-test="project"
   >
-    <div class="w-1/4 text-sm uppercase flex-shrink-0 p-2">
+    <div class="md:w-1/4 text-sm uppercase flex-shrink-0 p-2">
       <NuxtImg
         v-if="blok.previewImage"
         class="border-white-dark border rounded"

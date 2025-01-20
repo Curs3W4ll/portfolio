@@ -12,7 +12,7 @@ const resolvers = ref({
     return h(
       CustomLink,
       {
-        href: node.attrs?.href,
+        to: node.attrs?.href,
         target: "_blank",
         class: "text-white whitespace-nowrap",
       },
@@ -32,5 +32,7 @@ const resolvers = ref({
 </script>
 
 <template>
-  <StoryblokRichText class="space-y-5 text-white-dark" :doc="richText" :resolvers="resolvers" />
+  <div class="space-y-5 text-white-dark">
+    <StoryblokRichText :doc="richText" :resolvers="resolvers" />
+  </div>
 </template>

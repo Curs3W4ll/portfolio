@@ -16,7 +16,7 @@ withDefaults(
 <template>
   <div
     v-editable="blok"
-    class="flex items-baseline gap-3 p-5 rounded-lg text-white-dark hover:bg-white/5 peer peer-hover:opacity-50"
+    class="flex items-baseline gap-3 p-5 rounded-lg text-white-dark hover:bg-white/5"
     :class="{ 'opacity-50': fade }"
     data-test="experience"
   >

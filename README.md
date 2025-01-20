@@ -58,6 +58,7 @@ If you wish to deploy the project by another way, you could follow these steps:
 | `NUXT_UNLEASH_PROXY_URL`         | `String`, `undefined`  | The URL of the Unleash proxy to use                                              |
 | `NUXT_UNLEASH_PROXY_CLIENT_KEY`  | `String`, `undefined`  | The client key to use when connecting to the Unleash proxy                       |
 | `NUXT_KEEP_DATA_TEST_ATTRIBUTES` | `Boolean`, `undefined` | Whether to keep the `data-test` attributes or no                                 |
+| `NUXT_BASE_URL`                  | `String`               | The base URL used by i18n                                                        |
 
 - Option 1: Run the website as a **static website** (used for GitLab pages deployment)
   - Generate a static version of the website with `npm run generate`

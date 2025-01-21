@@ -76,6 +76,14 @@ describe("Displaying home page", () => {
       cy.wait("@storyblok-projects-preview");
       cy.getByData("project").should("have.length.gt", 0);
     });
+
+    it("should redirect to projects archive", () => {
+      cy.wait("@storyblok-projects-preview");
+
+      cy.getByData("projects-archive-button").click();
+
+      cy.location("pathname").should("eq", "/projects");
+    });
   });
 
   context("Eyes popup", () => {

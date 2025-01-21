@@ -1,10 +1,6 @@
 describe("Displaying home page", () => {
   beforeEach(() => {
     cy.viewport(1920, 600);
-    cy.intercept("https://api.storyblok.com/**/profile*").as("storyblok-profile");
-    cy.intercept("https://api.storyblok.com/**/about*").as("storyblok-about");
-    cy.intercept("https://api.storyblok.com/**/*projects-preview*").as("storyblok-projects-preview");
-    cy.intercept("https://api.storyblok.com/**/*experiences*").as("storyblok-experiences");
     cy.visit("/");
   });
 
@@ -79,6 +75,39 @@ describe("Displaying home page", () => {
     it("should display projects preview", () => {
       cy.wait("@storyblok-projects-preview");
       cy.getByData("project").should("have.length.gt", 0);
+    });
+  });
+
+  context("Eyes popup", () => {
+    beforeEach(() => {
+      cy.wait("@unleash");
+    });
+
+    context("Language switcher", () => {
+      it("should change language when selecting", () => {
+        cy.getByData("eyes").click();
+
+        cy.getByData("lang-en").should("have.class", "underline");
+        cy.getByData("lang-fr").should("not.have.class", "underline");
+
+        cy.getByData("lang-fr").click();
+
+        cy.getByData("lang-en").should("not.have.class", "underline");
+        cy.getByData("lang-fr").should("have.class", "underline");
+        cy.getCookie("i18n_redirected").should("have.property", "value", "fr");
+        cy.location("pathname").should("eq", "/fr");
+      });
+
+      it("should automatically detect language from cookies", () => {
+        cy.setCookie("i18n_redirected", "fr");
+        cy.visit("/");
+        cy.wait("@unleash");
+
+        cy.getByData("lang-en").should("not.have.class", "underline");
+        cy.getByData("lang-fr").should("have.class", "underline");
+        cy.getCookie("i18n_redirected").should("have.property", "value", "fr");
+        cy.location("pathname").should("eq", "/fr");
+      });
     });
   });
 });

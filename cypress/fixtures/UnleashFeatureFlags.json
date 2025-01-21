@@ -1,0 +1,14 @@
+{
+  "toggles": [
+    {
+      "name": "feature-flag-slug",
+      "enabled": true,
+      "variant": {
+        "name": "disabled",
+        "enabled": false,
+        "feature_enabled": true,
+        "featureEnabled": true
+      }
+    }
+  ]
+}

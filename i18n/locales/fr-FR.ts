@@ -4,6 +4,12 @@ export default {
   },
   present: "aujourd'hui",
   language: "langue",
+  theme: {
+    theme: "thème",
+    light: "clair",
+    dark: "sombre",
+    auto: "système",
+  },
   seeResume: "voir mon CV",
   seeProjectsArchive: "voir mes projets",
   allProjects: "Tous mes projets",

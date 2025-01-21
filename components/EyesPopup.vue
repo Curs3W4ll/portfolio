@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   displayLanguageSwitcher: boolean;
+  displayThemeSwitcher: boolean;
 }>();
 </script>
 
@@ -10,9 +11,10 @@ defineProps<{
   >
     <div class="rounded-r border-8 border-l-0 border-black w-40 h-52">
       <div
-        class="bg-gradient-to-br from-primary-200 to-primary-400 dark:from-primary-700 dark:to-primary-800 rounded-r w-full h-full p-3"
+        class="bg-gradient-to-br from-primary-200 to-primary-400 dark:from-primary-700 dark:to-primary-800 rounded-r w-full h-full p-3 flex flex-col justify-around"
       >
         <LocaleSwitcher v-if="displayLanguageSwitcher" />
+        <ThemeSwitcher v-if="displayThemeSwitcher" />
       </div>
     </div>
     <AnimatedEyes />

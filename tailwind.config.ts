@@ -33,5 +33,6 @@ export default {
       center: true,
     },
   },
+  darkMode: "selector",
   plugins: [primeui],
 } satisfies Config;

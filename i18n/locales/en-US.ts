@@ -4,6 +4,12 @@ export default {
   },
   present: "present",
   language: "language",
+  theme: {
+    theme: "theme",
+    light: "light",
+    dark: "dark",
+    auto: "system",
+  },
   seeResume: "see full résumé",
   seeProjectsArchive: "see projets archive",
   allProjects: "all projects",

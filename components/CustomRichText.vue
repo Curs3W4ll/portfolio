@@ -14,7 +14,7 @@ const resolvers = ref({
       {
         to: node.attrs?.href,
         target: "_blank",
-        class: "text-white whitespace-nowrap",
+        class: "text-black dark:text-white whitespace-nowrap",
       },
       () => node.text,
     );
@@ -23,7 +23,7 @@ const resolvers = ref({
     return h(
       "strong",
       {
-        class: "text-white",
+        class: "dark:text-white text-black",
       },
       node.text,
     );
@@ -32,7 +32,7 @@ const resolvers = ref({
 </script>
 
 <template>
-  <div class="space-y-5 text-white-dark">
+  <div class="space-y-5 text-black-light dark:text-white-dark">
     <StoryblokRichText :doc="richText" :resolvers="resolvers" />
   </div>
 </template>

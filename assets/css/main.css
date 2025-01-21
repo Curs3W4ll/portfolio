@@ -4,13 +4,16 @@
 
 @layer base {
   html {
-    @apply text-white;
+    @apply text-black-light;
+    @apply dark:text-white;
     @apply overscroll-none;
     @apply scroll-smooth;
     @apply bg-fixed;
     @apply bg-gradient-to-tr;
-    @apply from-primary-800;
-    @apply to-primary-950;
+    @apply from-primary-100;
+    @apply to-primary-500;
+    @apply dark:from-primary-700;
+    @apply dark:to-primary-900;
     @apply font-light;
     @apply selection:bg-primary;
     @apply selection:text-black;

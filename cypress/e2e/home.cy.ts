@@ -1,10 +1,6 @@
 describe("Displaying home page", () => {
   beforeEach(() => {
     cy.viewport(1920, 600);
-    cy.intercept("https://api.storyblok.com/**/profile*").as("storyblok-profile");
-    cy.intercept("https://api.storyblok.com/**/about*").as("storyblok-about");
-    cy.intercept("https://api.storyblok.com/**/*projects-preview*").as("storyblok-projects-preview");
-    cy.intercept("https://api.storyblok.com/**/*experiences*").as("storyblok-experiences");
     cy.visit("/");
   });
 
@@ -44,8 +40,8 @@ describe("Displaying home page", () => {
       cy.getByData("anchor-experience").click();
 
       cy.hash().should("eq", "#experience");
-      cy.getByData("anchor-experience").should("have.class", "text-white font-bold");
-      cy.getByData("anchor-about").should("not.have.class", "text-white font-bold");
+      cy.getByData("anchor-experience").should("have.class", "font-bold");
+      cy.getByData("anchor-about").should("not.have.class", "font-bold");
       cy.get("#experience").then((el) => {
         expect(el[0].getBoundingClientRect().top).equal(0);
       });
@@ -53,8 +49,8 @@ describe("Displaying home page", () => {
       cy.getByData("anchor-about").click();
 
       cy.hash().should("eq", "#about");
-      cy.getByData("anchor-about").should("have.class", "text-white font-bold");
-      cy.getByData("anchor-experience").should("not.have.class", "text-white font-bold");
+      cy.getByData("anchor-about").should("have.class", "font-bold");
+      cy.getByData("anchor-experience").should("not.have.class", "font-bold");
       cy.get("#about").then((el) => {
         expect(el[0].getBoundingClientRect().top).equal(0);
       });
@@ -79,6 +75,61 @@ describe("Displaying home page", () => {
     it("should display projects preview", () => {
       cy.wait("@storyblok-projects-preview");
       cy.getByData("project").should("have.length.gt", 0);
+    });
+
+    it("should redirect to projects archive", () => {
+      cy.wait("@storyblok-projects-preview");
+
+      cy.getByData("projects-archive-button").click();
+
+      cy.location("pathname").should("eq", "/projects");
+    });
+  });
+
+  context("Eyes popup", () => {
+    beforeEach(() => {
+      cy.wait("@unleash");
+    });
+
+    context("Language switcher", () => {
+      it("should change language when selecting", () => {
+        cy.getByData("eyes").click();
+
+        cy.getByData("lang-en").should("have.class", "underline");
+        cy.getByData("lang-fr").should("not.have.class", "underline");
+
+        cy.getByData("lang-fr").click();
+
+        cy.getByData("lang-en").should("not.have.class", "underline");
+        cy.getByData("lang-fr").should("have.class", "underline");
+        cy.getCookie("i18n_redirected").should("have.property", "value", "fr");
+        cy.location("pathname").should("eq", "/fr");
+      });
+
+      it("should automatically detect language from cookies", () => {
+        cy.setCookie("i18n_redirected", "fr");
+        cy.visit("/");
+        cy.wait("@unleash");
+
+        cy.getByData("lang-en").should("not.have.class", "underline");
+        cy.getByData("lang-fr").should("have.class", "underline");
+        cy.getCookie("i18n_redirected").should("have.property", "value", "fr");
+        cy.location("pathname").should("eq", "/fr");
+      });
+    });
+
+    context("Theme switcher", () => {
+      it("should change theme when selecting", () => {
+        cy.getByData("eyes").click();
+
+        cy.getByData("theme-name").should("have.text", "system");
+        cy.getByData("change-theme-button").click();
+        cy.getByData("theme-name").should("have.text", "dark");
+        cy.get("html").should("have.class", "dark");
+        cy.getByData("change-theme-button").click();
+        cy.getByData("theme-name").should("have.text", "light");
+        cy.get("html").should("have.class", "light");
+      });
     });
   });
 });

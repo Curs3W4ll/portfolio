@@ -37,7 +37,7 @@ useHead({
   <div class="container max-w-screen-xl py-20 px-10 space-y-10">
     <div class="space-y-3">
       <NuxtLinkLocale
-        class="text-primary text-lg before:content-['←\00a0'] before:inline-block before:hover:motion-safe:-translate-x-2 before:motion-safe:transition-transform before:ease-in-out before:duration-300"
+        class="text-primary-600 dark:text-primary text-lg before:content-['←\00a0'] before:inline-block before:hover:motion-safe:-translate-x-2 before:motion-safe:transition-transform before:ease-in-out before:duration-300"
         to="index"
         data-test="back-button"
         >Corentin Hervaud</NuxtLinkLocale
@@ -55,20 +55,24 @@ useHead({
         </tr>
       </thead>
       <tbody class="table-row-group">
-        <tr v-for="project in projectsStories" :key="project.id" class="table-row border-t border-white-dark *:p-3">
-          <td class="table-cell text-white-dark !pl-0">
+        <tr
+          v-for="project in projectsStories"
+          :key="project.id"
+          class="table-row border-t border-black-light dark:border-white-dark *:p-3"
+        >
+          <td class="table-cell text-black-light dark:text-white-dark !pl-0">
             <NuxtTime :datetime="project.year" :locale="locale" year="numeric" />
           </td>
-          <td class="table-cell text-white whitespace-nowrap">
+          <td class="table-cell text-black dark:text-white whitespace-nowrap">
             <component :is="project.link?.url ? CustomLink : 'strong'" :to="project.link?.url" target="_blank">
               {{ project.title }}
             </component>
           </td>
-          <td class="hidden md:table-cell text-white-dark">{{ project.company }}</td>
+          <td class="hidden md:table-cell text-black-light dark:text-white-dark">{{ project.company }}</td>
           <td class="hidden lg:table-cell"><TagsList :tags="project.tags?.value" /></td>
           <td
             v-tooltip.left="{ value: project.description, autoHide: false }"
-            class="hidden sm:table-cell text-white-dark"
+            class="hidden sm:table-cell text-black-light dark:text-white-dark"
           >
             {{ project.summary }}
           </td>

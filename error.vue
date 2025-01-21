@@ -20,7 +20,7 @@ const handleError = () => {
       <p class="first-letter:uppercase">
         {{ $t("couldNotLoadPage") }}.
         <span
-          class="hover:text-primary cursor-pointer first-letter:uppercase"
+          class="hover:text-primary cursor-pointer inline-block first-letter:uppercase"
           data-test="go-back-home"
           @click="handleError"
           >{{ $t("goBackHome") }}</span

@@ -21,7 +21,10 @@ export default {
         DEFAULT: "#ECECEC",
         dark: "#CEC4D2",
       },
-      black: "#3A333D",
+      black: {
+        DEFAULT: "#3A333D",
+        light: "#584E5D",
+      },
     },
     fontFamily: {
       sans: ["'Merriweather Sans'", ...defaultTheme.fontFamily.sans],
@@ -30,5 +33,6 @@ export default {
       center: true,
     },
   },
+  darkMode: "selector",
   plugins: [primeui],
 } satisfies Config;

@@ -22,9 +22,9 @@ const themeIcon = computed(() => {
     <p class="font-bold">
       <span class="capitalize">{{ $t("theme.theme") }}</span>
     </p>
-    <div class="pl-3 flex items-center gap-2 cursor-pointer" @click="next()">
+    <div class="pl-3 flex items-center gap-2 cursor-pointer" data-test="change-theme-button" @click="next()">
       <i class="pi" :class="[themeIcon]" />
-      <p class="first-letter:uppercase">{{ $t(`theme.${state}`) }}</p>
+      <p class="first-letter:uppercase" data-test="theme-name">{{ $t(`theme.${state}`) }}</p>
     </div>
   </div>
 </template>

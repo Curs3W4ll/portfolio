@@ -109,5 +109,19 @@ describe("Displaying home page", () => {
         cy.location("pathname").should("eq", "/fr");
       });
     });
+
+    context("Theme switcher", () => {
+      it("should change theme when selecting", () => {
+        cy.getByData("eyes").click();
+
+        cy.getByData("theme-name").should("have.text", "system");
+        cy.getByData("change-theme-button").click();
+        cy.getByData("theme-name").should("have.text", "dark");
+        cy.get("html").should("have.class", "dark");
+        cy.getByData("change-theme-button").click();
+        cy.getByData("theme-name").should("have.text", "light");
+        cy.get("html").should("have.class", "light");
+      });
+    });
   });
 });

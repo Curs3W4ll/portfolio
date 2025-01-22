@@ -8,7 +8,7 @@ export default {
     theme: "theme",
     light: "light",
     dark: "dark",
-    auto: "system",
+    system: "system",
   },
   seeResume: "see full résumé",
   seeProjectsArchive: "see projets archive",

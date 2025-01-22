@@ -19,12 +19,13 @@ onMounted(() => {
 <template>
   <NuxtRouteAnnouncer />
   <NuxtLoadingIndicator color="repeating-linear-gradient(to right,#C980E6 0%,#5FDFC8 100%)" />
-  <EyesPopup
-    v-if="displayEyesPopup"
-    :display-language-switcher="displayLanguageSwitcher"
-    :display-theme-switcher="displayThemeSwitcher"
-  />
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <ColorScheme>
+    <EyesPopup
+      :display-language-switcher="displayEyesPopup && displayLanguageSwitcher"
+      :display-theme-switcher="displayEyesPopup && displayThemeSwitcher"
+    />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </ColorScheme>
 </template>

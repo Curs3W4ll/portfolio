@@ -19,7 +19,7 @@ export default defineNuxtConfig({
       unleashProxySecret: process.env.NUXT_UNLEASH_PROXY_CLIENT_KEY,
     },
   },
-  css: ["~/assets/css/main.css", "~/assets/scss/main.scss"],
+  css: ["~/assets/scss/main.scss"],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -44,6 +44,8 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "v-gsap-nuxt",
     "@nuxtjs/i18n",
+    "@nuxtjs/color-mode",
+    "@nuxtjs/tailwindcss",
   ],
   eslint: {
     checker: true,
@@ -133,6 +135,11 @@ export default defineNuxtConfig({
     },
     baseUrl: process.env.NUXT_BASE_URL,
     lazy: true,
+  },
+  colorMode: {
+    fallback: "dark",
+    classSuffix: "",
+    storage: "cookie",
   },
   sourcemap: {
     client: true,

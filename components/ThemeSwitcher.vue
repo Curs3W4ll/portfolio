@@ -1,16 +1,16 @@
 <script setup lang="ts">
-const colorMode = useColorMode({ emitAuto: true });
-const { state, next } = useCycleList(["auto", "dark", "light"] as const, { initialValue: colorMode });
+const colorMode = useColorMode();
+const { state, next } = useCycleList(["system", "dark", "light"] as const, { initialValue: colorMode.preference });
 
-watchEffect(() => (colorMode.value = state.value));
+watchEffect(() => (colorMode.preference = state.value));
 
 const themeIcon = computed(() => {
-  switch (colorMode.value) {
+  switch (colorMode.preference) {
     case "dark":
       return "pi-moon";
     case "light":
       return "pi-sun";
-    case "auto":
+    case "system":
     default:
       return "pi-desktop";
   }

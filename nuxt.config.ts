@@ -19,6 +19,13 @@ export default defineNuxtConfig({
       unleashProxySecret: process.env.NUXT_UNLEASH_PROXY_CLIENT_KEY,
     },
   },
+  app: {
+    head: {
+      templateParams: {
+        separator: "-",
+      },
+    },
+  },
   css: ["~/assets/scss/main.scss"],
   postcss: {
     plugins: {
@@ -46,6 +53,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
     "@nuxtjs/tailwindcss",
+    "nuxt-seo-utils",
   ],
   eslint: {
     checker: true,
@@ -140,6 +148,9 @@ export default defineNuxtConfig({
     fallback: "dark",
     classSuffix: "",
     storage: "cookie",
+  },
+  seo: {
+    fallbackTitle: false,
   },
   sourcemap: {
     client: true,

@@ -27,6 +27,6 @@ export default {
   },
   seo: {
     description:
-      "Corentin Hervaud is a software engineer specializing in creating innovative and modern websites and software using the latest technologies.",
+      "Corentin Hervaud is a FullStack Engineer specializing in creating innovative and modern websites and software using the latest technologies.",
   },
 };

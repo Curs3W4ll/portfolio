@@ -8,7 +8,7 @@ export default {
     theme: "thème",
     light: "clair",
     dark: "sombre",
-    auto: "système",
+    system: "système",
   },
   seeResume: "voir mon CV",
   seeProjectsArchive: "voir mes projets",

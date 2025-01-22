@@ -15,7 +15,7 @@ defineProps<{
         </h1>
       </NuxtLinkLocale>
       <h2 class="text-xl sm:text-2xl font-bold">{{ blok.job }}</h2>
-      <h3 v-gsap.animateText.slow.delay-500>{{ blok.description }}</h3>
+      <h3 v-gsap.animateText.slow>{{ blok.description }}</h3>
     </div>
     <NavBar class="invisible lg:visible" />
     <div class="flex gap-5 pt-3">

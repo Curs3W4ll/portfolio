@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
-    "@nuxt/eslint": "^0.7.0",
+    "@nuxt/eslint": "^1.0.0",
     "@nuxt/test-utils": "^3.14.4",
     "@types/eslint__eslintrc": "^2.1.1",
     "@types/gsap": "^3.0.0",

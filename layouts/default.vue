@@ -1,6 +1,22 @@
 <script setup lang="ts">
+import { useFlag } from "@unleash/proxy-client-vue";
+
+const displayEyesPopup = ref<boolean>(false);
+const displayLanguageSwitcher = ref<boolean>(false);
+const displayThemeSwitcher = ref<boolean>(false);
+
 const head = useLocaleHead();
 const config = useConfig();
+
+onMounted(() => {
+  const displayAnimatedEyesFlag = useFlag("display-animated-eyes");
+  const displayLanguageSwitcherFlag = useFlag("display-language-switcher");
+  const displayThemeSwitcherFlag = useFlag("display-theme-switcher");
+
+  syncRef(displayEyesPopup, displayAnimatedEyesFlag, { direction: "rtl" });
+  syncRef(displayLanguageSwitcher, displayLanguageSwitcherFlag, { direction: "rtl" });
+  syncRef(displayThemeSwitcher, displayThemeSwitcherFlag, { direction: "rtl" });
+});
 </script>
 
 <template>
@@ -25,6 +41,11 @@ const config = useConfig();
       </template>
     </Head>
     <Body>
+      <EyesPopup
+        :class="{ invisible: !displayEyesPopup || (!displayLanguageSwitcher && !displayThemeSwitcher) }"
+        :display-language-switcher="displayLanguageSwitcher"
+        :display-theme-switcher="displayThemeSwitcher"
+      />
       <slot />
     </Body>
   </Html>

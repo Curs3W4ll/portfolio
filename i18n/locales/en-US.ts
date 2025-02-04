@@ -26,7 +26,13 @@ export default {
     projects: "projects",
   },
   seo: {
-    description:
-      "Corentin Hervaud is a FullStack Engineer specializing in creating innovative and modern websites and software using the latest technologies.",
+    name: {
+      projects: "Corentin Hervaud's projects",
+    },
+    description: {
+      default:
+        "Corentin Hervaud is a FullStack Engineer specializing in creating innovative and modern websites and software using the latest technologies.",
+      projects: "A complete overview of the various projects completed by Corentin Hervaud.",
+    },
   },
 };

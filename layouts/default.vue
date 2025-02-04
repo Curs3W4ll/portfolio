@@ -1,6 +1,22 @@
 <script setup lang="ts">
+import { useFlag } from "@unleash/proxy-client-vue";
+
+const displayEyesPopup = ref<boolean>(false);
+const displayLanguageSwitcher = ref<boolean>(false);
+const displayThemeSwitcher = ref<boolean>(false);
+
 const head = useLocaleHead();
 const config = useConfig();
+
+onMounted(() => {
+  const displayAnimatedEyesFlag = useFlag("display-animated-eyes");
+  const displayLanguageSwitcherFlag = useFlag("display-language-switcher");
+  const displayThemeSwitcherFlag = useFlag("display-theme-switcher");
+
+  syncRef(displayEyesPopup, displayAnimatedEyesFlag, { direction: "rtl" });
+  syncRef(displayLanguageSwitcher, displayLanguageSwitcherFlag, { direction: "rtl" });
+  syncRef(displayThemeSwitcher, displayThemeSwitcherFlag, { direction: "rtl" });
+});
 </script>
 
 <template>
@@ -11,11 +27,11 @@ const config = useConfig();
       <template v-for="link in head.link" :key="link.hid">
         <Link :id="link.hid" :rel="link.rel" :href="link.href" :hreflang="link.hreflang" />
       </template>
-      <Meta :content="config.seo.description" name="description" />
-      <Meta :content="config.seo.name" property="og:title" />
-      <Meta :content="config.seo.description" property="og:description" />
-      <Meta :content="config.seo.name" name="twitter:title" />
-      <Meta :content="config.seo.description" name="twitter:description" />
+      <Meta :content="config.seo.description.default" name="description" />
+      <Meta :content="config.seo.description.default" property="og:description" />
+      <Meta :content="config.seo.description.default" name="twitter:description" />
+      <Meta :content="config.seo.name.default" property="og:title" />
+      <Meta :content="config.seo.name.default" name="twitter:title" />
       <Meta :content="config.seo.url" name="twitter:site" />
       <Meta :content="config.seo.color" name="msapplication-TileColor" />
       <Meta :content="config.seo.image" name="msapplication-TileImage" />
@@ -25,6 +41,11 @@ const config = useConfig();
       </template>
     </Head>
     <Body>
+      <EyesPopup
+        :class="{ invisible: !displayEyesPopup || (!displayLanguageSwitcher && !displayThemeSwitcher) }"
+        :display-language-switcher="displayLanguageSwitcher"
+        :display-theme-switcher="displayThemeSwitcher"
+      />
       <slot />
     </Body>
   </Html>

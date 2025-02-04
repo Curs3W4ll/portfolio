@@ -11,6 +11,18 @@ defineI18nRoute({
 
 const sbVersion = useStoryblokVersion();
 const { locale, t } = useI18n();
+const config = useConfig();
+
+useHeadSafe({
+  title: t("titles.projectsArchive"),
+  meta: [
+    { name: "description", content: config.seo.description.projects },
+    { property: "og:description", content: config.seo.description.projects },
+    { name: "twitter:description", content: config.seo.description.projects },
+    { property: "og:title", content: config.seo.name.projects },
+    { name: "twitter:title", content: config.seo.name.projects },
+  ],
+});
 
 const projects = await useStoryblokProjects(sbVersion, locale.value);
 if (import.meta.dev && projects.data.value) {
@@ -26,10 +38,6 @@ const projectsStories = computed(() => {
     .map((elem) => {
       return elem.content as ProjectStoryblok;
     });
-});
-
-useHead({
-  title: t("titles.projectsArchive"),
 });
 </script>
 

@@ -3,8 +3,14 @@ export const useConfig = () => {
 
   return {
     seo: {
-      name: "Corentin Hervaud",
-      description: t("seo.description"),
+      name: {
+        default: "Corentin Hervaud",
+        projects: t("seo.name.projects"),
+      },
+      description: {
+        default: t("seo.description.default"),
+        projects: t("seo.description.projects"),
+      },
       image: "https://hervaud.fr/og-image.png",
       url: useRuntimeConfig().public.baseUrl,
       color: "#C980E6",

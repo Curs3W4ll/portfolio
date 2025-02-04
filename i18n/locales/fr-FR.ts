@@ -26,7 +26,13 @@ export default {
     projects: "projets",
   },
   seo: {
-    description:
-      "Corentin Hervaud est un Ingénieur FullStack spécialisé dans la création de sites web et de logiciels innovants et modernes en utilisant les technologies les plus récentes.",
+    name: {
+      projects: "Projets de Corentin Hervaud",
+    },
+    description: {
+      default:
+        "Corentin Hervaud est un Ingénieur FullStack spécialisé dans la création de sites web et de logiciels innovants et modernes en utilisant les technologies les plus récentes.",
+      projects: "Un aperçu complet des différents projets réalisés par Corentin Hervaud.",
+    },
   },
 };

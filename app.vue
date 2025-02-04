@@ -21,8 +21,9 @@ onMounted(() => {
   <NuxtLoadingIndicator color="repeating-linear-gradient(to right,#C980E6 0%,#5FDFC8 100%)" />
   <ColorScheme>
     <EyesPopup
-      :display-language-switcher="displayEyesPopup && displayLanguageSwitcher"
-      :display-theme-switcher="displayEyesPopup && displayThemeSwitcher"
+      :class="{ invisible: !displayEyesPopup || (!displayLanguageSwitcher && !displayThemeSwitcher) }"
+      :display-language-switcher="displayLanguageSwitcher"
+      :display-theme-switcher="displayThemeSwitcher"
     />
     <NuxtLayout>
       <NuxtPage />

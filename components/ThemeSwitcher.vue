@@ -1,4 +1,13 @@
 <script setup lang="ts">
+withDefaults(
+  defineProps<{
+    show?: boolean;
+  }>(),
+  {
+    show: true,
+  },
+);
+
 const colorMode = useColorMode();
 const { state, next } = useCycleList(["system", "dark", "light"] as const, { initialValue: colorMode.preference });
 
@@ -18,7 +27,7 @@ const themeIcon = computed(() => {
 </script>
 
 <template>
-  <div>
+  <div v-if="show">
     <p class="font-bold">
       <span class="capitalize">{{ $t("theme.theme") }}</span>
     </p>

@@ -18,7 +18,9 @@ const toggle = useToggle(show);
         class="bg-gradient-to-br from-primary-200 to-primary-400 dark:from-primary-700 dark:to-primary-800 rounded-r w-full h-full p-3 flex flex-col justify-around"
       >
         <LocaleSwitcher v-if="displayLanguageSwitcher" />
-        <ThemeSwitcher :show="displayThemeSwitcher" />
+        <ColorScheme>
+          <ThemeSwitcher :show="displayThemeSwitcher" />
+        </ColorScheme>
       </div>
     </div>
     <AnimatedEyes data-test="eyes" @click="toggle" />

@@ -27,11 +27,11 @@ onMounted(() => {
       <template v-for="link in head.link" :key="link.hid">
         <Link :id="link.hid" :rel="link.rel" :href="link.href" :hreflang="link.hreflang" />
       </template>
-      <Meta :content="config.seo.description" name="description" />
-      <Meta :content="config.seo.name" property="og:title" />
-      <Meta :content="config.seo.description" property="og:description" />
-      <Meta :content="config.seo.name" name="twitter:title" />
-      <Meta :content="config.seo.description" name="twitter:description" />
+      <Meta :content="config.seo.description.default" name="description" />
+      <Meta :content="config.seo.description.default" property="og:description" />
+      <Meta :content="config.seo.description.default" name="twitter:description" />
+      <Meta :content="config.seo.name.default" property="og:title" />
+      <Meta :content="config.seo.name.default" name="twitter:title" />
       <Meta :content="config.seo.url" name="twitter:site" />
       <Meta :content="config.seo.color" name="msapplication-TileColor" />
       <Meta :content="config.seo.image" name="msapplication-TileImage" />

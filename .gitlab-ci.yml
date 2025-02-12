@@ -142,10 +142,12 @@ E2E tests:
     - npm install
     - npm run test:e2e:record
   artifacts:
-    expire_in: 1 day
     paths:
       - cypress/videos/
       - cypress/screenshots/
+      - tests-results/cypress/
+    reports:
+      junit: tests-results/cypress/test-output-*.xml
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"

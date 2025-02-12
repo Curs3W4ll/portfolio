@@ -39,3 +39,6 @@ localhost.pem
 
 # StoryBlok files
 components.314995.json
+
+# Tests
+/tests-results/

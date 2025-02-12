@@ -45,6 +45,6 @@ beforeEach(() => {
       i++;
     });
 
-    cy.intercept("GET", "https://unleash-proxy-erno.onrender.com/proxy*", data).as("unleash");
+    cy.intercept("GET", "https://portfolio.unleash.hervaud.fr/proxy*", data).as("unleash");
   });
 });

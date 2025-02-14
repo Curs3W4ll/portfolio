@@ -1,7 +1,8 @@
 export const useStoryblokProjects = (version: "draft" | "published", locale: string) => {
   const storyblokApi = useStoryblokApi();
+  const uniqueKey = `projects-${locale}-${version}`;
 
-  return useAsyncData(async () => {
+  return useAsyncData(uniqueKey, async () => {
     const { data } = await storyblokApi.getStories({
       starts_with: "projects/",
       language: locale,

@@ -33,7 +33,7 @@ const themeIcon = computed(() => {
     </p>
     <div class="pl-3 flex items-center gap-2 cursor-pointer" data-test="change-theme-button" @click="next()">
       <i class="pi" :class="[themeIcon]" />
-      <p class="first-letter:uppercase" data-test="theme-name">{{ $t(`theme.${state}`) }}</p>
+      <p class="first-letter:uppercase underline" data-test="theme-name">{{ $t(`theme.${state}`) }}</p>
     </div>
   </div>
 </template>

@@ -153,7 +153,7 @@ export default defineNuxtConfig({
     fallbackTitle: false,
   },
   sourcemap: {
-    client: true,
+    client: "hidden",
   },
   compatibilityDate: "2024-12-19",
 });

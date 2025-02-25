@@ -23,12 +23,11 @@ include:
 cache:
   key:
     files:
-      # - package-lock.json # BUG: Cannot use package-lock.json file as key because of this npm bug: https://github.com/npm/cli/issues/4828
-      - package.json
+      - package-lock.json
   paths:
-    # - node_modules/ # BUG: Cannot cache node modules because of this npm bug: https://github.com/npm/cli/issues/4828
+    - node_modules/
     - .nuxt/
-    - .npm/
+    - .npm
 
 Format code:
   stage: format
@@ -41,8 +40,7 @@ Format code:
   before_script:
     - apk add git
   script:
-    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
-    - npm install
+    - npm ci
     - npm run lint:fix || true
     - npm run format
     - git config user.name "GitLab CI"
@@ -65,8 +63,7 @@ Lint:
   dependencies: []
   interruptible: true
   script:
-    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
-    - npm install
+    - npm ci
     - npm run lint
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
@@ -83,8 +80,7 @@ Build:
   interruptible: true
   script:
     - cp ${DEV_ENV_FILE} .env
-    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
-    - npm install
+    - npm ci
     - npm run build:noserver
   artifacts:
     paths:
@@ -115,8 +111,7 @@ Unit tests:
   dependencies: []
   interruptible: true
   script:
-    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
-    - npm install
+    - npm ci
     - npm run test:unit
   artifacts:
     paths:
@@ -138,8 +133,7 @@ E2E tests:
       artifacts: true
   interruptible: true
   script:
-    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
-    - npm install
+    - npm ci
     - npm run test:e2e:record
   artifacts:
     paths:
@@ -172,8 +166,7 @@ pages:
   script:
     - cp ${PRODUCTION_ENV_FILE} .env
     - echo -e "\nNUXT_PUBLIC_VERSION=${CI_COMMIT_TAG}\n" >> .env
-    # - npm ci # BUG: Cannot use this command because of this bug: https://github.com/npm/cli/issues/4828
-    - npm install
+    - npm ci
     - npm run generate
   artifacts:
     paths:

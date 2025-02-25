@@ -33,7 +33,7 @@
     "@nuxtjs/robots": "^5.0.0",
     "@nuxtjs/sitemap": "^7.0.0",
     "@nuxtjs/tailwindcss": "^6.13.1",
-    "@pinia/nuxt": "^0.9.0",
+    "@pinia/nuxt": "^0.10.1",
     "@primevue/nuxt-module": "^4.2.3",
     "@primevue/themes": "^4.2.3",
     "@sentry/nuxt": "^9.1.0",

@@ -36,7 +36,7 @@
     "@pinia/nuxt": "^0.10.1",
     "@primevue/nuxt-module": "^4.2.3",
     "@primevue/themes": "^4.2.3",
-    "@sentry/nuxt": "^9.1.0",
+    "@sentry/nuxt": "^9.3.0",
     "@storyblok/nuxt": "^6.2.0",
     "@unleash/proxy-client-vue": "^0.1.2",
     "@vueuse/nuxt": "^12.3.0",

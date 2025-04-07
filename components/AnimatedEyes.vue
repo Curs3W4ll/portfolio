@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// @ts-expect-error The GSAP module seems to not be typescript-compatible yet
 import { RoughEase } from "gsap/EasePack";
 
 onMounted(() => {

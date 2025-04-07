@@ -2,7 +2,7 @@
 withDefaults(
   defineProps<{
     anchor: string;
-    active: boolean;
+    active?: boolean;
   }>(),
   {
     active: false,

@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-// @ts-expect-error No declared type for now
 import primeui from "tailwindcss-primeui";
 import defaultTheme from "tailwindcss/defaultTheme";
 

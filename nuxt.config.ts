@@ -118,9 +118,6 @@ export default defineNuxtConfig({
       },
     ],
   },
-  robots: {
-    disallow: ["/_nuxt/"],
-  },
   i18n: {
     locales: [
       {

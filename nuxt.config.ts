@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import removeAttr from "remove-attr";
 
 export default defineNuxtConfig({
@@ -61,8 +62,10 @@ export default defineNuxtConfig({
         extensions: ["vue"],
         attributes: [process.env.NUXT_KEEP_DATA_TEST_ATTRIBUTES === "true" ? "data-nothing" : "data-test"],
       }),
+      tailwindcss(),
     ],
   },
+  css: ["~/assets/css/main.css"],
   sentry: {
     sourceMapsUploadOptions: {
       org: "hvconnect",

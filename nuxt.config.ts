@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import removeAttr from "remove-attr";
 
 export default defineNuxtConfig({
@@ -26,19 +27,10 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["~/assets/scss/main.scss"],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
   modules: [
     "@nuxt/eslint",
     "@nuxt/test-utils/module",
     "@sentry/nuxt/module",
-    "@pinia/nuxt",
-    "@primevue/nuxt-module",
     "nuxt-gtag",
     "@storyblok/nuxt",
     "@nuxt/devtools",
@@ -52,7 +44,6 @@ export default defineNuxtConfig({
     "v-gsap-nuxt",
     "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
-    "@nuxtjs/tailwindcss",
     "nuxt-seo-utils",
   ],
   eslint: {
@@ -70,8 +61,10 @@ export default defineNuxtConfig({
         extensions: ["vue"],
         attributes: [process.env.NUXT_KEEP_DATA_TEST_ATTRIBUTES === "true" ? "data-nothing" : "data-test"],
       }),
+      tailwindcss(),
     ],
   },
+  css: ["~/assets/css/main.css"],
   sentry: {
     sourceMapsUploadOptions: {
       org: "hvconnect",
@@ -82,14 +75,6 @@ export default defineNuxtConfig({
       release: {
         name: process.env.NUXT_SENTRY_RELEASE,
       },
-    },
-  },
-  primevue: {
-    importTheme: {
-      from: "~/themes/custom.ts",
-    },
-    options: {
-      ripple: true,
     },
   },
   storyblok: {

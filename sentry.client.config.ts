@@ -5,7 +5,6 @@ Sentry.init({
   attachStacktrace: true,
   integrations: [
     Sentry.replayIntegration(),
-    Sentry.piniaIntegration(usePinia()),
     Sentry.vueIntegration({
       tracingOptions: {
         trackComponents: true,

@@ -22,13 +22,19 @@ The project is then generated as a JamStack static website and hosted on [GitLab
 The project is using [ESLint](https://eslint.org/) for linting and good practices tracking.  
 The project is using [Prettier](https://prettier.io/) for code formatting.
 
+The project is using [Tailwindcss v4](https://tailwindcss.com/) as css library.  
+The project is using [VoltUI](https://volt.primevue.org/) as components library.  
+The project is using [Unleash](https://www.getunleash.io/) as feature flag library.  
+The project is using [Sentry](https://sentry.io/) as error management tool.  
+The project is using [Storyblok](https://www.storyblok.com/) headless CMS for content management.
+
 #### Installation
 
 To install dependencies, use `npm install`.
 
 See a list of available commands with `npm run`.
 
-If you wish to start the project either in `dev` mode or in `generate:preview` mode, you will need to create a local ssl certificate.  
+If you wish to start the project either in `dev` mode or in `preview` mode with Storyblok working, you will need to create a local ssl certificate.  
 In order to do this, follow these steps:
 
 - Install the `mkcert` CLI

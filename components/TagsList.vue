@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Tag from "@/volt/Tag.vue";
+
 defineProps<{
   tags?: string[];
 }>();

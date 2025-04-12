@@ -31,7 +31,6 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/test-utils/module",
     "@sentry/nuxt/module",
-    "@pinia/nuxt",
     "nuxt-gtag",
     "@storyblok/nuxt",
     "@nuxt/devtools",

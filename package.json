@@ -31,7 +31,6 @@
     "@nuxtjs/i18n": "^9.5.3",
     "@nuxtjs/robots": "^5.2.9",
     "@nuxtjs/sitemap": "^7.2.10",
-    "@pinia/nuxt": "^0.10.1",
     "@sentry/nuxt": "^9.12.0",
     "@storyblok/nuxt": "^6.2.4",
     "@tailwindcss/vite": "^4.1.3",

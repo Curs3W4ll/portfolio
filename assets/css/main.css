@@ -1,2 +1,101 @@
 @import "tailwindcss";
 @import "tailwindcss-primeui";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-*: initial;
+  --color-primary-50: #fcf6fe;
+  --color-primary-100: #f6ebfc;
+  --color-primary-200: #efdbf9;
+  --color-primary-300: #e3bef4;
+  --color-primary-400: #d294ec;
+  --color-primary-500: #c980e6;
+  --color-primary-600: #ad4bd2;
+  --color-primary-700: #9639b7;
+  --color-primary-800: #7d3396;
+  --color-primary-900: #5f4a66;
+  --color-primary-950: #3a333d;
+  --font-sans:
+    "Merriweather Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+
+@theme inline {
+  --color-primary: var(--color-primary-500);
+}
+
+/* Primary and Surface Palettes */
+:root {
+  --p-primary-50: var(--color-primary-50);
+  --p-primary-100: var(--color-primary-100);
+  --p-primary-200: var(--color-primary-200);
+  --p-primary-300: var(--color-primary-300);
+  --p-primary-400: var(--color-primary-400);
+  --p-primary-500: var(--color-primary-500);
+  --p-primary-600: var(--color-primary-600);
+  --p-primary-700: var(--color-primary-700);
+  --p-primary-800: var(--color-primary-800);
+  --p-primary-900: var(--color-primary-900);
+  --p-primary-950: var(--color-primary-950);
+  --p-surface-0: #ffffff;
+  --p-surface-50: #fafafa;
+  --p-surface-100: #f4f4f5;
+  --p-surface-200: #e4e4e7;
+  --p-surface-300: #d4d4d8;
+  --p-surface-400: #a1a1aa;
+  --p-surface-500: #71717a;
+  --p-surface-600: #52525b;
+  --p-surface-700: #3f3f46;
+  --p-surface-800: #27272a;
+  --p-surface-900: #18181b;
+  --p-surface-950: #09090b;
+  --p-content-border-radius: 6px;
+}
+
+/* Light */
+:root {
+  --p-primary-color: var(--p-primary-500);
+  --p-primary-contrast-color: var(--p-surface-0);
+  --p-primary-hover-color: var(--p-primary-600);
+  --p-primary-active-color: var(--p-primary-700);
+  --p-content-border-color: var(--p-surface-200);
+  --p-content-hover-background: var(--p-surface-100);
+  --p-content-hover-color: var(--p-surface-800);
+  --p-highlight-background: var(--p-primary-50);
+  --p-highlight-color: var(--p-primary-700);
+  --p-highlight-focus-background: var(--p-primary-100);
+  --p-highlight-focus-color: var(--p-primary-800);
+  --p-text-color: var(--p-surface-700);
+  --p-text-hover-color: var(--p-surface-800);
+  --p-text-muted-color: var(--p-surface-500);
+  --p-text-hover-muted-color: var(--p-surface-600);
+}
+
+/*
+ * Dark Mode
+ * Defaults to system, change the dark variant selector to match the CSS variable configuration.
+ * For example;
+ * @custom-variant dark (&:where(.app-dark, .app-dark *));
+ * should match to;
+ * :root[class="app-dark"]
+*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --p-primary-color: var(--p-primary-400);
+    --p-primary-contrast-color: var(--p-surface-900);
+    --p-primary-hover-color: var(--p-primary-300);
+    --p-primary-active-color: var(--p-primary-200);
+    --p-content-border-color: var(--p-surface-700);
+    --p-content-hover-background: var(--p-surface-800);
+    --p-content-hover-color: var(--p-surface-0);
+    --p-highlight-background: color-mix(in srgb, var(--p-primary-400), transparent 84%);
+    --p-highlight-color: rgba(255, 255, 255, 0.87);
+    --p-highlight-focus-background: color-mix(in srgb, var(--p-primary-400), transparent 76%);
+    --p-highlight-focus-color: rgba(255, 255, 255, 0.87);
+    --p-text-color: var(--p-surface-0);
+    --p-text-hover-color: var(--p-surface-0);
+    --p-text-muted-color: var(--p-surface-400);
+    --p-text-hover-muted-color: var(--p-surface-300);
+  }
+}

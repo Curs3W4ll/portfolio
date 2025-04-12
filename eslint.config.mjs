@@ -5,10 +5,12 @@ import withNuxt from "./.nuxt/eslint.config.mjs";
 const compat = new FlatCompat();
 
 export default withNuxt().append([
+  {
+    ignores: ["components-types-sb.d.ts", "volt/**/*"],
+  },
   ...compat.config({
     plugins: ["cypress", "no-only-tests"],
     extends: ["plugin:cypress/recommended"],
-    ignorePatterns: ["components-types-sb.d.ts"],
     overrides: [
       {
         files: ["storyblok/**/*.vue"],

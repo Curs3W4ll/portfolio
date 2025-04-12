@@ -44,7 +44,6 @@ export default defineNuxtConfig({
     "v-gsap-nuxt",
     "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
-    "@nuxtjs/tailwindcss",
     "nuxt-seo-utils",
   ],
   eslint: {

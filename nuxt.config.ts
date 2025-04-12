@@ -26,19 +26,11 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["~/assets/scss/main.scss"],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
   modules: [
     "@nuxt/eslint",
     "@nuxt/test-utils/module",
     "@sentry/nuxt/module",
     "@pinia/nuxt",
-    "@primevue/nuxt-module",
     "nuxt-gtag",
     "@storyblok/nuxt",
     "@nuxt/devtools",
@@ -82,14 +74,6 @@ export default defineNuxtConfig({
       release: {
         name: process.env.NUXT_SENTRY_RELEASE,
       },
-    },
-  },
-  primevue: {
-    importTheme: {
-      from: "~/themes/custom.ts",
-    },
-    options: {
-      ripple: true,
     },
   },
   storyblok: {

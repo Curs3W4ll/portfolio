@@ -35,6 +35,7 @@
     "@storyblok/nuxt": "^6.2.4",
     "@tailwindcss/vite": "^4.1.3",
     "@unleash/proxy-client-vue": "^0.1.5",
+    "@vesp/nuxt-fontawesome": "^1.2.1",
     "@vueuse/nuxt": "^13.1.0",
     "nuxt": "^3.16.2",
     "nuxt-anchorscroll": "^1.0.5",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@nuxt/eslint": "^1.3.0",
     "@nuxt/test-utils": "^3.17.2",
     "@vitest/ui": "^3.1.1",

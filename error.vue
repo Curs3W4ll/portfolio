@@ -16,7 +16,7 @@ const handleError = () => {
   <div class="h-screen w-screen flex flex-col items-center justify-center text-white-dark">
     <div class="flex gap-3 items-center">
       <h1 class="my-3 text-xl">{{ error.statusCode }}</h1>
-      <Divider class="before:!border-white self-stretch" layout="vertical" />
+      <Divider class="before:border-white! self-stretch" layout="vertical" />
       <p class="first-letter:uppercase">
         {{ $t("couldNotLoadPage") }}.
         <span

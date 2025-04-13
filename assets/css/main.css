@@ -104,6 +104,10 @@
   }
 }
 
+@utility container {
+  margin-inline: auto;
+}
+
 @layer base {
   html {
     @apply text-black-light;

@@ -15,7 +15,7 @@ const toggle = useToggle(show);
   >
     <div class="rounded-r border-8 border-l-0 border-black w-40 h-52">
       <div
-        class="bg-gradient-to-br from-primary-100 to-primary-400 dark:from-primary-800 dark:to-primary-900 rounded-r w-full h-full p-3 flex flex-col justify-around"
+        class="bg-linear-to-br from-primary-200 to-primary-400 dark:from-primary-700 dark:to-primary-800 rounded-r w-full h-full p-3 flex flex-col justify-around"
       >
         <LocaleSwitcher v-if="displayLanguageSwitcher" />
         <ColorScheme>

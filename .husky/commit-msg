@@ -16,7 +16,7 @@ GITMOJIES_DOC_WEBLINK="https://gitmoji.dev"
 
 # Regex to apply to check if the commit is valid
 REGEX_NO_ISSUE_KEY="^#[0-9]+"
-REGEX_NO_GITMOJI="${REGEX_NO_ISSUE_KEY} (:sparkles:|:bug:|:art:|:recycle:|:test_tube:|:pencil:|:lipstick:|:wrench:|:truck:|:arrow_up:|:arrow_down:|:label:|:zap:|:rewind:|:tada:|:beers:|:twisted_rightwards_arrows:|:construction:|:fire:|:heavy_minus_sign:)"
+REGEX_NO_GITMOJI="${REGEX_NO_ISSUE_KEY} (:sparkles:|:bug:|:art:|:recycle:|:test_tube:|:pencil:|:lipstick:|:wrench:|:truck:|:arrow_up:|:arrow_down:|:label:|:zap:|:rewind:|:tada:|:beers:|:twisted_rightwards_arrows:|:construction:|:fire:|:heavy_minus_sign:|:heavy_plus_sign:)"
 REGEX_NO_DESCRIPTION="${REGEX_NO_GITMOJI} ."
 REGEX_GLOBAL="${REGEX_NO_GITMOJI} .{10,}\$"
 

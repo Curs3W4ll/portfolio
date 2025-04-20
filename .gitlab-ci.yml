@@ -70,6 +70,27 @@ Lint:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
 
+License check:
+  stage: test
+  image: alpine
+  dependencies: []
+  variables:
+    BRANCH: $CI_COMMIT_BRANCH
+  before_script:
+    - apk add bash curl
+  script:
+    - 'curl -H "Cache-Control: no-cache" "https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh" | bash'
+    - fossa analyze -b "$BRANCH" -t "Portfolio" -P "$CI_PROJECT_URL"
+    - fossa test
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - package.json
+        - package-lock.json
+      variables:
+        BRANCH: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+
 Build:
   stage: test
   image: node:alpine
@@ -89,18 +110,6 @@ Build:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
-
-# This job is used to let GitLab merge requests that have no job to be merged
-# Fixing a weird behavior of GitLab, not letting you merge when your pipeline contains no job
-No job MR validation:
-  stage: test
-  needs: []
-  dependencies: []
-  interruptible: true
-  script:
-    - echo "Skipping pipeline..."
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 Unit tests:
   stage: test

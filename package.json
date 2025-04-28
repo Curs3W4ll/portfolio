@@ -57,7 +57,7 @@
     "@vitest/ui": "^3.1.1",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
-    "cypress": "^14.3.1",
+    "cypress": "^14.3.2",
     "eslint-plugin-cypress": "^4.2.1",
     "eslint-plugin-no-only-tests": "^3.3.0",
     "husky": "^9.1.7",

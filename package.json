@@ -39,7 +39,7 @@
     "nuxt": "^3.16.2",
     "nuxt-anchorscroll": "^1.0.5",
     "nuxt-gtag": "^3.0.2",
-    "nuxt-seo-utils": "^7.0.9",
+    "nuxt-seo-utils": "^7.0.10",
     "nuxt-time": "^1.0.3",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "primevue": "^4.3.3",

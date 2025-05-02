@@ -33,7 +33,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="uppercase flex flex-col gap-5">
+  <div class="uppercase flex flex-col gap-5 lg:my-8">
     <NavBarLink v-for="anchor in anchors" :key="anchor" :anchor="anchor" :active="anchor === activeAnchor" />
   </div>
 </template>

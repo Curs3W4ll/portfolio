@@ -124,4 +124,7 @@
     @apply selection:bg-primary;
     @apply selection:text-black;
   }
+  body {
+    @apply overscroll-none;
+  }
 }

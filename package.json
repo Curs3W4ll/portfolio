@@ -33,7 +33,7 @@
     "@nuxtjs/sitemap": "^7.2.10",
     "@sentry/nuxt": "^9.14.0",
     "@storyblok/nuxt": "^6.2.4",
-    "@tailwindcss/vite": "^4.1.4",
+    "@tailwindcss/vite": "^4.1.6",
     "@unleash/proxy-client-vue": "^0.1.5",
     "@vueuse/nuxt": "^13.1.0",
     "nuxt": "^3.17.0",

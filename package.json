@@ -36,7 +36,7 @@
     "@tailwindcss/vite": "^4.1.4",
     "@unleash/proxy-client-vue": "^0.1.5",
     "@vueuse/nuxt": "^13.1.0",
-    "nuxt": "^3.17.0",
+    "nuxt": "^3.17.2",
     "nuxt-anchorscroll": "^1.0.5",
     "nuxt-gtag": "^3.0.2",
     "nuxt-seo-utils": "^7.0.10",

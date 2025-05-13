@@ -69,7 +69,7 @@ const projectsStories = await useStoryblokStoriesContent<ProjectStoryblok>(
           </td>
           <td class="hidden md:table-cell text-black-light dark:text-white-dark">{{ project.company }}</td>
           <td class="hidden lg:table-cell"><TagsList :tags="project.tags?.value" /></td>
-          <td class="hidden sm:table-cell text-black-light dark:text-white-dark">
+          <td v-tooltip="project.description" class="hidden sm:table-cell text-black-light dark:text-white-dark">
             {{ project.summary }}
           </td>
         </tr>

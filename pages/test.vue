@@ -1,3 +1,0 @@
-<template>
-  <TestComp />
-</template>

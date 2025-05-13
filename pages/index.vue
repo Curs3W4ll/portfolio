@@ -8,30 +8,15 @@ const displayProjectsArchiveButton = ref<boolean>(false);
 const sbVersion = useStoryblokVersion();
 const { locale } = useI18n();
 
-const profileStory = await useAsyncStoryblok("profile", {
-  version: sbVersion,
-  language: locale.value,
-});
-const aboutStory = await useAsyncStoryblok("about", {
-  version: sbVersion,
-  language: locale.value,
-});
-const experiences = await useStoryblokExperiences(sbVersion, locale.value);
-if (import.meta.dev && experiences.data.value) {
-  for (const [i, elem] of experiences.data.value.entries()) {
-    useStoryblokBridge(elem.id, (evStory) => (experiences.data.value![i] = evStory));
-  }
-}
-const experienceStories = computed(() => {
-  return experiences.data.value?.filter((elem) => {
-    return typeof elem === "object";
-  });
-});
-const projectsPreviewStory = await useAsyncStoryblok("projects-preview", {
-  version: sbVersion,
-  language: locale.value,
-  resolve_relations: ["projects-preview.projects"],
-});
+const profileStory = await useStoryblokStory("profile", sbVersion, locale.value);
+const aboutStory = await useStoryblokStory("about", sbVersion, locale.value);
+const projectsPreviewStory = await useStoryblokStory(
+  "projects-preview",
+  sbVersion,
+  locale.value,
+  "projects-preview.projects",
+);
+const experiencesStories = await useStoryblokStories("experiences", sbVersion, locale.value, "content.startDate:desc");
 
 const resumeFile = computed(() => {
   switch (locale.value) {
@@ -63,9 +48,9 @@ onMounted(() => {
     />
     <div class="pb-28 flex flex-col gap-32">
       <StoryblokComponent v-if="aboutStory" id="about" :blok="aboutStory.content" />
-      <div v-if="experienceStories" id="experience" class="flex flex-col gap-5">
+      <div v-if="experiencesStories" id="experience" class="flex flex-col gap-5">
         <StoryblokComponent
-          v-for="experience in experienceStories"
+          v-for="experience in experiencesStories"
           :key="experience.uuid"
           :blok="experience.content"
           :fade="focusedExperience && focusedExperience !== experience.uuid"

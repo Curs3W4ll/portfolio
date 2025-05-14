@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faDisplay, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+
 withDefaults(
   defineProps<{
     show?: boolean;
@@ -16,12 +18,12 @@ watchEffect(() => (colorMode.preference = state.value));
 const themeIcon = computed(() => {
   switch (colorMode.preference) {
     case "dark":
-      return "pi-moon";
+      return faMoon;
     case "light":
-      return "pi-sun";
+      return faSun;
     case "system":
     default:
-      return "pi-desktop";
+      return faDisplay;
   }
 });
 </script>
@@ -32,7 +34,7 @@ const themeIcon = computed(() => {
       <span class="capitalize">{{ $t("theme.theme") }}</span>
     </p>
     <div class="pl-3 flex items-center gap-2 cursor-pointer" data-test="change-theme-button" @click="next()">
-      <i class="pi" :class="[themeIcon]" />
+      <font-awesome :icon="themeIcon" />
       <p class="first-letter:uppercase underline" data-test="theme-name">{{ $t(`theme.${state}`) }}</p>
     </div>
   </div>

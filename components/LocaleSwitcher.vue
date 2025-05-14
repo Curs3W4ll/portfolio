@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { faLanguage } from "@fortawesome/free-solid-svg-icons";
+
 const { locale, locales } = useI18n();
 </script>
 
 <template>
   <div>
     <p class="font-bold">
-      <i class="pi pi-language" /> <span class="capitalize">{{ $t("language") }}</span>
+      <font-awesome :icon="faLanguage" /> <span class="capitalize">{{ $t("language") }}</span>
     </p>
     <div class="space-x-2 pl-3">
       <SwitchLocalePathLink

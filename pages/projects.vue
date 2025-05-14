@@ -24,21 +24,12 @@ useHeadSafe({
   ],
 });
 
-const projects = await useStoryblokProjects(sbVersion, locale.value);
-if (import.meta.dev && projects.data.value) {
-  for (const [i, elem] of projects.data.value.entries()) {
-    useStoryblokBridge(elem.id, (evStory) => (projects.data.value![i] = evStory));
-  }
-}
-const projectsStories = computed(() => {
-  return projects.data.value
-    ?.filter((elem) => {
-      return typeof elem === "object";
-    })
-    .map((elem) => {
-      return elem.content as ProjectStoryblok;
-    });
-});
+const projectsStories = await useStoryblokStoriesContent<ProjectStoryblok>(
+  "projects",
+  sbVersion,
+  locale.value,
+  "content.year:desc",
+);
 </script>
 
 <template>
@@ -78,10 +69,7 @@ const projectsStories = computed(() => {
           </td>
           <td class="hidden md:table-cell text-black-light dark:text-white-dark">{{ project.company }}</td>
           <td class="hidden lg:table-cell"><TagsList :tags="project.tags?.value" /></td>
-          <td
-            v-tooltip.left="{ value: project.description, autoHide: false }"
-            class="hidden sm:table-cell text-black-light dark:text-white-dark"
-          >
+          <td v-tooltip="project.description" class="hidden sm:table-cell text-black-light dark:text-white-dark">
             {{ project.summary }}
           </td>
         </tr>

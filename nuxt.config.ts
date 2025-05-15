@@ -45,6 +45,8 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
     "nuxt-seo-utils",
+    "@vesp/nuxt-fontawesome",
+    "floating-vue/nuxt",
   ],
   eslint: {
     checker: true,

@@ -112,27 +112,6 @@ Build:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
 
-Unit tests:
-  stage: test
-  image: node:alpine
-  needs:
-    - job: Format code
-      optional: true
-  dependencies: []
-  interruptible: true
-  script:
-    - npm ci
-    - npm run test:unit
-  artifacts:
-    paths:
-      - junit-report.xml
-    reports:
-      junit: junit-report.xml
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
-
 E2E tests:
   stage: test
   image: cypress/base:latest

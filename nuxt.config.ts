@@ -29,7 +29,6 @@ export default defineNuxtConfig({
   },
   modules: [
     "@nuxt/eslint",
-    "@nuxt/test-utils/module",
     "@sentry/nuxt/module",
     "nuxt-gtag",
     "@storyblok/nuxt",

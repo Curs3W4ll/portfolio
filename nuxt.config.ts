@@ -29,7 +29,6 @@ export default defineNuxtConfig({
   },
   modules: [
     "@nuxt/eslint",
-    "@nuxt/test-utils/module",
     "@sentry/nuxt/module",
     "nuxt-gtag",
     "@storyblok/nuxt",
@@ -37,7 +36,6 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxtjs/robots",
     "@nuxt/fonts",
-    "nuxt-time",
     "nuxt-anchorscroll",
     "@vueuse/nuxt",
     "@nuxt/image",

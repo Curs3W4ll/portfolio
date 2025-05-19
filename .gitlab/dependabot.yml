@@ -5,6 +5,11 @@ updates:
     directory: /
     schedule:
       interval: daily
+    allow:
+      - update-type: "version-update:semver-major"
+      - update-type: "version-update:semver-minor"
+    ignore:
+      - dependency-name: "@rollup/rollup-*"
     open-pull-requests-limit: 50
     labels:
       - dependencies

@@ -91,6 +91,16 @@ describe("Displaying home page", () => {
       cy.wait("@unleash");
     });
 
+    it("should be able to show and hide popup when clicking on it", () => {
+      cy.getByData("popup").should("not.be.visible");
+
+      cy.getByData("eyes").click();
+      cy.getByData("popup").should("be.visible");
+
+      cy.getByData("eyes").click();
+      cy.getByData("popup").should("not.be.visible");
+    });
+
     context("Language switcher", () => {
       it("should change language when selecting", () => {
         cy.getByData("eyes").click();

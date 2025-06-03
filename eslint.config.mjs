@@ -1,27 +1,27 @@
-// @ts-check
-import { FlatCompat } from "@eslint/eslintrc";
+import pluginCypress from "eslint-plugin-cypress";
+import pluginMocha from "eslint-plugin-mocha";
 import withNuxt from "./.nuxt/eslint.config.mjs";
 
-const compat = new FlatCompat();
-
-export default withNuxt().append([
+export default withNuxt(
+  pluginCypress.configs.recommended,
+  pluginMocha.configs.recommended,
   {
     ignores: ["components-types-sb.d.ts", "volt/**/*"],
   },
-  ...compat.config({
-    plugins: ["cypress", "no-only-tests"],
-    extends: ["plugin:cypress/recommended"],
-    overrides: [
-      {
-        files: ["storyblok/**/*.vue"],
-        rules: {
-          "vue/multi-word-component-names": "off",
-        },
-      },
-    ],
+  {
+    files: ["storyblok/**/*.vue"],
     rules: {
+      "vue/multi-word-component-names": "off",
+    },
+  },
+  {
+    rules: {
+      "no-console": "error",
       "vue/no-v-html": "off",
       "vue/html-self-closing": "off",
+      "mocha/no-mocha-arrows": "off",
+      "mocha/no-exclusive-tests": "error",
+      "mocha/no-pending-tests": "error",
     },
-  }),
-]);
+  },
+);

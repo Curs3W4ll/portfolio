@@ -19,7 +19,8 @@ import "./commands";
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-beforeEach(() => {
+// eslint-disable-next-line mocha/no-top-level-hooks
+beforeEach(function () {
   const featureFlags = [
     "display-resume",
     "display-projects-archive",

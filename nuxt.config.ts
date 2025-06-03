@@ -46,9 +46,6 @@ export default defineNuxtConfig({
     "@vesp/nuxt-fontawesome",
     "floating-vue/nuxt",
   ],
-  eslint: {
-    checker: true,
-  },
   devServer: {
     port: 4173,
   },

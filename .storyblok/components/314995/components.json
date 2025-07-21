@@ -1,0 +1,324 @@
+[
+  {
+    "name": "about",
+    "display_name": null,
+    "description": null,
+    "created_at": "2024-12-13T19:18:58.213Z",
+    "updated_at": "2025-01-18T00:02:46.066Z",
+    "id": 6689487,
+    "schema": {
+      "description": {
+        "type": "richtext",
+        "pos": 0,
+        "required": true,
+        "id": "sCtZus9USp6kuRpcwLZ3PA",
+        "translatable": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "about",
+    "component_group_uuid": "all",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "experience",
+    "display_name": null,
+    "description": null,
+    "created_at": "2024-12-20T15:22:25.928Z",
+    "updated_at": "2025-01-18T00:38:25.187Z",
+    "id": 6716155,
+    "schema": {
+      "startDate": {
+        "type": "datetime",
+        "pos": 0,
+        "required": true,
+        "id": "lVIFr2p_QKGs01BIffzdWg",
+        "disable_time": true
+      },
+      "endDate": {
+        "type": "datetime",
+        "pos": 1,
+        "id": "Xl9CzrXrS7C6Q6NiJQmzjg",
+        "disable_time": true
+      },
+      "title": {
+        "type": "text",
+        "pos": 2,
+        "required": true,
+        "id": "zNTuNU0dQTCUP7Kkt7a8jw",
+        "translatable": true
+      },
+      "company": {
+        "type": "text",
+        "pos": 3,
+        "required": true,
+        "id": "7btXQEHsRVywihUolMHkUA",
+        "translatable": false
+      },
+      "link": {
+        "type": "multilink",
+        "pos": 4,
+        "id": "zz06G2ryTfW5H9PWZmtjwA"
+      },
+      "role": {
+        "type": "textarea",
+        "pos": 5,
+        "required": true,
+        "id": "EgBOQoBCSFS7FJGzLEtqpA",
+        "translatable": true
+      },
+      "tags": {
+        "type": "custom",
+        "pos": 6,
+        "field_type": "storyblok-tags",
+        "options": [],
+        "id": "wmiSJzKNSZiAQQ5uVXwYtg",
+        "translatable": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "experience",
+    "component_group_uuid": "all",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "profile",
+    "display_name": null,
+    "description": null,
+    "created_at": "2024-12-13T19:05:13.549Z",
+    "updated_at": "2025-01-17T20:51:04.104Z",
+    "id": 6689485,
+    "schema": {
+      "name": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "Xtz6lR1mTsCHAGcwiWAaJg"
+      },
+      "job": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "id": "walLuGOGSVaXQTcuMTZMaA",
+        "translatable": true
+      },
+      "description": {
+        "type": "text",
+        "pos": 2,
+        "required": true,
+        "id": "2S7nJvZuSj2O7mHLFlvxvA",
+        "translatable": true
+      },
+      "links": {
+        "type": "bloks",
+        "pos": 3,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": ["social-link"],
+        "id": "tOWUaCieRbSLN0xBPcqSIQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "profile",
+    "component_group_uuid": "all",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "project",
+    "display_name": null,
+    "description": null,
+    "created_at": "2025-01-01T19:50:34.051Z",
+    "updated_at": "2025-01-18T21:23:30.797Z",
+    "id": 6742134,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "wBtA4DU5SRKYM1RVH1C1LQ",
+        "required": true,
+        "translatable": true
+      },
+      "link": {
+        "type": "multilink",
+        "pos": 1,
+        "id": "aIMkyBFaTkK5CJBhgwRRQQ",
+        "required": false
+      },
+      "previewImage": {
+        "type": "asset",
+        "pos": 2,
+        "filetypes": ["images"],
+        "required": false,
+        "id": "pALlL0VPRgyC7puMiTw3-Q",
+        "translatable": false
+      },
+      "summary": {
+        "type": "text",
+        "pos": 3,
+        "required": true,
+        "id": "bHfs3XeVQESpFwEOfeE6Kw",
+        "translatable": true
+      },
+      "description": {
+        "type": "textarea",
+        "pos": 4,
+        "required": true,
+        "id": "zoQIMrItSNqweNScvca8xw",
+        "translatable": true
+      },
+      "company": {
+        "type": "text",
+        "pos": 6,
+        "id": "yjCDtvLJQOW4VmND_KeAUA"
+      },
+      "year": {
+        "type": "datetime",
+        "pos": 7,
+        "required": true,
+        "id": "FQvwnJqFRjKoRW90HGnADA",
+        "disable_time": true
+      },
+      "tags": {
+        "type": "custom",
+        "pos": 8,
+        "field_type": "storyblok-tags",
+        "options": [],
+        "id": "piy63bVFRZioApG2Ea-3Gw",
+        "translatable": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "project",
+    "component_group_uuid": "all",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "projects-preview",
+    "display_name": null,
+    "description": null,
+    "created_at": "2025-01-04T13:03:02.881Z",
+    "updated_at": "2025-01-18T16:43:01.010Z",
+    "id": 6750781,
+    "schema": {
+      "projects": {
+        "type": "options",
+        "pos": 0,
+        "required": true,
+        "source": "internal_stories",
+        "folder_slug": "projects/",
+        "filter_content_type": ["project"],
+        "entry_appearance": "card",
+        "id": "TVi8zSE3SEe34zrlKHAKVQ",
+        "allow_advanced_search": false,
+        "translatable": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "projects-preview",
+    "component_group_uuid": "all",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "social-link",
+    "display_name": null,
+    "description": null,
+    "created_at": "2024-12-18T13:41:25.589Z",
+    "updated_at": "2025-01-17T20:51:13.537Z",
+    "id": 6707560,
+    "schema": {
+      "name": {
+        "type": "text",
+        "pos": 0,
+        "required": true,
+        "id": "hicZZmCnRuCbQaKP0cGl1g",
+        "translatable": true
+      },
+      "url": {
+        "type": "multilink",
+        "pos": 1,
+        "required": true,
+        "id": "94B6CKjKSmCc9Os9L1ZNXA"
+      },
+      "icon": {
+        "type": "textarea",
+        "pos": 2,
+        "required": true,
+        "filetypes": ["images"],
+        "asset_folder_id": 686449,
+        "description": "The <svg> tag to use.\nThe svg MUST contain the viewBox attribute.",
+        "id": "6Zq7BztZRJeCXOxW5Xc3-g",
+        "tooltip": true
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "social-link",
+    "component_group_uuid": "all",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  }
+]

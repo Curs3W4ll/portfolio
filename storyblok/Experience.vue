@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ExperienceStoryblok } from "~/components-types-sb";
+import type { Experience } from "~/.storyblok/types/314995/storyblok-components";
 import { CustomLink } from "#components";
 
 withDefaults(
   defineProps<{
-    blok: ExperienceStoryblok;
+    blok: Experience;
     fade?: boolean;
   }>(),
   {

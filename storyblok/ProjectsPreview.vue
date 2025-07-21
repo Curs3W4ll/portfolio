@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ProjectsPreviewStoryblok } from "~/components-types-sb";
+import type { ProjectsPreview } from "~/.storyblok/types/314995/storyblok-components";
 
 const props = defineProps<{
-  blok: ProjectsPreviewStoryblok;
+  blok: ProjectsPreview;
 }>();
 
 const focusedProject = ref<string | undefined>(undefined);
@@ -15,11 +15,11 @@ const projects = computed(() => {
 </script>
 
 <template>
-  <StoryblokComponent
+  <Project
     v-for="project in projects"
     :key="project.id"
     :blok="project.content"
-    :fade="focusedProject && focusedProject !== project.uuid"
+    :fade="focusedProject !== undefined && focusedProject !== project.uuid"
     @mouseover="focusedProject = project.uuid"
     @mouseleave="focusedProject = undefined"
   />

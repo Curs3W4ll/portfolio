@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ProjectStoryblok } from "~/components-types-sb";
+import type { Project } from "~/.storyblok/types/314995/storyblok-components";
 import { CustomLink } from "#components";
 
 withDefaults(
   defineProps<{
-    blok: ProjectStoryblok;
+    blok: Project;
     fade?: boolean;
   }>(),
   {

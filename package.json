@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@nuxt/eslint": "^1.5.2",
+    "@nuxt/eslint": "^1.6.0",
     "@vue/tsconfig": "^0.7.0",
     "cypress": "^14.5.0",
     "eslint-plugin-cypress": "^5.1.0",

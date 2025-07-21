@@ -64,7 +64,7 @@
     "remove-attr": "^0.0.15",
     "serve": "^14.2.4",
     "start-server-and-test": "^2.0.11",
-    "storyblok": "^3.36.1",
+    "storyblok": "^4.2.0",
     "typescript": "5.8.3",
     "vite-plugin-eslint2": "^5.0.3",
     "vue-tsc": "^2.2.10"

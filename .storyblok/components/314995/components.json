@@ -136,9 +136,7 @@
         "pos": 3,
         "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": [
-          "social-link"
-        ],
+        "component_whitelist": ["social-link"],
         "id": "tOWUaCieRbSLN0xBPcqSIQ"
       }
     },
@@ -182,9 +180,7 @@
       "previewImage": {
         "type": "asset",
         "pos": 2,
-        "filetypes": [
-          "images"
-        ],
+        "filetypes": ["images"],
         "required": false,
         "id": "pALlL0VPRgyC7puMiTw3-Q",
         "translatable": false
@@ -254,9 +250,7 @@
         "required": true,
         "source": "internal_stories",
         "folder_slug": "projects/",
-        "filter_content_type": [
-          "project"
-        ],
+        "filter_content_type": ["project"],
         "entry_appearance": "card",
         "id": "TVi8zSE3SEe34zrlKHAKVQ",
         "allow_advanced_search": false,
@@ -304,9 +298,7 @@
         "type": "textarea",
         "pos": 2,
         "required": true,
-        "filetypes": [
-          "images"
-        ],
+        "filetypes": ["images"],
         "asset_folder_id": 686449,
         "description": "The <svg> tag to use.\nThe svg MUST contain the viewBox attribute.",
         "id": "6Zq7BztZRJeCXOxW5Xc3-g",

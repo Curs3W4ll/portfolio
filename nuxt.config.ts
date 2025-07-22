@@ -18,6 +18,9 @@ export default defineNuxtConfig({
       storyblokVersion: process.env.NUXT_STORYBLOK_VERSION || "published",
       unleashProxyUrl: process.env.NUXT_UNLEASH_PROXY_URL,
       unleashProxySecret: process.env.NUXT_UNLEASH_PROXY_CLIENT_KEY,
+      i18n: {
+        baseUrl: process.env.NUXT_BASE_URL || "https://hervaud.fr",
+      },
     },
   },
   app: {
@@ -120,8 +123,6 @@ export default defineNuxtConfig({
       redirectOn: "root",
       fallbackLocale: "en",
     },
-    baseUrl: process.env.NUXT_BASE_URL,
-    lazy: true,
   },
   colorMode: {
     fallback: "dark",

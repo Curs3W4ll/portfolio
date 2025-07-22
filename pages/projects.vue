@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ProjectStoryblok } from "~/components-types-sb";
+import type { Project } from "~/.storyblok/types/314995/storyblok-components";
 import { CustomLink } from "#components";
 
 defineI18nRoute({
@@ -24,7 +24,7 @@ useHeadSafe({
   ],
 });
 
-const projectsStories = await useStoryblokStoriesContent<ProjectStoryblok>(
+const projectsStories = await useStoryblokStoriesContent<Project>(
   "projects",
   sbVersion,
   locale.value,
@@ -56,7 +56,7 @@ const projectsStories = await useStoryblokStoriesContent<ProjectStoryblok>(
       <tbody class="table-row-group">
         <tr
           v-for="project in projectsStories"
-          :key="project.id"
+          :key="project._uid"
           class="table-row border-t border-black-light dark:border-white-dark *:p-3"
         >
           <td class="table-cell text-black-light dark:text-white-dark pl-0!">

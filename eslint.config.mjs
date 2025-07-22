@@ -6,7 +6,7 @@ export default withNuxt(
   pluginCypress.configs.recommended,
   pluginMocha.configs.recommended,
   {
-    ignores: ["components-types-sb.d.ts", "volt/**/*"],
+    ignores: [".storyblok/**/*", "volt/**/*"],
   },
   {
     files: ["storyblok/**/*.vue"],

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ProfileStoryblok } from "~/components-types-sb";
+import type { Profile } from "~/.storyblok/types/314995/storyblok-components";
 
 defineProps<{
-  blok: ProfileStoryblok;
+  blok: Profile;
 }>();
 </script>
 

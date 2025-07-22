@@ -11,7 +11,7 @@ export default {
     system: "system",
   },
   seeResume: "see full résumé",
-  seeProjectsArchive: "see projets archive",
+  seeProjectsArchive: "see projects archive",
   allProjects: "all projects",
   year: "year",
   project: "project",

@@ -59,7 +59,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.0",
     "prettier": "^3.6.0",
-    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-organize-imports": "^4.2.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "remove-attr": "^0.0.15",
     "serve": "^14.2.4",
@@ -67,7 +67,7 @@
     "storyblok": "^4.2.0",
     "typescript": "5.8.3",
     "vite-plugin-eslint2": "^5.0.3",
-    "vue-tsc": "^2.2.10"
+    "vue-tsc": "^3.0.3"
   },
   "optionalDependencies": {
     "@rollup/rollup-android-arm-eabi": "4.41.0",

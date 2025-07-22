@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { StoryblokRichTextNode } from "@storyblok/vue";
-import type { RichtextStoryblok } from "~/components-types-sb";
+import type { StoryblokRichtext } from "~/.storyblok/types/storyblok";
 import CustomLink from "~/components/CustomLink.vue";
 
 defineProps<{
-  richText: RichtextStoryblok;
+  richText: StoryblokRichtext;
 }>();
 
 const resolvers = ref({

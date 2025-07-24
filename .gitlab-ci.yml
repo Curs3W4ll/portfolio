@@ -92,7 +92,7 @@ License check:
       variables:
         BRANCH: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
 
-Build:
+Generate snapshot:
   stage: test
   image: node:alpine
   needs:
@@ -103,7 +103,7 @@ Build:
   script:
     - cp ${DEV_ENV_FILE} .env
     - npm ci
-    - npm run build:noserver
+    - npm run generate
   artifacts:
     paths:
       - .output/
@@ -118,7 +118,7 @@ E2E tests:
   needs:
     - job: Format code
       optional: true
-    - job: Build
+    - job: Generate snapshot
       artifacts: true
   interruptible: true
   script:

@@ -1,14 +1,11 @@
 describe("Viewing projects archive", () => {
   beforeEach(() => {
     cy.visit("/projects");
-    cy.intercept("https://api.storyblok.com/**/*projects*").as("storyblok-projects");
   });
 
   it("should have a sticky header row", () => {
     cy.viewport(1050, 200);
     let initialPosition: JQuery.Coordinates;
-
-    cy.wait("@storyblok-projects");
 
     cy.getByData("header-row").then((el) => {
       initialPosition = el.position();

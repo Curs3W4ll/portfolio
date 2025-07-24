@@ -29,11 +29,6 @@ beforeEach(function () {
     "display-theme-switcher",
   ];
 
-  cy.intercept("https://api.storyblok.com/**/profile*").as("storyblok-profile");
-  cy.intercept("https://api.storyblok.com/**/about*").as("storyblok-about");
-  cy.intercept("https://api.storyblok.com/**/*projects-preview*").as("storyblok-projects-preview");
-  cy.intercept("https://api.storyblok.com/**/*experiences*").as("storyblok-experiences");
-
   cy.fixture("UnleashFeatureFlags.json").then((data) => {
     let i: number;
     for (i = 1; i < featureFlags.length; i++) {

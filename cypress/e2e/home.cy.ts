@@ -17,11 +17,6 @@ describe("Displaying home page", () => {
       cy.viewport(1050, 700);
       let initialPosition: JQuery.Coordinates;
 
-      cy.wait("@storyblok-profile");
-      cy.wait("@storyblok-about");
-      cy.wait("@storyblok-experiences");
-      cy.wait("@storyblok-projects-preview");
-
       cy.getByData("profile").then((el) => {
         initialPosition = el.position();
       });
@@ -59,27 +54,22 @@ describe("Displaying home page", () => {
 
   context("About", () => {
     it("should display description", () => {
-      cy.wait("@storyblok-about");
       cy.getByData("about").should("be.visible");
     });
   });
 
   context("Experiences", () => {
     it("should display experiences", () => {
-      cy.wait("@storyblok-experiences");
       cy.getByData("experience").should("have.length.gt", 0);
     });
   });
 
   context("Projects preview", () => {
     it("should display projects preview", () => {
-      cy.wait("@storyblok-projects-preview");
       cy.getByData("project").should("have.length.gt", 0);
     });
 
     it("should redirect to projects archive", () => {
-      cy.wait("@storyblok-projects-preview");
-
       cy.getByData("projects-archive-button").click();
 
       cy.location("pathname").should("eq", "/projects");

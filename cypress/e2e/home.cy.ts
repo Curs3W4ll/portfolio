@@ -32,22 +32,20 @@ describe("Displaying home page", () => {
 
   context("NavBar", () => {
     it("Should move to anchor when clicking on it", () => {
-      cy.getByData("anchor-experience").click();
-
+      cy.getByData("anchor-experience").should("be.visible").click();
       cy.hash().should("eq", "#experience");
-      cy.getByData("anchor-experience").should("have.class", "font-bold");
-      cy.getByData("anchor-about").should("not.have.class", "font-bold");
-      cy.get("#experience").then((el) => {
-        expect(el[0]?.getBoundingClientRect()?.top).equal(0);
+      cy.getByData("anchor-experience").should("be.visible").should("have.class", "font-bold");
+      cy.getByData("anchor-about").should("be.visible").should("not.have.class", "font-bold");
+      cy.get("#experience").should(($el) => {
+        expect($el[0].getBoundingClientRect().top).equal(0);
       });
 
-      cy.getByData("anchor-about").click();
-
-      cy.hash().should("eq", "#about");
-      cy.getByData("anchor-about").should("have.class", "font-bold");
-      cy.getByData("anchor-experience").should("not.have.class", "font-bold");
-      cy.get("#about").then((el) => {
-        expect(el[0]?.getBoundingClientRect()?.top).equal(0);
+      cy.getByData("anchor-about").should("be.visible").click();
+      cy.hash({ timeout: 10000 }).should("eq", "#about");
+      cy.getByData("anchor-about").should("be.visible").should("have.class", "font-bold");
+      cy.getByData("anchor-experience").should("be.visible").should("not.have.class", "font-bold");
+      cy.get("#about").should(($el) => {
+        expect($el[0].getBoundingClientRect().top).equal(0);
       });
     });
   });

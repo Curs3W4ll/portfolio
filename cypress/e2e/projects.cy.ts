@@ -1,14 +1,16 @@
 describe("Viewing projects archive", () => {
   beforeEach(() => {
     cy.visit("/projects");
-    cy.intercept("https://api.storyblok.com/**/*projects*").as("storyblok-projects");
   });
 
   it("should have a sticky header row", () => {
     cy.viewport(1050, 200);
-    let initialPosition: JQuery.Coordinates;
 
-    cy.wait("@storyblok-projects");
+    // When dealing with positions checks, Cypress seems to have a hard time
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(500);
+
+    let initialPosition: JQuery.Coordinates;
 
     cy.getByData("header-row").then((el) => {
       initialPosition = el.position();

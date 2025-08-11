@@ -15,12 +15,12 @@ describe("Displaying home page", () => {
 
     it("should be sticky on large screens", () => {
       cy.viewport(1050, 700);
-      let initialPosition: JQuery.Coordinates;
 
-      cy.wait("@storyblok-profile");
-      cy.wait("@storyblok-about");
-      cy.wait("@storyblok-experiences");
-      cy.wait("@storyblok-projects-preview");
+      // When dealing with positions checks, Cypress seems to have a hard time
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(500);
+
+      let initialPosition: JQuery.Coordinates;
 
       cy.getByData("profile").then((el) => {
         initialPosition = el.position();
@@ -37,49 +37,46 @@ describe("Displaying home page", () => {
 
   context("NavBar", () => {
     it("Should move to anchor when clicking on it", () => {
-      cy.getByData("anchor-experience").click();
+      // When dealing with positions checks, Cypress seems to have a hard time
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(500);
 
+      cy.getByData("anchor-experience").should("be.visible").click();
       cy.hash().should("eq", "#experience");
-      cy.getByData("anchor-experience").should("have.class", "font-bold");
-      cy.getByData("anchor-about").should("not.have.class", "font-bold");
-      cy.get("#experience").then((el) => {
-        expect(el[0]?.getBoundingClientRect()?.top).equal(0);
+      cy.getByData("anchor-experience").should("be.visible").should("have.class", "font-bold");
+      cy.getByData("anchor-about").should("be.visible").should("not.have.class", "font-bold");
+      cy.get("#experience").should(($el) => {
+        expect($el[0].getBoundingClientRect().top).equal(0);
       });
 
-      cy.getByData("anchor-about").click();
-
-      cy.hash().should("eq", "#about");
-      cy.getByData("anchor-about").should("have.class", "font-bold");
-      cy.getByData("anchor-experience").should("not.have.class", "font-bold");
-      cy.get("#about").then((el) => {
-        expect(el[0]?.getBoundingClientRect()?.top).equal(0);
+      cy.getByData("anchor-about").should("be.visible").click();
+      cy.hash({ timeout: 10000 }).should("eq", "#about");
+      cy.getByData("anchor-about").should("be.visible").should("have.class", "font-bold");
+      cy.getByData("anchor-experience").should("be.visible").should("not.have.class", "font-bold");
+      cy.get("#about").should(($el) => {
+        expect($el[0].getBoundingClientRect().top).equal(0);
       });
     });
   });
 
   context("About", () => {
     it("should display description", () => {
-      cy.wait("@storyblok-about");
       cy.getByData("about").should("be.visible");
     });
   });
 
   context("Experiences", () => {
     it("should display experiences", () => {
-      cy.wait("@storyblok-experiences");
       cy.getByData("experience").should("have.length.gt", 0);
     });
   });
 
   context("Projects preview", () => {
     it("should display projects preview", () => {
-      cy.wait("@storyblok-projects-preview");
       cy.getByData("project").should("have.length.gt", 0);
     });
 
     it("should redirect to projects archive", () => {
-      cy.wait("@storyblok-projects-preview");
-
       cy.getByData("projects-archive-button").click();
 
       cy.location("pathname").should("eq", "/projects");

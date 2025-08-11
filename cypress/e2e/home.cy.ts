@@ -15,6 +15,11 @@ describe("Displaying home page", () => {
 
     it("should be sticky on large screens", () => {
       cy.viewport(1050, 700);
+
+      // When dealing with positions checks, Cypress seems to have a hard time
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(500);
+
       let initialPosition: JQuery.Coordinates;
 
       cy.getByData("profile").then((el) => {
@@ -32,6 +37,10 @@ describe("Displaying home page", () => {
 
   context("NavBar", () => {
     it("Should move to anchor when clicking on it", () => {
+      // When dealing with positions checks, Cypress seems to have a hard time
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(500);
+
       cy.getByData("anchor-experience").should("be.visible").click();
       cy.hash().should("eq", "#experience");
       cy.getByData("anchor-experience").should("be.visible").should("have.class", "font-bold");

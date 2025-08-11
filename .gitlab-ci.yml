@@ -47,7 +47,7 @@ Format code:
     - git remote set-url origin $CI_REPOSITORY_URL
     - git add .
     - git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
-    - git push origin
+    - git push origin HEAD
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 

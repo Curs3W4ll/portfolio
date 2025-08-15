@@ -41,6 +41,6 @@ beforeEach(function () {
       i++;
     });
 
-    cy.intercept("GET", "https://portfolio.unleash.hervaud.fr/proxy*", data).as("unleash");
+    cy.intercept("GET", "https://unleash.portfolio.hervaud.fr/proxy*", data).as("unleash");
   });
 });

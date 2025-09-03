@@ -46,7 +46,7 @@ describe("Displaying home page", () => {
       cy.getByData("anchor-experience").should("be.visible").should("have.class", "font-bold");
       cy.getByData("anchor-about").should("be.visible").should("not.have.class", "font-bold");
       cy.get("#experience").should(($el) => {
-        expect($el[0].getBoundingClientRect().top).equal(0);
+        expect($el[0]?.getBoundingClientRect().top).equal(0);
       });
 
       cy.getByData("anchor-about").should("be.visible").click();
@@ -54,7 +54,7 @@ describe("Displaying home page", () => {
       cy.getByData("anchor-about").should("be.visible").should("have.class", "font-bold");
       cy.getByData("anchor-experience").should("be.visible").should("not.have.class", "font-bold");
       cy.get("#about").should(($el) => {
-        expect($el[0].getBoundingClientRect().top).equal(0);
+        expect($el[0]?.getBoundingClientRect().top).equal(0);
       });
     });
   });

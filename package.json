@@ -61,7 +61,7 @@
     "prettier-plugin-organize-imports": "^4.2.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "remove-attr": "^0.0.15",
-    "serve": "^14.2.4",
+    "serve": "^14.2.5",
     "start-server-and-test": "^2.0.11",
     "storyblok": "^4.2.0",
     "typescript": "5.8.3",

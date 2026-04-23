@@ -1,17 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
 import removeAttr from "remove-attr";
 
-const vitePlugins = [tailwindcss()];
-
-if (process.env.NUXT_KEEP_DATA_TEST_ATTRIBUTES !== "true") {
-  vitePlugins.push([
-    removeAttr({
-      extensions: ["vue"],
-      attributes: ["data-test"],
-    }),
-  ]);
-}
-
 export default defineNuxtConfig({
   ssr: process.env.NUXT_CONFIG_SSR == "true" ? true : process.env.NUXT_CONFIG_SSR === "false" ? false : undefined,
   devtools: {
@@ -67,7 +56,12 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
   vite: {
-    plugins: vitePlugins,
+    plugins: [
+      tailwindcss(),
+      ...(process.env.NUXT_KEEP_DATA_TEST_ATTRIBUTES !== "true"
+        ? [removeAttr({ extensions: ["vue"], attributes: ["data-test"] })]
+        : []),
+    ],
   },
   css: ["~/assets/css/main.css"],
   sentry: {

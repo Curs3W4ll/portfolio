@@ -1,0 +1,42 @@
+---
+# Shared foundations for all jobs. Hidden jobs (keys prefixed with `.`) are
+# consumed from sibling files via `extends:` or `!reference [...]` — YAML
+# anchors do not cross the wildcard include in .gitlab-ci.yml, so everything
+# reusable across files is expressed as a hidden job.
+
+default:
+  image: node:alpine
+
+variables:
+  # The pipeline lints and formats itself; husky would only fight the commit
+  # the `format` job pushes.
+  HUSKY: 0
+
+.default-retry:
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+      - scheduler_failure
+
+.interruptible:
+  interruptible: true
+
+.not-interruptible:
+  interruptible: false
+
+.npm-before_script:
+  before_script:
+    - npm ci
+
+.npm-cache:
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+      - .nuxt/
+      - .npm
+    policy: pull-push

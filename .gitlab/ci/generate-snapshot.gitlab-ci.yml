@@ -1,0 +1,23 @@
+---
+generate-snapshot:
+  stage: test
+  needs:
+    - job: format
+      optional: true
+  dependencies: []
+  extends:
+    - .default-retry
+    - .interruptible
+  cache:
+    - !reference [".npm-cache", cache]
+  rules:
+    - !reference [".generate-snapshot:rules", rules]
+  before_script:
+    # Ahead of `npm ci`, whose postinstall runs `nuxt prepare`.
+    - cp "$DEV_ENV_FILE" .env
+    - !reference [".npm-before_script", before_script]
+  script:
+    - npm run generate
+  artifacts:
+    paths:
+      - .output/

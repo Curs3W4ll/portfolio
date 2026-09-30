@@ -13,6 +13,7 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:sh": "shellcheck .gitlab/ci/scripts/*.sh",
     "test:e2e": "start-server-and-test 'serve -p 4173 .output/public' http://localhost:4173 'cypress run --e2e'",
     "test:e2e:record": "start-server-and-test 'serve -p 4173 .output/public' http://localhost:4173 'cypress run --e2e --record'",
     "test:e2e:dev": "start-server-and-test 'serve -p 4173 .output/public' http://localhost:4173 'cypress open --e2e --browser chrome'",
@@ -63,6 +64,7 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "remove-attr": "^0.0.15",
     "serve": "^14.2.5",
+    "shellcheck": "^4.1.0",
     "start-server-and-test": "^3.0.2",
     "storyblok": "^4.2.0",
     "typescript": "6.0.3",
@@ -96,6 +98,9 @@
     ],
     "**/*.{js,cjs,mjs,ts,cts,mts,vue}": [
       "npm run lint:fix"
+    ],
+    "**/*.sh": [
+      "shellcheck"
     ]
   }
 }

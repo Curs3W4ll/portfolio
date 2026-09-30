@@ -1,0 +1,22 @@
+---
+include:
+  - component: gitlab.com/dependabot-gitlab/dependabot-standalone/template@3.15.0
+    inputs:
+      gitlab_access_token: $DEPENDABOT_GITLAB_ACCESS_TOKEN
+      github_access_token: $DEPENDABOT_GITHUB_ACCESS_TOKEN
+      stage_name: maintenance
+
+npm:
+  # No `extends:` here. A local array replaces the included one rather than
+  # merging, so it would need the component's own `.dependabot-gitlab` restated
+  # — coupling this to an undocumented internal of a pinned dependency.
+  retry: !reference [".default-retry", retry]
+  # `.not-interruptible` spelled out: `!reference` resolves sections, not
+  # scalars, so it cannot reach a bare boolean.
+  interruptible: false
+  variables:
+    # Required by the component's script, so the schedule only has to set
+    # SCHEDULE_TASK. A schedule variable still overrides it.
+    DIRECTORY: "/"
+  rules:
+    - !reference [".dependabot:rules", rules]

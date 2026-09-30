@@ -1,166 +1,31 @@
 ---
-variables:
-  HUSKY: 0
-
 stages:
-  - format
+  - maintenance
+  - lint
   - test
   - deploy
 
 workflow:
+  # Applies the PIPELINE_NAME the rules below set; without it the variable is
+  # inert. Rules setting none resolve to an empty string, leaving pipelines unnamed.
+  name: "$PIPELINE_NAME"
   auto_cancel:
     on_new_commit: interruptible
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TASK == ""'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      variables:
+        PIPELINE_NAME: "Scheduled pipeline: $SCHEDULE_TASK"
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
+      variables:
+        PIPELINE_NAME: "Release pipeline: $CI_COMMIT_TAG"
+    - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH'
+      variables:
+        PIPELINE_NAME: "Manual run"
+        MANUAL_RUN: "true"
 
 include:
-  - component: gitlab.com/dependabot-gitlab/dependabot-standalone/template@3.15.0
-    inputs:
-      gitlab_access_token: $DEPENDABOT_GITLAB_ACCESS_TOKEN
-      github_access_token: $DEPENDABOT_GITHUB_ACCESS_TOKEN
-      stage_name: test
-    rules:
-      - if: $RUN_DEPENDABOT
-
-cache:
-  key:
-    files:
-      - package-lock.json
-  paths:
-    - node_modules/
-    - .nuxt/
-    - .npm
-
-Format code:
-  stage: format
-  image: node:alpine
-  needs: []
-  dependencies: []
-  variables:
-    COMMIT_MESSAGE: ":art: Format code"
-  before_script:
-    - apk add git
-  script:
-    - npm ci
-    - npm run lint:fix || true
-    - npm run format
-    - git config user.email "$GITLAB_USER_EMAIL"
-    - git config user.name "$GITLAB_USER_NAME"
-    - git remote set-url origin "$CI_REPOSITORY_URL"
-    - git add .
-    - git diff-index --quiet HEAD || git commit -m "$COMMIT_MESSAGE"
-    - git push origin HEAD:$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-
-Lint:
-  stage: test
-  image: node:alpine
-  needs:
-    - job: Format code
-      optional: true
-  dependencies: []
-  interruptible: true
-  script:
-    - npm ci
-    - npm run lint
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
-
-License check:
-  stage: test
-  image: alpine
-  dependencies: []
-  variables:
-    BRANCH: $CI_COMMIT_BRANCH
-  before_script:
-    - apk add bash curl
-  script:
-    - 'curl -H "Cache-Control: no-cache" "https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh" | bash'
-    - fossa analyze -b "$BRANCH" -t "Portfolio" -P "$CI_PROJECT_URL"
-    - fossa test
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      changes:
-        - package.json
-        - package-lock.json
-      variables:
-        BRANCH: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
-
-Generate snapshot:
-  stage: test
-  image: node:alpine
-  needs:
-    - job: Format code
-      optional: true
-  dependencies: []
-  interruptible: true
-  script:
-    - cp ${DEV_ENV_FILE} .env
-    - npm ci
-    - npm run generate
-  artifacts:
-    paths:
-      - .output/
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
-
-E2E tests:
-  stage: test
-  image: cypress/base:latest
-  needs:
-    - job: Format code
-      optional: true
-    - job: Generate snapshot
-      artifacts: true
-  interruptible: true
-  script:
-    - npm ci
-    - npm run test:e2e:record
-  artifacts:
-    paths:
-      - cypress/videos/
-      - cypress/screenshots/
-      - tests-results/cypress/
-    reports:
-      junit: tests-results/cypress/test-output-*.xml
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
-
-pages:
-  stage: deploy
-  image: node:alpine
-  needs:
-    - job: Format code
-      optional: true
-    - job: Lint
-      optional: true
-    - job: Unit tests
-      optional: true
-    - job: E2E tests
-      optional: true
-  dependencies: []
-  variables:
-    SENTRY_AUTH_TOKEN: $CUSTOM_SENTRY_AUTH_TOKEN
-    NUXT_SENTRY_RELEASE: $CI_COMMIT_TAG
-  script:
-    - cp ${PRODUCTION_ENV_FILE} .env
-    - echo -e "\nNUXT_PUBLIC_VERSION=${CI_COMMIT_TAG}\n" >> .env
-    - npm ci
-    - npm run generate
-  artifacts:
-    paths:
-      - .output/public
-    expire_in: never
-  publish: .output/public
-  environment:
-    name: production
-    url: https://hervaud.fr
-    deployment_tier: production
-  rules:
-    - if: $CI_COMMIT_TAG =~ /^\d+(\.\d+)*/
+  - local: .gitlab/ci/*.gitlab-ci.yml

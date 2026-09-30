@@ -1,0 +1,24 @@
+---
+test:e2e:
+  stage: test
+  image: cypress/base:latest
+  needs:
+    - job: format
+      optional: true
+    - job: generate-snapshot
+      artifacts: true
+  extends:
+    - .default-retry
+    - .interruptible
+    - .npm-before_script
+  rules:
+    - !reference [".test:rules", rules]
+  script:
+    - npm run test:e2e:record
+  artifacts:
+    paths:
+      - cypress/videos/
+      - cypress/screenshots/
+      - tests-results/cypress/
+    reports:
+      junit: tests-results/cypress/test-output-*.xml

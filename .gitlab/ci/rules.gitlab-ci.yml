@@ -1,0 +1,91 @@
+---
+# Centralized conditions, change patterns, and composite rule sets — GitLab
+# style. Bare-mapping condition anchors (&if-*) and bare-list pattern anchors
+# (&*-patterns) are combined into composite `.*:rules` sets via YAML merge keys
+# (<<:) and aliases (*). Anchors are a same-file feature, so they only build the
+# composites here; jobs in the sibling .gitlab/ci/*.gitlab-ci.yml files consume
+# the composites via `!reference [".x:rules", rules]`, which does cross the
+# include. Never `!reference` the bare `.if-*` / `.*-patterns` anchors from
+# another file.
+#
+# Merging a condition into a rule (rather than referencing a whole rules list)
+# is what lets a composite add `changes:`, `when:`, or `variables:` to it.
+
+# --- Condition anchors (bare mappings; merged into a rule with `<<:`) ---------
+
+.if-merge-request: &if-merge-request
+  if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+.if-default-branch: &if-default-branch
+  if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push"'
+
+.if-tag: &if-tag
+  if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
+
+# Set by any web run on the default branch.
+.if-manual-run: &if-manual-run
+  if: '$CI_PIPELINE_SOURCE == "web" && $MANUAL_RUN == "true"'
+
+.if-schedule-dependabot: &if-schedule-dependabot
+  if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TASK == "dependabot"'
+
+# --- Change-pattern anchors (bare lists; aliased into a rule's `changes:`) ----
+
+.gitlab-ci-patterns: &gitlab-ci-patterns
+  - .gitlab-ci.yml
+  - .gitlab/ci/**/*
+
+.npm-dependencies-patterns: &npm-dependencies-patterns
+  - package.json
+  - package-lock.json
+
+# --- Composite rule sets (the public API — `!reference` these from jobs) ------
+
+.format:rules:
+  rules:
+    - <<: *if-merge-request
+
+.lint:rules:
+  rules:
+    - <<: *if-merge-request
+    - <<: *if-default-branch
+    - <<: *if-tag
+    - <<: *if-manual-run
+
+# The one job narrow enough to filter on: only the manifests (or this pipeline)
+# can change a license scan. BRANCH is overridden because $CI_COMMIT_BRANCH,
+# the job's default, is unset in a merge-request pipeline.
+.license:rules:
+  rules:
+    - <<: *if-merge-request
+      changes: *gitlab-ci-patterns
+      variables:
+        BRANCH: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+    - <<: *if-merge-request
+      changes: *npm-dependencies-patterns
+      variables:
+        BRANCH: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+    - <<: *if-default-branch
+    - <<: *if-manual-run
+
+.generate-snapshot:rules:
+  rules:
+    - <<: *if-merge-request
+    - <<: *if-default-branch
+    - <<: *if-tag
+    - <<: *if-manual-run
+
+.test:rules:
+  rules:
+    - <<: *if-merge-request
+    - <<: *if-default-branch
+    - <<: *if-tag
+    - <<: *if-manual-run
+
+.deploy:rules:
+  rules:
+    - <<: *if-tag
+
+.dependabot:rules:
+  rules:
+    - <<: *if-schedule-dependabot

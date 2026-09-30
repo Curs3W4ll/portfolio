@@ -1,0 +1,35 @@
+---
+format:
+  stage: lint
+  needs: []
+  dependencies: []
+  extends:
+    - .default-retry
+    - .interruptible
+  rules:
+    - !reference [".format:rules", rules]
+  variables:
+    COMMIT_MESSAGE: ":art: Format code"
+  before_script:
+    - apk add --no-cache git
+    - !reference [".npm-before_script", before_script]
+  script:
+    # Best-effort: an unfixable rule must not stop the commit, `lint` reports it.
+    - npm run lint:fix || true
+    - npm run format
+    - sh .gitlab/ci/scripts/format-and-push.sh
+
+lint:
+  stage: lint
+  needs:
+    - job: format
+      optional: true
+  dependencies: []
+  extends:
+    - .default-retry
+    - .interruptible
+    - .npm-before_script
+  rules:
+    - !reference [".lint:rules", rules]
+  script:
+    - npm run lint

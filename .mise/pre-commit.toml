@@ -1,0 +1,26 @@
+["pre-commit:setup"]
+description = "Install the git hooks pre-commit manages"
+# pre-commit installs the `pre-commit` stage and nothing else unless the other
+# hook types are named
+run = '''
+pre-commit install \
+  --hook-type pre-commit \
+  --hook-type prepare-commit-msg \
+  --hook-type commit-msg \
+  --hook-type pre-push
+'''
+sources = [".pre-commit-config.yaml"]
+
+["pre-commit:run"]
+description = "Run pre-commit on the diff between two refs (defaults origin/main..HEAD)"
+usage = '''
+arg "<from>" default="origin/main" help="Base git ref"
+arg "<to>" default="HEAD" help="Tip git ref"
+'''
+run = '''
+pre-commit run --show-diff-on-failure --from-ref="{{ usage.from }}" --to-ref="{{ usage.to }}"
+'''
+
+["pre-commit:run:all"]
+description = "Run pre-commit over every file in the repository"
+run = "pre-commit run --show-diff-on-failure --all-files"

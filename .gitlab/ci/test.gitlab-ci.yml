@@ -3,8 +3,6 @@ test:e2e:
   stage: test
   image: cypress/base:latest
   needs:
-    - job: format
-      optional: true
     - job: generate-snapshot
       artifacts: true
   extends:

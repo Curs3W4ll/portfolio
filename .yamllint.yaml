@@ -1,0 +1,12 @@
+---
+extends: default
+
+rules:
+  # Matches printWidth in .prettierrc.json, which formats every YAML file here.
+  line-length:
+    max: 120
+  comments:
+    # Pre-emptive: prettier formats every YAML file here and collapses the gap
+    # before an inline comment to exactly one space, which the stock minimum of
+    # 2 would then re-expand — a fight neither tool can win.
+    min-spaces-from-content: 1

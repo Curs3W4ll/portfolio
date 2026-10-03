@@ -41,10 +41,6 @@
 
 # --- Composite rule sets (the public API — `!reference` these from jobs) ------
 
-.format:rules:
-  rules:
-    - <<: *if-merge-request
-
 .lint:rules:
   rules:
     - <<: *if-merge-request

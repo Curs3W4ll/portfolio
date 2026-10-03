@@ -1,0 +1,13 @@
+{
+  "config": {
+    // MD013 (line-length) is prettier's business.
+    "MD013": false,
+    // Two `##### Examples` headings sit under different parents (the commit
+    // and the branch-naming conventions). Renaming either would break the
+    // anchor that GitLab's `[[_TOC_]]` and any external link resolve to, so
+    // duplicates are allowed as long as they are not siblings.
+    "MD024": { "siblings_only": true },
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", ".nuxt/**", ".output/**", ".mise-data/**", ".pre-commit-data/**"],
+}

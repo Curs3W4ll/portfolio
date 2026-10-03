@@ -30,9 +30,21 @@ The project is using [Storyblok](https://www.storyblok.com/) headless CMS for co
 
 #### Installation
 
-To install dependencies, use `npm install`.
+The toolchain is pinned in `mise.toml`, so the only prerequisite is
+[mise](https://mise.jdx.dev/) itself:
 
-See a list of available commands with `npm run`.
+- Install the `mise` CLI
+- Run the following command in the project folder:
+
+```sh
+mise trust
+```
+
+Entering the folder then installs the pinned tools and sets up the [Git hooks](#git-hooks) automatically. Everything
+else is a regular npm project:
+
+- Install dependencies with `npm install`
+- See a list of available commands with `npm run`, and of mise tasks with `mise tasks`
 
 If you wish to start the project either in `dev` mode or in `preview` mode with Storyblok working, you will need to create a local ssl certificate.  
 In order to do this, follow these steps:
@@ -87,6 +99,10 @@ To update the types according to the architecture used in the StoryBlok space, f
 
 #### Git hooks
 
+The hooks below are managed by [pre-commit](https://pre-commit.com/) (see `.pre-commit-config.yaml`); the ones that
+are not off-the-shelf tools live in `.gitlab/git-hooks/`. They are installed for you when you enter the project
+folder, or by hand with `mise run pre-commit:setup`.
+
 ##### Issue id auto-filler
 
 This custom Git hook allow to write your commit without the issue id, as it will automatically insert it at the start of a commit (if not already present, avoiding duplications), so you don't have to.  
@@ -104,9 +120,13 @@ This custom Git hook will check every branch you're trying to push to, and ensur
 
 This custom Git hook will display a link to quickly create a well-configured merge request each time your are pushing to a branch.
 
-##### Lint staged
+##### Formatter and linter
 
-This Git hook is using [lint-staged](https://github.com/lint-staged/lint-staged) to automatically run the formatter and linter on the modified files (staged files) before committing, so files are automatically formatted.
+This Git hook runs [Prettier](https://prettier.io/), [ESLint](https://eslint.org/),
+[yamllint](https://yamllint.readthedocs.io/), [markdownlint](https://github.com/DavidAnson/markdownlint) and
+[ShellCheck](https://www.shellcheck.net/) on the staged files before committing, so files are automatically formatted
+and obvious mistakes are caught before they reach a merge request. A hook that rewrites a file fails the commit and
+leaves the change unstaged, so you can review it before committing again.
 
 ### Conventions
 
@@ -119,7 +139,7 @@ Please read [Atomic commits](#atomic-commits) first.
 
 Commits should follow the following format:
 
-```
+```text
 #<issue-id> :<gitmoji>: [<scope>] <description>
 <body>
 ```
@@ -132,24 +152,24 @@ Commits should follow the following format:
 
 ##### Examples
 
-```
+```text
 #234 :bug: [Bed card] Fix wrong patient lastname displayed
 ```
 
-```
+```text
 #234 :sparkles: [Database service] Secure connection to the database
 Following the jinja connection conventions: https://myinsanewebsite.com/wouhou
 ```
 
-```
+```text
 #234 :pencil: [Readme] Explain how to use Ansible
 ```
 
-```
+```text
 #234 :art: Format code
 ```
 
-```
+```text
 #234 :wrench: Export compile_commands.json file when building project
 ```
 
@@ -169,7 +189,7 @@ Your commits change should not be hard to read.
 
 To keep branches readable, you must name the branch you create according to the following format:
 
-```
+```text
 <issue-id>-<issue-summary>
 ```
 
@@ -180,11 +200,11 @@ The branches you create should always take the source into the `main` branch.
 
 ##### Examples
 
-```
+```text
 234-Setup-conventions
 ```
 
-```
+```text
 24-Add-login-button
 ```
 

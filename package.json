@@ -13,14 +13,12 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:sh": "shellcheck .gitlab/ci/scripts/*.sh",
     "test:e2e": "start-server-and-test 'serve -p 4173 .output/public' http://localhost:4173 'cypress run --e2e'",
     "test:e2e:record": "start-server-and-test 'serve -p 4173 .output/public' http://localhost:4173 'cypress run --e2e --record'",
     "test:e2e:dev": "start-server-and-test 'serve -p 4173 .output/public' http://localhost:4173 'cypress open --e2e --browser chrome'",
     "storyblok:login": "storyblok login",
     "storyblok:updatetypes": "storyblok components pull --space 314995 && storyblok ts generate --strict --space 314995 --custom-fields-parser .storyblok/custom-fields-parser.js",
-    "postinstall": "nuxt prepare",
-    "prepare": "husky"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.11.3",
@@ -57,14 +55,11 @@
     "cypress": "^15.15.0",
     "eslint-plugin-cypress": "^6.3.1",
     "eslint-plugin-mocha": "^11.1.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.5",
     "prettier": "^3.6.0",
     "prettier-plugin-organize-imports": "^4.2.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "remove-attr": "^0.0.15",
     "serve": "^14.2.5",
-    "shellcheck": "^4.1.0",
     "start-server-and-test": "^3.0.2",
     "storyblok": "^4.2.0",
     "typescript": "6.0.3",
@@ -91,16 +86,5 @@
     "@rollup/rollup-win32-arm64-msvc": "4.41.0",
     "@rollup/rollup-win32-ia32-msvc": "4.41.0",
     "@rollup/rollup-win32-x64-msvc": "4.41.0"
-  },
-  "lint-staged": {
-    "*": [
-      "npm run format"
-    ],
-    "**/*.{js,cjs,mjs,ts,cts,mts,vue}": [
-      "npm run lint:fix"
-    ],
-    "**/*.sh": [
-      "shellcheck"
-    ]
   }
 }

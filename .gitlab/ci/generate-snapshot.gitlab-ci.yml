@@ -1,18 +1,19 @@
 ---
 generate-snapshot:
   stage: test
-  needs:
-    - job: format
-      optional: true
+  needs: []
   dependencies: []
   extends:
     - .default-retry
     - .interruptible
+    - .toolset:node
   cache:
+    - !reference [".mise-cache", cache]
     - !reference [".npm-cache", cache]
   rules:
     - !reference [".generate-snapshot:rules", rules]
   before_script:
+    - !reference [".mise-before_script", before_script]
     # Ahead of `npm ci`, whose postinstall runs `nuxt prepare`.
     - cp "$DEV_ENV_FILE" .env
     - !reference [".npm-before_script", before_script]

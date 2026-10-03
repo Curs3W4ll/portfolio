@@ -1,0 +1,76 @@
+---
+repos:
+  - repo: local
+    hooks:
+      - id: prettier
+        name: Format with prettier
+        # --ignore-unknown so passing every staged path is safe: prettier skips
+        # what it has no parser for instead of failing.
+        # `--` so npm stops claiming prettier's flags as its own config.
+        entry: npx --no -- prettier --write --ignore-unknown
+        language: system
+        stages: [pre-commit]
+
+      - id: eslint
+        name: Lint JavaScript, TypeScript and Vue
+        entry: npx --no -- eslint --fix
+        language: system
+        files: \.(js|cjs|mjs|ts|cts|mts|vue)$
+        stages: [pre-commit]
+
+      - id: yamllint
+        name: Lint YAML
+        entry: yamllint
+        language: system
+        types: [yaml]
+        stages: [pre-commit]
+
+      - id: markdownlint
+        name: Lint markdown
+        entry: markdownlint-cli2
+        language: system
+        types: [markdown]
+        stages: [pre-commit]
+
+      - id: shellcheck
+        name: Lint shell scripts
+        # --external-sources so the `source .gitlab/git-hooks/colors.sh` the
+        # hooks share resolves instead of being reported as unfollowable.
+        entry: shellcheck --external-sources
+        language: system
+        types: [shell]
+        stages: [pre-commit]
+
+      - id: prepare-commit-msg
+        name: Prefix the commit with its issue key
+        entry: .gitlab/git-hooks/prepare-commit-msg.sh
+        language: script
+        always_run: true
+        # Informational output, which pre-commit hides for a passing hook.
+        verbose: true
+        stages: [prepare-commit-msg]
+
+      - id: commit-msg
+        name: Check the commit message convention
+        entry: .gitlab/git-hooks/commit-msg.sh
+        language: script
+        always_run: true
+        stages: [commit-msg]
+
+      - id: branch-name
+        name: Check the branch naming convention
+        entry: .gitlab/git-hooks/branch-name.sh
+        language: script
+        always_run: true
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: merge-request-url
+        name: Print the merge request creation URL
+        entry: .gitlab/git-hooks/merge-request-url.sh
+        language: script
+        always_run: true
+        pass_filenames: false
+        # Informational output, which pre-commit hides for a passing hook.
+        verbose: true
+        stages: [pre-push]

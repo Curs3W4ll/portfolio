@@ -2,8 +2,6 @@
 pages:
   stage: deploy
   needs:
-    - job: format
-      optional: true
     - job: lint
       optional: true
     - job: test:e2e
@@ -12,7 +10,9 @@ pages:
   extends:
     - .default-retry
     - .not-interruptible
+    - .toolset:node
   cache:
+    - !reference [".mise-cache", cache]
     - !reference [".npm-cache", cache]
   rules:
     - !reference [".deploy:rules", rules]
@@ -20,6 +20,7 @@ pages:
     SENTRY_AUTH_TOKEN: $CUSTOM_SENTRY_AUTH_TOKEN
     NUXT_SENTRY_RELEASE: $CI_COMMIT_TAG
   before_script:
+    - !reference [".mise-before_script", before_script]
     # Ahead of `npm ci`, whose postinstall runs `nuxt prepare`.
     - cp "$PRODUCTION_ENV_FILE" .env
     - echo -e "\nNUXT_PUBLIC_VERSION=${CI_COMMIT_TAG}\n" >> .env

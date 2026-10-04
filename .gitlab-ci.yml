@@ -1,9 +1,20 @@
+spec:
+  inputs:
+    destroy_infra:
+      type: boolean
+      default: false
+      description: >-
+        Set to true to expose the OpenTofu destroy jobs
+        (default branch only).
 ---
 stages:
   - maintenance
   - lint
   - test
   - deploy
+  - plan
+  - apply
+  - cleanup
 
 workflow:
   # Applies the PIPELINE_NAME the rules below set; without it the variable is
@@ -22,6 +33,11 @@ workflow:
     - if: '$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
       variables:
         PIPELINE_NAME: "Release pipeline: $CI_COMMIT_TAG"
+    - if: '$CI_PIPELINE_SOURCE == "web" && $[[ inputs.destroy_infra ]] && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH'
+      variables:
+        PIPELINE_NAME: "Destroy pipeline"
+        DESTROY_INFRA: "true"
+    # Must stay last: the rules above set the variables tofu's rules read.
     - if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH'
       variables:
         PIPELINE_NAME: "Manual run"

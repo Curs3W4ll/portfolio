@@ -49,7 +49,7 @@ variables:
 .toolset:lint:
   variables:
     TOOLSET: lint
-    TOOLSET_TOOLS: "node python pre-commit shellcheck markdownlint-cli2 pipx pipx:yamllint"
+    TOOLSET_TOOLS: "node python opentofu tflint pre-commit shellcheck markdownlint-cli2 pipx pipx:yamllint"
 
 # Base before_script: install the job's mise-managed tools and put them on PATH.
 # Pair it with one of the `.toolset:*` sets above.

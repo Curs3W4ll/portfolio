@@ -20,7 +20,7 @@ include:
       auto_delete_state: true
       auto_encryption: true
       auto_encryption_passphrase: $TOFU_ENCRYPTION_PASSPHRASE
-      #      post_mr_plan_comment: true # TODO: Add back once we have the TOFU_BOT
+      post_mr_plan_comment: true
       lockfile: "readonly"
 
 .gitlab-provider-auth-via-manual-token:
@@ -54,9 +54,7 @@ include:
     - !reference [".tofu:rules:destroy", rules]
 
 .unit:tofu-bot:
-  # TODO: Add back once first apply is done
-  #  extends: [.gitlab-provider-auth-via-provider-bot]
-  extends: [.gitlab-provider-auth-via-manual-token]
+  extends: [.gitlab-provider-auth-via-provider-bot]
   variables:
     GITLAB_TOFU_ROOT_DIR: terraform/live/tofu-bot
     GITLAB_TOFU_STATE_NAME: tofu-bot
@@ -80,17 +78,13 @@ include:
     GITLAB_TOFU_STATE_NAME: issue-boards
 
 .unit:terraform-provider-bot:
-  # TODO: Add back once first apply is done
-  #  extends: [.gitlab-provider-auth-via-rotator-bot]
-  extends: [.gitlab-provider-auth-via-manual-token]
+  extends: [.gitlab-provider-auth-via-rotator-bot]
   variables:
     GITLAB_TOFU_ROOT_DIR: terraform/live/terraform-provider-bot
     GITLAB_TOFU_STATE_NAME: terraform-provider-bot
 
 .unit:terraform-provider-rotator-bot:
-  # TODO: Add back once first apply is done
-  #  extends: [.gitlab-provider-auth-via-provider-bot]
-  extends: [.gitlab-provider-auth-via-manual-token]
+  extends: [.gitlab-provider-auth-via-provider-bot]
   variables:
     GITLAB_TOFU_ROOT_DIR: terraform/live/terraform-provider-rotator-bot
     GITLAB_TOFU_STATE_NAME: terraform-provider-rotator-bot

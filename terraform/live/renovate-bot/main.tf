@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">=1.9, <2.0.0"
+  required_version = "1.16.5"
 
   backend "http" {}
 
@@ -10,7 +10,7 @@ terraform {
       # 19.3.0 (19.1.0/19.2.0 had only the group-scoped token resource;
       # 19.0.0 had neither service account resource at all) — floor matches
       # the last of those to land, not just "19.x".
-      version = "~> 19.3"
+      version = "19.4.1"
     }
   }
 }

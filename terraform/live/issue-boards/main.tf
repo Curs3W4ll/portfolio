@@ -1,12 +1,12 @@
 terraform {
-  required_version = ">=1.9, <2.0.0"
+  required_version = "1.16.5"
 
   backend "http" {}
 
   required_providers {
     gitlab = {
       source  = "gitlabhq/gitlab"
-      version = "~> 19.3"
+      version = "19.4.1"
     }
   }
 }

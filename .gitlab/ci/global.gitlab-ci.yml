@@ -10,8 +10,7 @@ default:
   #
   # entrypoint: [""] overrides the image's ENTRYPOINT (mise), otherwise the
   # runner would launch the job script as `mise <script>` and mise would reject
-  # it. Jobs that bring their own image (alpine for `license`, cypress/base for
-  # `test:e2e`, the dependabot component's own) override this.
+  # it. Jobs that bring their own image override this.
   image:
     name: jdxcode/mise:2026.9.18-debian
     entrypoint: [""]

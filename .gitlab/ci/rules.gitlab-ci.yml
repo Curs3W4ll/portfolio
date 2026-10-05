@@ -34,8 +34,11 @@
 .if-destroy-infra: &if-destroy-infra
   if: '$CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $DESTROY_INFRA == "true"'
 
-.if-schedule-dependabot: &if-schedule-dependabot
-  if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TASK == "dependabot"'
+.if-schedule-renovate: &if-schedule-renovate
+  if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TASK == "renovate"'
+
+.if-schedule-deps-digest: &if-schedule-deps-digest
+  if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TASK == "deps-digest"'
 
 .if-schedule-token-rotation: &if-schedule-token-rotation
   if: '$CI_PIPELINE_SOURCE == "schedule" && $SCHEDULE_TASK == "token-rotation"'
@@ -53,6 +56,9 @@
 .tofu-tofu-bot-patterns: &tofu-tofu-bot-patterns
   - terraform/live/tofu-bot/**/*
 
+.tofu-renovate-bot-patterns: &tofu-renovate-bot-patterns
+  - terraform/live/renovate-bot/**/*
+
 .tofu-labels-patterns: &tofu-labels-patterns
   - terraform/live/labels/**/*
 
@@ -61,6 +67,12 @@
 
 .tofu-pipeline-schedule-token-rotation-patterns: &tofu-pipeline-schedule-token-rotation-patterns
   - terraform/live/pipeline-schedule-token-rotation/**/*
+
+.tofu-pipeline-schedule-renovate-patterns: &tofu-pipeline-schedule-renovate-patterns
+  - terraform/live/pipeline-schedule-renovate/**/*
+
+.tofu-pipeline-schedule-deps-digest-patterns: &tofu-pipeline-schedule-deps-digest-patterns
+  - terraform/live/pipeline-schedule-deps-digest/**/*
 
 .tofu-terraform-provider-bot-patterns: &tofu-terraform-provider-bot-patterns
   - terraform/live/terraform-provider-bot/**/*
@@ -111,9 +123,13 @@
   rules:
     - <<: *if-tag
 
-.dependabot:rules:
+.renovate:rules:
   rules:
-    - <<: *if-schedule-dependabot
+    - <<: *if-schedule-renovate
+
+.deps-digest:rules:
+  rules:
+    - <<: *if-schedule-deps-digest
 
 .tofu:rules:plan:tofu-bot:
   rules:
@@ -133,6 +149,29 @@
       when: manual
     - <<: *if-default-branch
       changes: *tofu-tofu-bot-patterns
+      when: manual
+    - <<: *if-manual-run
+      when: manual
+    - <<: *if-schedule-token-rotation
+
+.tofu:rules:plan:renovate-bot:
+  rules:
+    - <<: *if-merge-request
+      changes: *tofu-renovate-bot-patterns
+    - <<: *if-merge-request-label-tofu-plan
+    - <<: *if-merge-request-label-tofu-apply
+    - <<: *if-default-branch
+      changes: *tofu-renovate-bot-patterns
+    - <<: *if-manual-run
+    - <<: *if-destroy-infra
+    - <<: *if-schedule-token-rotation
+
+.tofu:rules:apply:renovate-bot:
+  rules:
+    - <<: *if-merge-request-label-tofu-apply
+      when: manual
+    - <<: *if-default-branch
+      changes: *tofu-renovate-bot-patterns
       when: manual
     - <<: *if-manual-run
       when: manual
@@ -197,6 +236,48 @@
       when: manual
     - <<: *if-default-branch
       changes: *tofu-pipeline-schedule-token-rotation-patterns
+      when: manual
+    - <<: *if-manual-run
+      when: manual
+
+.tofu:rules:plan:pipeline-schedule:renovate:
+  rules:
+    - <<: *if-merge-request
+      changes: *tofu-pipeline-schedule-renovate-patterns
+    - <<: *if-merge-request-label-tofu-plan
+    - <<: *if-merge-request-label-tofu-apply
+    - <<: *if-default-branch
+      changes: *tofu-pipeline-schedule-renovate-patterns
+    - <<: *if-manual-run
+    - <<: *if-destroy-infra
+
+.tofu:rules:apply:pipeline-schedule:renovate:
+  rules:
+    - <<: *if-merge-request-label-tofu-apply
+      when: manual
+    - <<: *if-default-branch
+      changes: *tofu-pipeline-schedule-renovate-patterns
+      when: manual
+    - <<: *if-manual-run
+      when: manual
+
+.tofu:rules:plan:pipeline-schedule:deps-digest:
+  rules:
+    - <<: *if-merge-request
+      changes: *tofu-pipeline-schedule-deps-digest-patterns
+    - <<: *if-merge-request-label-tofu-plan
+    - <<: *if-merge-request-label-tofu-apply
+    - <<: *if-default-branch
+      changes: *tofu-pipeline-schedule-deps-digest-patterns
+    - <<: *if-manual-run
+    - <<: *if-destroy-infra
+
+.tofu:rules:apply:pipeline-schedule:deps-digest:
+  rules:
+    - <<: *if-merge-request-label-tofu-apply
+      when: manual
+    - <<: *if-default-branch
+      changes: *tofu-pipeline-schedule-deps-digest-patterns
       when: manual
     - <<: *if-manual-run
       when: manual

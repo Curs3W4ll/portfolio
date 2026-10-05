@@ -1,0 +1,19 @@
+---
+# Weekly Discord digest of the release notes in merged Renovate MRs, so
+# automerged updates don't go unread. Runs only on the `SCHEDULE_TASK=deps-digest`
+# pipeline schedule (terraform/live/pipeline-schedule-deps-digest). Posts to
+# the DISCORD_DEPS_WEBHOOK_URL CI/CD variable.
+deps-digest:
+  stage: maintenance
+  image: alpine:3.24.2
+  needs: []
+  dependencies: []
+  extends:
+    - .default-retry
+    - .not-interruptible
+  rules:
+    - !reference [".deps-digest:rules", rules]
+  before_script:
+    - apk add --no-cache bash curl jq coreutils
+  script:
+    - bash .gitlab/ci/scripts/deps-digest.sh

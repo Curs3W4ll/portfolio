@@ -1,7 +1,7 @@
 ---
 test:e2e:
   stage: test
-  image: cypress/base:latest
+  image: cypress/base:24.21.0
   needs:
     - job: generate-snapshot
       artifacts: true

@@ -14,7 +14,7 @@ readonly project_url="https://gitlab.com/curs3_w4ll/portfolio"
 readonly convention_url="${project_url}#commit-convention"
 readonly gitmoji_url="https://gitmoji.dev"
 
-readonly gitmojis="sparkles|bug|art|recycle|test_tube|pencil|lipstick|wrench|truck|arrow_up|arrow_down|label|zap|rewind|tada|beers|twisted_rightwards_arrows|construction|fire|heavy_minus_sign|heavy_plus_sign|green_heart|white_check_mark"
+readonly gitmojis="sparkles|bug|art|recycle|test_tube|pencil|lipstick|wrench|truck|arrow_up|arrow_down|lock|label|zap|rewind|tada|beers|twisted_rightwards_arrows|construction|fire|heavy_minus_sign|heavy_plus_sign|green_heart|white_check_mark"
 
 # Progressively stricter patterns, so a rejection can name the part that is wrong
 # instead of only that the whole subject failed.

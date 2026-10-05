@@ -184,5 +184,8 @@
     schedule: ["at any time"],
     labels: ["security", "dependencies"],
     commitMessagePrefix: "#292 :lock: [npm]",
+    // Fixes are never grouped, but would otherwise inherit the npm group's
+    // topic and read "Upgrade npm non-major dependencies".
+    commitMessageTopic: "{{depName}}",
   },
 }

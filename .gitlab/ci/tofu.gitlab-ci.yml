@@ -66,9 +66,7 @@ include:
     GITLAB_TOFU_STATE_NAME: pipeline-schedule-token-rotation
 
 .unit:renovate-bot:
-  # TODO: Switch back once done
-  #  extends: [.gitlab-provider-auth-via-provider-bot]
-  extends: [.gitlab-provider-auth-via-manual-token]
+  extends: [.gitlab-provider-auth-via-provider-bot]
   variables:
     GITLAB_TOFU_ROOT_DIR: terraform/live/renovate-bot
     GITLAB_TOFU_STATE_NAME: renovate-bot

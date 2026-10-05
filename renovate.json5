@@ -14,13 +14,12 @@
 
   // Commit subjects (and so MR titles) follow the commit-msg hook's
   // convention: "#<issue> :<gitmoji>: [<scope>] <description>", rendered as
-  // "#XXX :arrow_up: [npm] Upgrade ws to 8.21.1".
+  // "#292 :arrow_up: [npm] Upgrade ws to 8.21.1".
   // The issue key is hardcoded to the Renovate dependency dashboard issue
-  // because Renovate exposes no template field for its IID. Every
-  // `#XXX` in this file must be updated together if the dashboard issue is
+  // (#292) because Renovate exposes no template field for its IID. Every
+  // `#292` in this file must be updated together if the dashboard issue is
   // ever recreated with a new IID.
-  // TODO: replace `#XXX` with the dashboard issue's IID once the first run creates it.
-  commitMessagePrefix: "#XXX :arrow_up: [npm]",
+  commitMessagePrefix: "#292 :arrow_up: [npm]",
   commitMessageAction: "Upgrade",
   commitMessageTopic: "{{depName}}",
   commitMessageExtra: "to {{newVersion}}",
@@ -61,15 +60,15 @@
     // --- Commit scopes, one per manager -------------------------------------
     {
       matchManagers: ["gitlabci", "gitlabci-include", "custom.regex"],
-      commitMessagePrefix: "#XXX :arrow_up: [GitLab CI]",
+      commitMessagePrefix: "#292 :arrow_up: [GitLab CI]",
     },
     {
       matchManagers: ["mise"],
-      commitMessagePrefix: "#XXX :arrow_up: [mise]",
+      commitMessagePrefix: "#292 :arrow_up: [mise]",
     },
     {
       matchManagers: ["terraform"],
-      commitMessagePrefix: "#XXX :arrow_up: [tofu]",
+      commitMessagePrefix: "#292 :arrow_up: [tofu]",
     },
 
     // --- npm ----------------------------------------------------------------
@@ -152,7 +151,7 @@
       matchDepNames: ["node", "cypress/base"],
       groupName: "node",
       commitMessageTopic: "node",
-      commitMessagePrefix: "#XXX :arrow_up: [node]",
+      commitMessagePrefix: "#292 :arrow_up: [node]",
     },
     // One dependency in two places (mise pin + opentofu_version input).
     // Must stay after the mise rules: packageRules merge in order.
@@ -161,7 +160,7 @@
       matchDepNames: ["opentofu", "opentofu/opentofu"],
       groupName: "opentofu",
       commitMessageTopic: "opentofu",
-      commitMessagePrefix: "#XXX :arrow_up: [tofu]",
+      commitMessagePrefix: "#292 :arrow_up: [tofu]",
     },
     {
       matchManagers: ["mise", "custom.regex"],
@@ -184,6 +183,6 @@
     enabled: true,
     schedule: ["at any time"],
     labels: ["security", "dependencies"],
-    commitMessagePrefix: "#XXX :lock: [npm]",
+    commitMessagePrefix: "#292 :lock: [npm]",
   },
 }

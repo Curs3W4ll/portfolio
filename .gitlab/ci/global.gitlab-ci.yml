@@ -12,7 +12,7 @@ default:
   # runner would launch the job script as `mise <script>` and mise would reject
   # it. Jobs that bring their own image override this.
   image:
-    name: jdxcode/mise:2026.9.18-debian
+    name: jdxcode/mise:2026.10.3-debian
     entrypoint: [""]
 
 variables:

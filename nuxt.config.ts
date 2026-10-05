@@ -133,5 +133,10 @@ export default defineNuxtConfig({
   sourcemap: {
     client: "hidden",
   },
+  experimental: {
+    // The default "automatic" only reloads on chunk errors during navigation;
+    // this also recovers from a chunk that fails on the initial page load.
+    emitRouteChunkError: "automatic-immediate",
+  },
   compatibilityDate: "2024-12-19",
 });

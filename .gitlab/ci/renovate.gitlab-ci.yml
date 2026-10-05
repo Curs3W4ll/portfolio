@@ -7,7 +7,7 @@
 renovate:
   stage: maintenance
   image:
-    name: renovate/renovate:44.134.1
+    name: renovate/renovate:44.134.3
     entrypoint: [""]
   needs: []
   dependencies: []

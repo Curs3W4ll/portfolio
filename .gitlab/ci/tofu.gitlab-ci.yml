@@ -79,6 +79,12 @@ include:
     GITLAB_TOFU_ROOT_DIR: terraform/live/pipeline-schedule-renovate
     GITLAB_TOFU_STATE_NAME: pipeline-schedule-renovate
 
+.unit:pipeline-schedule:deps-digest:
+  extends: [.gitlab-provider-auth-via-provider-bot]
+  variables:
+    GITLAB_TOFU_ROOT_DIR: terraform/live/pipeline-schedule-deps-digest
+    GITLAB_TOFU_STATE_NAME: pipeline-schedule-deps-digest
+
 .unit:labels:
   extends: [.gitlab-provider-auth-via-provider-bot]
   variables:
@@ -189,6 +195,25 @@ apply:pipeline-schedule:renovate:
 
 destroy:pipeline-schedule:renovate:
   extends: [.destroy, .unit:pipeline-schedule:renovate]
+
+# --- deps-digest pipeline schedule ---
+plan:pipeline-schedule:deps-digest:
+  extends: [.plan, .unit:pipeline-schedule:deps-digest]
+  rules:
+    - !reference [".tofu:rules:plan:pipeline-schedule:deps-digest", rules]
+
+apply:pipeline-schedule:deps-digest:
+  extends: [.apply, .unit:pipeline-schedule:deps-digest]
+  needs:
+    - plan:pipeline-schedule:deps-digest
+    # Waits for provider-bot's rotation, if any, so this job's token stays valid.
+    - job: apply:terraform-provider-bot
+      optional: true
+  rules:
+    - !reference [".tofu:rules:apply:pipeline-schedule:deps-digest", rules]
+
+destroy:pipeline-schedule:deps-digest:
+  extends: [.destroy, .unit:pipeline-schedule:deps-digest]
 
 # --- project labels ---
 plan:labels:

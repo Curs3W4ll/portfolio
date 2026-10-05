@@ -23,5 +23,10 @@ renovate:
     RENOVATE_AUTODISCOVER: false # Disable Renovate "scan every repo I can see" mode
     RENOVATE_REPOSITORIES: $CI_PROJECT_PATH
     RENOVATE_GIT_AUTHOR: "Renovate Bot <$RENOVATE_GIT_AUTHOR_EMAIL>"
+    # Off GitHub, Renovate skips release notes without a github.com token (and
+    # the deps-digest job then has nothing to post), and the github-releases
+    # datasource behind most mise tools hits the anonymous rate limit. The
+    # read-only token mise already uses is enough.
+    GITHUB_COM_TOKEN: $MISE_GITHUB_TOKEN
   script:
     - renovate

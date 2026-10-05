@@ -65,6 +65,20 @@ include:
     GITLAB_TOFU_ROOT_DIR: terraform/live/pipeline-schedule-token-rotation
     GITLAB_TOFU_STATE_NAME: pipeline-schedule-token-rotation
 
+.unit:renovate-bot:
+  # TODO: Switch back once done
+  #  extends: [.gitlab-provider-auth-via-provider-bot]
+  extends: [.gitlab-provider-auth-via-manual-token]
+  variables:
+    GITLAB_TOFU_ROOT_DIR: terraform/live/renovate-bot
+    GITLAB_TOFU_STATE_NAME: renovate-bot
+
+.unit:pipeline-schedule:renovate:
+  extends: [.gitlab-provider-auth-via-provider-bot]
+  variables:
+    GITLAB_TOFU_ROOT_DIR: terraform/live/pipeline-schedule-renovate
+    GITLAB_TOFU_STATE_NAME: pipeline-schedule-renovate
+
 .unit:labels:
   extends: [.gitlab-provider-auth-via-provider-bot]
   variables:
@@ -130,6 +144,51 @@ apply:pipeline-schedule:token-rotation:
 
 destroy:pipeline-schedule:token-rotation:
   extends: [.destroy, .unit:pipeline-schedule:token-rotation]
+
+# --- renovate bot ---
+plan:renovate-bot:
+  extends: [.plan, .unit:renovate-bot]
+  rules:
+    - !reference [".tofu:rules:plan:renovate-bot", rules]
+
+apply:renovate-bot:
+  extends: [.apply, .unit:renovate-bot]
+  needs:
+    - plan:renovate-bot
+    # Waits for provider-bot's rotation, if any, so this job's token stays valid.
+    - job: apply:terraform-provider-bot
+      optional: true
+  rules:
+    - !reference [".tofu:rules:apply:renovate-bot", rules]
+
+destroy:renovate-bot:
+  extends: [.destroy, .unit:renovate-bot]
+  needs:
+    # The token-rotation schedule can trigger an unattended apply on this unit.
+    # Destroy the schedule first so a rotation can't race with this destroy.
+    - destroy:pipeline-schedule:token-rotation
+    # The renovate schedule runs as this bot. Destroying the schedule first
+    # means no Renovate run starts with a revoked token.
+    - destroy:pipeline-schedule:renovate
+
+# --- renovate pipeline schedule ---
+plan:pipeline-schedule:renovate:
+  extends: [.plan, .unit:pipeline-schedule:renovate]
+  rules:
+    - !reference [".tofu:rules:plan:pipeline-schedule:renovate", rules]
+
+apply:pipeline-schedule:renovate:
+  extends: [.apply, .unit:pipeline-schedule:renovate]
+  needs:
+    - plan:pipeline-schedule:renovate
+    # Waits for provider-bot's rotation, if any, so this job's token stays valid.
+    - job: apply:terraform-provider-bot
+      optional: true
+  rules:
+    - !reference [".tofu:rules:apply:pipeline-schedule:renovate", rules]
+
+destroy:pipeline-schedule:renovate:
+  extends: [.destroy, .unit:pipeline-schedule:renovate]
 
 # --- project labels ---
 plan:labels:

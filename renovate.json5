@@ -1,0 +1,189 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  extends: [
+    "config:recommended",
+    ":dependencyDashboard",
+    // Bumps the component tag and opentofu_version via exact trailing
+    // comments in tofu.gitlab-ci.yml.
+    "local>components/opentofu",
+  ],
+
+  dependencyDashboard: true,
+  dependencyDashboardTitle: "Renovate Dependency Dashboard",
+
+  // Commit subjects (and so MR titles) follow the commit-msg hook's
+  // convention: "#<issue> :<gitmoji>: [<scope>] <description>", rendered as
+  // "#XXX :arrow_up: [npm] Upgrade ws to 8.21.1".
+  // The issue key is hardcoded to the Renovate dependency dashboard issue
+  // because Renovate exposes no template field for its IID. Every
+  // `#XXX` in this file must be updated together if the dashboard issue is
+  // ever recreated with a new IID.
+  // TODO: replace `#XXX` with the dashboard issue's IID once the first run creates it.
+  commitMessagePrefix: "#XXX :arrow_up: [npm]",
+  commitMessageAction: "Upgrade",
+  commitMessageTopic: "{{depName}}",
+  commitMessageExtra: "to {{newVersion}}",
+
+  commitBodyTable: true,
+
+  branchPrefix: "renovate/",
+  labels: ["dependencies"],
+  rebaseWhen: "behind-base-branch",
+  prConcurrentLimit: 10,
+  // Disable hourly rate limiting; prConcurrentLimit already caps how
+  // many MRs can be open at once, so the default prHourlyLimit: 2 just
+  // queues legitimate updates under "Rate-Limited" on the dashboard.
+  prHourlyLimit: 0,
+
+  // The lockfile already pins the real resolution; exact ranges make each
+  // MR diff show the version that actually changed.
+  rangeStrategy: "pin",
+
+  // Renovate ships no native manager for GitLab CI components, so track
+  // them via a regex manager backed by the gitlab-tags datasource.
+  customManagers: [
+    {
+      customType: "regex",
+      managerFilePatterns: ["(^|/)\\.gitlab/ci/.*\\.ya?ml$", "(^|/)\\.gitlab-ci\\.ya?ml$"],
+      matchStrings: [
+        // `$` excluded from the host class: variable hosts are skipped, not
+        // captured into the unresolvable `https://$CI_SERVER_FQDN`.
+        "component:\\s+(?<registryUrl>[^/\\s$]+)/(?<depName>[^@\\s]+)@(?<currentValue>[^\\s]+)",
+      ],
+      datasourceTemplate: "gitlab-tags",
+      registryUrlTemplate: "https://{{registryUrl}}",
+      versioningTemplate: "semver",
+    },
+  ],
+
+  packageRules: [
+    // --- Commit scopes, one per manager -------------------------------------
+    {
+      matchManagers: ["gitlabci", "gitlabci-include", "custom.regex"],
+      commitMessagePrefix: "#XXX :arrow_up: [GitLab CI]",
+    },
+    {
+      matchManagers: ["mise"],
+      commitMessagePrefix: "#XXX :arrow_up: [mise]",
+    },
+    {
+      matchManagers: ["terraform"],
+      commitMessagePrefix: "#XXX :arrow_up: [tofu]",
+    },
+
+    // --- npm ----------------------------------------------------------------
+    // Pins stay manual: the first run's pin MR rewrites every range in
+    // package.json and deserves a review.
+    {
+      matchManagers: ["npm"],
+      matchUpdateTypes: ["patch", "minor"],
+      groupName: "npm non-major dependencies",
+      commitMessageTopic: "npm non-major dependencies",
+      automerge: true,
+      automergeType: "pr",
+      platformAutomerge: true,
+    },
+    // Pinned in optionalDependencies to work around npm's optional dependencies
+    // bug (npm/cli#4828). They must move in lockstep, so one MR bumps them all.
+    // Must stay after the npm rule above: packageRules merge in order.
+    {
+      matchManagers: ["npm"],
+      matchPackageNames: ["@rollup/rollup-*"],
+      groupName: "rollup platform binaries",
+      commitMessageTopic: "rollup platform binaries",
+    },
+
+    // --- CI images, mise tools, tofu ----------------------------------------
+    {
+      matchManagers: ["mise"],
+      groupName: "mise tools",
+      commitMessageTopic: "mise tools",
+    },
+    // A grouped branch automerges only when every dep in it is automergeable,
+    // so one "pin" would otherwise hold back the whole "mise tools" group.
+    {
+      matchManagers: ["mise", "gitlabci", "gitlabci-include"],
+      matchUpdateTypes: ["pin", "patch", "minor"],
+      automerge: true,
+      automergeType: "pr",
+      platformAutomerge: true,
+    },
+    {
+      matchManagers: ["gitlabci", "gitlabci-include"],
+      groupName: "CI Images",
+      commitMessageTopic: "CI Images",
+    },
+    // Native detection reads $CI_SERVER_FQDN as a hostname and always warns
+    // with no result; the preset bumps this tag instead.
+    {
+      matchDatasources: ["gitlab-tags"],
+      matchDepNames: ["components/opentofu"],
+      enabled: false,
+    },
+    {
+      matchManagers: ["custom.regex"],
+      matchUpdateTypes: ["patch", "minor"],
+      automerge: true,
+      automergeType: "pr",
+      platformAutomerge: true,
+      minimumReleaseAge: "7 days",
+    },
+    {
+      matchManagers: ["terraform"],
+      matchDepTypes: ["required_provider"],
+      automerge: true,
+      automergeType: "pr",
+      platformAutomerge: true,
+      minimumReleaseAge: "7 days",
+    },
+    // Modules provision the tokens CI authenticates with; a bad bump locks
+    // the pipeline out of the project.
+    {
+      matchManagers: ["terraform"],
+      matchDepTypes: ["module"],
+      automerge: false,
+    },
+    // cypress/base tags are Node versions: keep test:e2e on the Node that
+    // mise installs for every other job. Must stay after the mise and CI
+    // Images rules: packageRules merge in order.
+    {
+      matchManagers: ["mise", "gitlabci"],
+      matchDepNames: ["node", "cypress/base"],
+      groupName: "node",
+      commitMessageTopic: "node",
+      commitMessagePrefix: "#XXX :arrow_up: [node]",
+    },
+    // One dependency in two places (mise pin + opentofu_version input).
+    // Must stay after the mise rules: packageRules merge in order.
+    {
+      matchManagers: ["mise", "custom.regex"],
+      matchDepNames: ["opentofu", "opentofu/opentofu"],
+      groupName: "opentofu",
+      commitMessageTopic: "opentofu",
+      commitMessagePrefix: "#XXX :arrow_up: [tofu]",
+    },
+    {
+      matchManagers: ["mise", "custom.regex"],
+      matchDepNames: ["opentofu", "opentofu/opentofu"],
+      matchUpdateTypes: ["minor", "major"],
+      automerge: false,
+    },
+
+    // Majors always manual, regardless of manager.
+    {
+      matchUpdateTypes: ["major"],
+      automerge: false,
+    },
+  ],
+
+  // GitLab exposes no vulnerability alerts to Renovate; OSV is the source,
+  // and its fixes get the vulnerabilityAlerts settings below.
+  osvVulnerabilityAlerts: true,
+  vulnerabilityAlerts: {
+    enabled: true,
+    schedule: ["at any time"],
+    labels: ["security", "dependencies"],
+    commitMessagePrefix: "#XXX :lock: [npm]",
+  },
+}
